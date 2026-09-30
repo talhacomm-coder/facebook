@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سنڌي نيوز پوسٽ جنريٽر</title>
+    <title>سنڌي نيوز پوسٽ جنريٽر - ڊوئل هيڊنگ فڪسڊ</title>
     <!-- Bootstrap 5 CSS RTL -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css.rtl.min.css">
     <!-- Google Fonts -->
@@ -48,11 +48,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             overflow: hidden;
             flex-shrink: 0;
             z-index: 2;
             width: 100%;
+            padding: 4px 12px;
+            box-sizing: border-box;
             font-family: 'Lateef', 'MBSindhiWeb', sans-serif;
         }
         .preview-image-box {
@@ -72,7 +74,7 @@
         }
         .news-text-box {
             color: white;
-            padding: 8px 12px;
+            padding: 8px 14px;
             text-align: center;
             font-weight: bold;
             display: flex;
@@ -82,7 +84,7 @@
             flex-shrink: 0;
             z-index: 2;
             width: 100%;
-            line-height: 1.4;
+            box-sizing: border-box;
             font-family: 'Lateef', 'MBSindhiWeb', sans-serif;
         }
         .watermark-logo {
@@ -97,7 +99,7 @@
         }
         .custom-name-watermark {
             position: absolute;
-            bottom: 110px;
+            bottom: 120px;
             right: 15px;
             color: white;
             font-weight: bold;
@@ -146,14 +148,19 @@
                         
                         <div class="preview-container mb-2" id="captureArea">
                             <img id="prevLogo" src="https://via.placeholder.com/80" class="watermark-logo" style="width: 60px; height: 60px; top: 12px; left: 12px;">
-                            <div id="prevCustomName" class="custom-name-watermark" style="font-size: 20px; bottom: 100px; right: 12px;">رپورٽر جو نالو</div>
+                            <div id="prevCustomName" class="custom-name-watermark" style="font-size: 20px; bottom: 120px; right: 12px;">رپورٽر جو نالو</div>
                             
                             <!-- Main Flex Wrapper -->
                             <div class="dynamic-flex-wrapper" id="dynamicFlexWrapper">
-                                <div class="preview-header-banner" id="prevTopBanner" style="font-size: 20px; height: 35px; background: linear-gradient(135deg, #cc0000, #ff4d4d);">برڪنگ نيوز</div>
+                                <!-- Heading 1 (Top Heading) -->
+                                <div class="preview-header-banner" id="prevTopBanner" style="font-size: 20px; height: 38px; background: linear-gradient(135deg, #cc0000, #ff4d4d);">مٿين مکيه خبر جو عنوان</div>
+                                
+                                <!-- Main Image Box -->
                                 <div class="preview-image-box" id="prevImageBox">
                                     <img id="prevMainImage" src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=600&q=80" class="preview-image" style="transform: scale(1) translate(0px, 0px);">
                                 </div>
+
+                                <!-- Heading 2 (Bottom Heading) -->
                                 <div class="news-text-box" id="prevNewsText" style="font-size: 20px; height: 95px; background: linear-gradient(135deg, #0d6efd, #4dabf7);">
                                     رائونتي ۾ موٽر سائڪل سوارن تي مبينه درون حملو، نصير ڪورائي ۽ الله ڏتو ڪورائي زخمي
                                 </div>
@@ -193,11 +200,11 @@
                     <!-- Tab Navigation Buttons Container -->
                     <div class="p-1 mb-2 bg-light rounded border shadow-sm">
                         <div class="d-flex flex-wrap gap-1 justify-content-center" id="settingTabs">
-                            <button class="btn btn-primary tab-btn active" data-target="sec-news"><i class="fa fa-align-right me-1"></i> خبرون</button>
+                            <button class="btn btn-primary tab-btn active" data-target="sec-news"><i class="fa fa-align-right me-1"></i> هيٺين خبر</button>
+                            <button class="btn btn-outline-primary tab-btn" data-target="sec-topheading"><i class="fa fa-heading me-1"></i> مٿين خبر</button>
                             <button class="btn btn-outline-primary tab-btn" data-target="sec-logo"><i class="fa fa-circle-user me-1"></i> لوگو</button>
                             <button class="btn btn-outline-primary tab-btn" data-target="sec-image"><i class="fa fa-image me-1"></i> تصوير</button>
                             <button class="btn btn-outline-primary tab-btn" data-target="sec-name"><i class="fa fa-font me-1"></i> نالو</button>
-                            <button class="btn btn-outline-primary tab-btn" data-target="sec-breaking"><i class="fa fa-bullhorn me-1"></i> بريڪنگ</button>
                             <button class="btn btn-outline-primary tab-btn" data-target="sec-layout"><i class="fa fa-layer-group me-1"></i> ترتيب</button>
                             <button class="btn btn-outline-primary tab-btn" data-target="sec-social"><i class="fa fa-share-nodes me-1"></i> آئڪن ۽ نالو</button>
                         </div>
@@ -206,9 +213,9 @@
                     <!-- Tab Contents Container -->
                     <div class="tab-content-container">
 
-                        <!-- 1. News Text Settings -->
+                        <!-- 1. Bottom News Text Settings -->
                         <div class="setting-section" id="sec-news">
-                            <h6 class="text-secondary fw-bold mb-2 pb-1 border-bottom small"><i class="fa fa-align-right me-1"></i> خبر جو متن، رنگ ۽ فونٽ</h6>
+                            <h6 class="text-secondary fw-bold mb-2 pb-1 border-bottom small"><i class="fa fa-align-right me-1"></i> هيٺين خبر جو متن، رنگ ۽ فونٽ</h6>
                             <div class="mb-2">
                                 <textarea class="form-control form-control-sm" id="newsTextInput" rows="2">رائونتي ۾ موٽر سائڪل سوارن تي مبينه درون حملو، نصير ڪورائي ۽ الله ڏتو ڪورائي زخمي</textarea>
                             </div>
@@ -233,7 +240,7 @@
                                 </div>
                             </div>
                             <div>
-                                <label class="form-label small mb-1">خبر جو فونٽ چونڊيو</label>
+                                <label class="form-label small mb-1">فونٽ چونڊيو</label>
                                 <select class="form-select form-select-sm" id="fontSelector">
                                     <option value="Lateef" selected>Lateef (بيحد صاف)</option>
                                     <option value="MBSindhiWeb">MB Sindhi Web</option>
@@ -248,7 +255,50 @@
                             </div>
                         </div>
 
-                        <!-- 2. Logo Settings -->
+                        <!-- 2. Top Heading Settings -->
+                        <div class="setting-section d-none" id="sec-topheading">
+                            <h6 class="text-secondary fw-bold mb-2 pb-1 border-bottom small"><i class="fa fa-heading me-1"></i> مٿين خبر جو متن، رنگ ۽ فونٽ</h6>
+                            <div class="mb-2">
+                                <label class="form-label small mb-1">عنوان جو متن</label>
+                                <input type="text" class="form-control form-control-sm" id="breakingTitleInput" value="مٿين مکيه خبر جو عنوان">
+                            </div>
+                            <div class="row g-2 mb-2">
+                                <div class="col-6">
+                                    <label class="form-label small mb-1">پهريون رنگ (Gradient 1)</label>
+                                    <input type="color" class="form-control form-control-color form-control-sm w-100" id="topColor1" value="#cc0000">
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-label small mb-1">ٻيو رنگ (Gradient 2)</label>
+                                    <input type="color" class="form-control form-control-color form-control-sm w-100" id="topColor2" value="#ff4d4d">
+                                </div>
+                            </div>
+                            <div class="row g-2 mb-2">
+                                <div class="col-6">
+                                    <label class="form-label small mb-1">فونٽ سائيز: <span id="breakingFontSizeVal">20</span>px</label>
+                                    <input type="range" class="form-range" id="breakingFontSizeRange" min="14" max="40" value="20">
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-label small mb-1">اوچائي: <span id="breakingHeightVal">38</span>px</label>
+                                    <input type="range" class="form-range" id="breakingHeightRange" min="25" max="80" value="38">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="form-label small mb-1">فونٽ چونڊيو</label>
+                                <select class="form-select form-select-sm" id="topFontSelector">
+                                    <option value="Lateef" selected>Lateef</option>
+                                    <option value="MBSindhiWeb">MB Sindhi Web</option>
+                                    <option value="MBSarang">MB Sarang</option>
+                                    <option value="NafeesSaleem">Nafees Saleem</option>
+                                    <option value="MBMajeed">MB Majeed</option>
+                                    <option value="PakTypeNaskh">PakType Naskh</option>
+                                    <option value="MBTahoma">MB Tahoma</option>
+                                    <option value="Amiri">Amiri Arabic</option>
+                                    <option value="Noto Nastaliq Urdu">Noto Nastaliq</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- 3. Logo Settings -->
                         <div class="setting-section d-none" id="sec-logo">
                             <h6 class="text-secondary fw-bold mb-2 pb-1 border-bottom small"><i class="fa fa-circle-user me-1"></i> لوگو سيٽنگون</h6>
                             <div class="mb-2">
@@ -275,7 +325,7 @@
                             </div>
                         </div>
 
-                        <!-- 3. Main Image Settings -->
+                        <!-- 4. Main Image Settings -->
                         <div class="setting-section d-none" id="sec-image">
                             <h6 class="text-secondary fw-bold mb-2 pb-1 border-bottom small"><i class="fa fa-image me-1"></i> مکيه تصوير سيٽنگون</h6>
                             <div class="mb-2">
@@ -298,7 +348,7 @@
                             </div>
                         </div>
 
-                        <!-- 4. Custom Name Settings -->
+                        <!-- 5. Custom Name Settings -->
                         <div class="setting-section d-none" id="sec-name">
                             <h6 class="text-secondary fw-bold mb-2 pb-1 border-bottom small"><i class="fa fa-font me-1"></i> رپورٽر جو نالو ۽ فونٽ</h6>
                             <div class="mb-2">
@@ -333,37 +383,8 @@
                                     <input type="range" class="form-range" id="customNamePosXRange" min="0" max="250" value="12">
                                 </div>
                                 <div class="col-6">
-                                    <label class="form-label small mb-1">مٿي/هيٺ (Bottom): <span id="customNamePosYVal">100</span>px</label>
-                                    <input type="range" class="form-range" id="customNamePosYRange" min="0" max="300" value="100">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 5. Breaking News Banner Settings -->
-                        <div class="setting-section d-none" id="sec-breaking">
-                            <h6 class="text-secondary fw-bold mb-2 pb-1 border-bottom small"><i class="fa fa-bullhorn me-1"></i> بريڪنگ نيوز بينر سيٽنگون</h6>
-                            <div class="mb-2">
-                                <label class="form-label small mb-1">عنوان جو متن</label>
-                                <input type="text" class="form-control form-control-sm" id="breakingTitleInput" value="برڪنگ نيوز">
-                            </div>
-                            <div class="row g-2 mb-2">
-                                <div class="col-6">
-                                    <label class="form-label small mb-1">پهريون رنگ (Gradient 1)</label>
-                                    <input type="color" class="form-control form-control-color form-control-sm w-100" id="topColor1" value="#cc0000">
-                                </div>
-                                <div class="col-6">
-                                    <label class="form-label small mb-1">ٻيو رنگ (Gradient 2)</label>
-                                    <input type="color" class="form-control form-control-color form-control-sm w-100" id="topColor2" value="#ff4d4d">
-                                </div>
-                            </div>
-                            <div class="row g-2">
-                                <div class="col-6">
-                                    <label class="form-label small mb-1">فونٽ سائيز: <span id="breakingFontSizeVal">20</span>px</label>
-                                    <input type="range" class="form-range" id="breakingFontSizeRange" min="14" max="40" value="20">
-                                </div>
-                                <div class="col-6">
-                                    <label class="form-label small mb-1">اوچائي: <span id="breakingHeightVal">35</span>px</label>
-                                    <input type="range" class="form-range" id="breakingHeightRange" min="25" max="60" value="35">
+                                    <label class="form-label small mb-1">مٿي/هيٺ (Bottom): <span id="customNamePosYVal">120</span>px</label>
+                                    <input type="range" class="form-range" id="customNamePosYRange" min="0" max="300" value="120">
                                 </div>
                             </div>
                         </div>
@@ -372,10 +393,10 @@
                         <div class="setting-section d-none" id="sec-layout">
                             <h6 class="text-secondary fw-bold mb-2 pb-1 border-bottom small"><i class="fa fa-layer-group me-1"></i> پٽين جي ترتيب</h6>
                             <div class="mb-3">
-                                <label class="form-label small mb-1">برڪنگ نيوز پٽي جي پوزيشن</label>
+                                <label class="form-label small mb-1">مٿين پٽي جي پوزيشن</label>
                                 <select class="form-select form-select-sm" id="layoutOrderSelect">
                                     <option value="top" selected>سڀ کان مٿي</option>
-                                    <option value="above-news">خبر واري پٽي جي بلڪل مٿان</option>
+                                    <option value="above-news">هيٺين خبر واري پٽي جي بلڪل مٿان</option>
                                 </select>
                             </div>
                         </div>
@@ -493,6 +514,7 @@
         const breakingFontSizeVal = document.getElementById('breakingFontSizeVal');
         const breakingHeightRange = document.getElementById('breakingHeightRange');
         const breakingHeightVal = document.getElementById('breakingHeightVal');
+        const topFontSelector = document.getElementById('topFontSelector');
 
         const newsTextInput = document.getElementById('newsTextInput');
         const fontSelector = document.getElementById('fontSelector');
@@ -625,6 +647,10 @@
             prevTopBanner.style.height = e.target.value + 'px';
         });
 
+        topFontSelector.addEventListener('change', (e) => {
+            prevTopBanner.style.fontFamily = e.target.value;
+        });
+
         fontSizeRange.addEventListener('input', (e) => {
             fontSizeVal.innerText = e.target.value;
             prevNewsText.style.fontSize = e.target.value + 'px';
@@ -666,10 +692,7 @@
         });
 
         fontSelector.addEventListener('change', (e) => {
-            let selectedFont = e.target.value;
-            prevNewsText.style.fontFamily = selectedFont;
-            // Sync Breaking banner font family to match main news font to prevent breaking
-            prevTopBanner.style.fontFamily = selectedFont;
+            prevNewsText.style.fontFamily = e.target.value;
         });
 
         footerBgColor.addEventListener('input', (e) => {
@@ -718,7 +741,7 @@
             }
         }
 
-        // Robust Download Function with Font Ready Verification
+        // Robust Download Function with Proper Padding & Font Ready Verification
         downloadBtn.addEventListener('click', () => {
             let scaleVal = parseInt(downloadScaleSelect.value) || 2;
             downloadBtn.innerText = "تصوير تيار ٿي رهي آهي...";
