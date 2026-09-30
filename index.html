@@ -109,10 +109,10 @@
             border-radius: 12px;
         }
         .tab-btn {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: bold;
-            padding: 8px 12px;
-            border-radius: 8px !important;
+            padding: 6px 10px;
+            border-radius: 6px !important;
             transition: all 0.2s ease;
         }
         .developer-footer {
@@ -134,7 +134,7 @@
 
     <div class="container mb-5">
         <div class="row g-3">
-            <!-- Live Preview Column (Left / Top) -->
+            <!-- Live Preview Column -->
             <div class="col-lg-5">
                 <div class="sticky-top" style="top: 20px;">
                     <div class="card shadow-sm p-3 border-0">
@@ -155,8 +155,8 @@
                                 </div>
                             </div>
 
-                            <!-- Separate Social Icons Bar -->
-                            <div class="bg-dark text-white p-1 d-flex justify-content-center gap-3 align-items-center" id="prevSocialBar" style="height: 35px; z-index: 2; width: 100%;">
+                            <!-- Separate Social/Footer Bar -->
+                            <div class="bg-dark text-white p-1 d-flex justify-content-center gap-3 align-items-center" id="prevSocialBar" style="height: 35px; z-index: 2; width: 100%; font-size: 14px;">
                                 <i class="fab fa-facebook text-primary"></i>
                                 <i class="fab fa-instagram text-danger"></i>
                                 <i class="fab fa-whatsapp text-success"></i>
@@ -180,20 +180,22 @@
                 </div>
             </div>
 
-            <!-- Settings Frame Column (Right / Bottom) -->
+            <!-- Settings Frame Column -->
             <div class="col-lg-7">
                 <div class="card shadow-sm p-3 border-0 settings-card">
                     <h5 class="mb-3 text-primary border-bottom pb-2 fs-6 fw-bold"><i class="fa fa-sliders me-2"></i> ڊزائن ۽ ايڊيٽنگ سيٽنگون</h5>
                     
-                    <!-- Tab Navigation Buttons -->
-                    <div class="d-flex flex-wrap gap-1 mb-3 bg-light p-2 rounded border" id="settingTabs">
-                        <button class="btn btn-primary tab-btn active" data-target="sec-layout"><i class="fa fa-layer-group me-1"></i> ترتيب</button>
-                        <button class="btn btn-outline-primary tab-btn" data-target="sec-image"><i class="fa fa-image me-1"></i> تصوير</button>
-                        <button class="btn btn-outline-primary tab-btn" data-target="sec-logo"><i class="fa fa-circle-user me-1"></i> لوگو</button>
-                        <button class="btn btn-outline-primary tab-btn" data-target="sec-name"><i class="fa fa-font me-1"></i> نالو</button>
-                        <button class="btn btn-outline-primary tab-btn" data-target="sec-breaking"><i class="fa fa-bullhorn me-1"></i> بريڪنگ</button>
-                        <button class="btn btn-outline-primary tab-btn" data-target="sec-news"><i class="fa fa-align-right me-1"></i> خبر</button>
-                        <button class="btn btn-outline-primary tab-btn" data-target="sec-social"><i class="fa fa-share-nodes me-1"></i> آئڪن</button>
+                    <!-- Tab Navigation Buttons Container -->
+                    <div class="p-2 mb-3 bg-light rounded border shadow-sm">
+                        <div class="d-flex flex-wrap gap-1 justify-content-center" id="settingTabs">
+                            <button class="btn btn-primary tab-btn active" data-target="sec-layout"><i class="fa fa-layer-group me-1"></i> ترتيب</button>
+                            <button class="btn btn-outline-primary tab-btn" data-target="sec-image"><i class="fa fa-image me-1"></i> تصوير</button>
+                            <button class="btn btn-outline-primary tab-btn" data-target="sec-logo"><i class="fa fa-circle-user me-1"></i> لوگو</button>
+                            <button class="btn btn-outline-primary tab-btn" data-target="sec-name"><i class="fa fa-font me-1"></i> نالو</button>
+                            <button class="btn btn-outline-primary tab-btn" data-target="sec-breaking"><i class="fa fa-bullhorn me-1"></i> بريڪنگ</button>
+                            <button class="btn btn-outline-primary tab-btn" data-target="sec-news"><i class="fa fa-align-right me-1"></i> خبر</button>
+                            <button class="btn btn-outline-primary tab-btn" data-target="sec-social"><i class="fa fa-share-nodes me-1"></i> آئڪن/نالو</button>
+                        </div>
                     </div>
 
                     <!-- Tab Contents Container -->
@@ -371,16 +373,34 @@
                             </div>
                         </div>
 
-                        <!-- 7. Social Icons Settings -->
+                        <!-- 7. Social Icons / Custom Text Settings -->
                         <div class="setting-section d-none" id="sec-social">
-                            <h6 class="text-secondary fw-bold mb-2 pb-1 border-bottom small"><i class="fa fa-share-nodes me-1"></i> سماجي رابطن جا آئڪن (ترتيب ۽ فاصلو)</h6>
-                            <div class="d-flex gap-3 flex-wrap mb-2">
-                                <div class="form-check"><input class="form-check-input social-chk" type="checkbox" value="fa-facebook" id="chk-fb" checked><label class="form-check-label small" for="chk-fb">فيس بوڪ</label></div>
-                                <div class="form-check"><input class="form-check-input social-chk" type="checkbox" value="fa-instagram" id="chk-insta" checked><label class="form-check-label small" for="chk-insta">انسٽाग्राम</label></div>
-                                <div class="form-check"><input class="form-check-input social-chk" type="checkbox" value="fa-whatsapp" id="chk-wa" checked><label class="form-check-label small" for="chk-wa">واٽس اپ</label></div>
-                                <div class="form-check"><input class="form-check-input social-chk" type="checkbox" value="fa-x-twitter" id="chk-x"><label class="form-check-label small" for="chk-x">ايڪس (X)</label></div>
-                                <div class="form-check"><input class="form-check-input social-chk" type="checkbox" value="fa-tiktok" id="chk-tt"><label class="form-check-label small" for="chk-tt">ٽڪ تاڪ</label></div>
+                            <h6 class="text-secondary fw-bold mb-2 pb-1 border-bottom small"><i class="fa fa-share-nodes me-1"></i> هيٺين پٽي (آئڪن يا پنهنجو نالو)</h6>
+                            <div class="mb-2">
+                                <label class="form-label small mb-1">هيٺين پٽي جو موڊ چونڊيو</label>
+                                <select class="form-select form-select-sm" id="footerModeSelect">
+                                    <option value="icons" selected>صرف سماجي رابطن جا آئڪن</option>
+                                    <option value="text">صرف پنهنجو نالو / متن لکو</option>
+                                </select>
                             </div>
+
+                            <!-- Custom Footer Text Input -->
+                            <div class="mb-2 d-none" id="footerTextWrapper">
+                                <label class="form-label small mb-1">هيٺين پٽي لاءِ نالو يا ويب سائٽ/صفحي جو نالو</label>
+                                <input type="text" class="form-control form-control-sm" id="footerCustomTextInput" value="www.sindhinews.com">
+                            </div>
+
+                            <!-- Icons Settings -->
+                            <div id="footerIconsSettings">
+                                <div class="d-flex gap-3 flex-wrap mb-2">
+                                    <div class="form-check"><input class="form-check-input social-chk" type="checkbox" value="fa-facebook" id="chk-fb" checked><label class="form-check-label small" for="chk-fb">فيس بوڪ</label></div>
+                                    <div class="form-check"><input class="form-check-input social-chk" type="checkbox" value="fa-instagram" id="chk-insta" checked><label class="form-check-label small" for="chk-insta">انسٽाग्राम</label></div>
+                                    <div class="form-check"><input class="form-check-input social-chk" type="checkbox" value="fa-whatsapp" id="chk-wa" checked><label class="form-check-label small" for="chk-wa">واٽس اپ</label></div>
+                                    <div class="form-check"><input class="form-check-input social-chk" type="checkbox" value="fa-x-twitter" id="chk-x"><label class="form-check-label small" for="chk-x">ايڪس (X)</label></div>
+                                    <div class="form-check"><input class="form-check-input social-chk" type="checkbox" value="fa-tiktok" id="chk-tt"><label class="form-check-label small" for="chk-tt">ٽڪ تاڪ</label></div>
+                                </div>
+                            </div>
+
                             <div class="row g-2">
                                 <div class="col-6">
                                     <label class="form-label small mb-1">پوزيشن (Alignment)</label>
@@ -484,6 +504,10 @@
         const bottomColor1 = document.getElementById('bottomColor1');
         const bottomColor2 = document.getElementById('bottomColor2');
 
+        const footerModeSelect = document.getElementById('footerModeSelect');
+        const footerTextWrapper = document.getElementById('footerTextWrapper');
+        const footerCustomTextInput = document.getElementById('footerCustomTextInput');
+        const footerIconsSettings = document.getElementById('footerIconsSettings');
         const socialAlignment = document.getElementById('socialAlignment');
         const socialGapRange = document.getElementById('socialGapRange');
         const socialGapVal = document.getElementById('socialGapVal');
@@ -654,6 +678,20 @@
             prevNewsText.style.fontFamily = e.target.value;
         });
 
+        // Footer Mode (Icons vs Text)
+        footerModeSelect.addEventListener('change', (e) => {
+            if(e.target.value === 'text') {
+                footerTextWrapper.classList.remove('d-none');
+                footerIconsSettings.classList.add('d-none');
+            } else {
+                footerTextWrapper.classList.add('d-none');
+                footerIconsSettings.classList.remove('d-none');
+            }
+            updateSocialIcons();
+        });
+
+        footerCustomTextInput.addEventListener('input', updateSocialIcons);
+
         // Social Icons Controls Fix
         document.querySelectorAll('.social-chk').forEach(chk => {
             chk.addEventListener('change', updateSocialIcons);
@@ -666,14 +704,16 @@
 
         function updateSocialIcons() {
             prevSocialBar.innerHTML = '';
-            // Fix Flex Alignment mapping
             let alignVal = socialAlignment.value;
+            
             if(alignVal === 'flex-start') {
                 prevSocialBar.style.justifyContent = 'flex-start';
                 prevSocialBar.style.paddingRight = '15px';
+                prevSocialBar.style.paddingLeft = '0';
             } else if(alignVal === 'flex-end') {
                 prevSocialBar.style.justifyContent = 'flex-end';
                 prevSocialBar.style.paddingLeft = '15px';
+                prevSocialBar.style.paddingRight = '0';
             } else {
                 prevSocialBar.style.justifyContent = 'center';
                 prevSocialBar.style.paddingLeft = '0';
@@ -682,11 +722,15 @@
             
             prevSocialBar.style.gap = socialGapRange.value + 'px';
 
-            if(document.getElementById('chk-fb').checked) prevSocialBar.innerHTML += '<i class="fab fa-facebook text-primary"></i>';
-            if(document.getElementById('chk-insta').checked) prevSocialBar.innerHTML += '<i class="fab fa-instagram text-danger"></i>';
-            if(document.getElementById('chk-wa').checked) prevSocialBar.innerHTML += '<i class="fab fa-whatsapp text-success"></i>';
-            if(document.getElementById('chk-x').checked) prevSocialBar.innerHTML += '<i class="fab fa-x-twitter text-light"></i>';
-            if(document.getElementById('chk-tt').checked) prevSocialBar.innerHTML += '<i class="fab fa-tiktok text-light"></i>';
+            if(footerModeSelect.value === 'text') {
+                prevSocialBar.innerText = footerCustomTextInput.value;
+            } else {
+                if(document.getElementById('chk-fb').checked) prevSocialBar.innerHTML += '<i class="fab fa-facebook text-primary"></i>';
+                if(document.getElementById('chk-insta').checked) prevSocialBar.innerHTML += '<i class="fab fa-instagram text-danger"></i>';
+                if(document.getElementById('chk-wa').checked) prevSocialBar.innerHTML += '<i class="fab fa-whatsapp text-success"></i>';
+                if(document.getElementById('chk-x').checked) prevSocialBar.innerHTML += '<i class="fab fa-x-twitter text-light"></i>';
+                if(document.getElementById('chk-tt').checked) prevSocialBar.innerHTML += '<i class="fab fa-tiktok text-light"></i>';
+            }
         }
 
         downloadBtn.addEventListener('click', () => {
