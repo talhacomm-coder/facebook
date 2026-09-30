@@ -62,11 +62,8 @@
             aspect-ratio: 4 / 4;
             overflow: hidden;
             background: #111;
-            cursor: grab;
+            cursor: pointer;
             touch-action: none;
-        }
-        .preview-image-box:active {
-            cursor: grabbing;
         }
         .preview-image {
             position: absolute;
@@ -98,7 +95,13 @@
             top: 15px;
             left: 15px;
             object-fit: contain;
-            z-index: 10;
+            z-index: 20;
+            cursor: grab;
+            user-select: none;
+            touch-action: none;
+        }
+        .watermark-logo:active {
+            cursor: grabbing;
         }
         .custom-name-watermark {
             position: absolute;
@@ -106,11 +109,16 @@
             right: 15px;
             color: white;
             font-weight: bold;
-            z-index: 10;
+            z-index: 20;
             white-space: nowrap;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
             font-family: 'Lateef', 'MBSindhiWeb', sans-serif;
-            cursor: pointer;
+            cursor: grab;
+            user-select: none;
+            touch-action: none;
+        }
+        .custom-name-watermark:active {
+            cursor: grabbing;
         }
         .floating-breaking-text {
             position: absolute;
@@ -118,11 +126,16 @@
             right: 15px;
             color: white;
             font-weight: bold;
-            z-index: 10;
+            z-index: 20;
             white-space: nowrap;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
             font-family: 'Lateef', 'MBSindhiWeb', sans-serif;
-            cursor: pointer;
+            cursor: grab;
+            user-select: none;
+            touch-action: none;
+        }
+        .floating-breaking-text:active {
+            cursor: grabbing;
         }
         .settings-card {
             background: #ffffff;
@@ -160,17 +173,17 @@
             <div class="col-xl-4 col-lg-5 col-md-5">
                 <div class="sticky-top" style="top: 10px;">
                     <div class="card shadow-sm p-2 border-0">
-                        <h6 class="text-center mb-1 text-secondary fw-bold fs-7">لائيو پريوو (تصوير يا ٽيڪسٽ تي سڌو ڪلڪ ڪري تبديل ڪريو)</h6>
+                        <h6 class="text-center mb-1 text-secondary fw-bold fs-7">لائيو پريوو (هر شيءِ کي هٿ سان کڻي سگهو ٿا)</h6>
                         
                         <div class="preview-container mb-2" id="captureArea">
-                            <img id="prevLogo" src="https://via.placeholder.com/80" class="watermark-logo" style="width: 60px; height: 60px; top: 12px; left: 12px;">
-                            <div id="prevCustomName" class="custom-name-watermark" style="font-size: 20px; bottom: 120px; right: 12px;" title="ڪلڪ ڪري نالو تبديل ڪريو">رپورٽر جو نالو</div>
-                            <div id="prevFloatingBreaking" class="floating-breaking-text" style="font-size: 20px; top: 15px; right: 15px;" title="ڪلڪ ڪري مٿين خبر تبديل ڪريو">برڪنگ نيوز</div>
+                            <img id="prevLogo" src="https://via.placeholder.com/80" class="watermark-logo" style="width: 60px; height: 60px; top: 12px; left: 12px;" title="لوگو کي هٿ سان کڻو يا ڪلڪ ڪري تبديل ڪريو">
+                            <div id="prevCustomName" class="custom-name-watermark" style="font-size: 20px; bottom: 120px; right: 12px;" title="نالو هٿ سان کڻو يا ڪلڪ ڪري تبديل ڪريو">رپورٽر جو نالو</div>
+                            <div id="prevFloatingBreaking" class="floating-breaking-text" style="font-size: 20px; top: 15px; right: 15px;" title="برڪنگ نيوز هٿ سان کڻو يا ڪلڪ ڪري تبديل ڪريو">برڪنگ نيوز</div>
                             
                             <!-- Main Flex Wrapper -->
                             <div class="dynamic-flex-wrapper" id="dynamicFlexWrapper">
                                 <div class="preview-header-banner" id="prevTopBanner" style="height: 38px; background: linear-gradient(135deg, #cc0000, #ff4d4d);"></div>
-                                <div class="preview-image-box" id="prevImageBox" title="تصوير کي هتان پڪڙي کڻي سگهو ٿا">
+                                <div class="preview-image-box" id="prevImageBox" title="تصوير تي ڪلڪ ڪري نئين تصوير اپلوڊ ڪريو">
                                     <img id="prevMainImage" src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=600&q=80" class="preview-image" style="transform: scale(1) translate(0px, 0px);">
                                 </div>
                                 <div class="news-text-box" id="prevNewsText" style="font-size: 20px; height: 95px; background: linear-gradient(135deg, #0d6efd, #4dabf7);" title="ڪلڪ ڪري خبر تبديل ڪريو">
@@ -209,6 +222,10 @@
                 <div class="card shadow-sm p-3 border-0 settings-card">
                     <h6 class="mb-2 text-primary border-bottom pb-1 fw-bold fs-7"><i class="fa fa-sliders me-1"></i> Social Media Post Studio - سيٽنگون</h6>
                     
+                    <!-- Hidden File Inputs -->
+                    <input type="file" id="hiddenImageInput" accept="image/*" style="display: none;">
+                    <input type="file" id="hiddenLogoInput" accept="image/*" style="display: none;">
+
                     <!-- Tab Navigation Buttons Container -->
                     <div class="p-1 mb-2 bg-light rounded border shadow-sm">
                         <div class="d-flex flex-wrap gap-1 justify-content-center" id="settingTabs">
@@ -501,6 +518,7 @@
         const layoutOrderSelect = document.getElementById('layoutOrderSelect');
 
         const logoInput = document.getElementById('logoInput');
+        const hiddenLogoInput = document.getElementById('hiddenLogoInput');
         const logoSizeRange = document.getElementById('logoSizeRange');
         const logoSizeVal = document.getElementById('logoSizeVal');
         const logoOpacityRange = document.getElementById('logoOpacityRange');
@@ -511,6 +529,7 @@
         const logoPosYVal = document.getElementById('logoPosYVal');
         
         const mainImageInput = document.getElementById('mainImageInput');
+        const hiddenImageInput = document.getElementById('hiddenImageInput');
         const imgScaleRange = document.getElementById('imgScaleRange');
         const imgScaleVal = document.getElementById('imgScaleVal');
         const imgPosXRange = document.getElementById('imgPosXRange');
@@ -568,7 +587,39 @@
         const downloadScaleSelect = document.getElementById('downloadScaleSelect');
         const prevImageBox = document.getElementById('prevImageBox');
 
-        // Direct On-Screen Click/Touch Editing Support
+        // Direct Click to Change Main Image
+        prevImageBox.addEventListener('click', (e) => {
+            if(e.target === prevImageBox || e.target === prevMainImage) {
+                hiddenImageInput.click();
+            }
+        });
+
+        hiddenImageInput.addEventListener('change', (e) => {
+            if (e.target.files[0]) {
+                let newImgUrl = URL.createObjectURL(e.target.files[0]);
+                prevMainImage.src = newImgUrl;
+                mainImageInput.files = e.target.files;
+                currentScale = 1;
+                currentPosX = 0;
+                currentPosY = 0;
+                updateImageTransform();
+            }
+        });
+
+        // Direct Click to Change Logo
+        prevLogo.addEventListener('click', () => {
+            hiddenLogoInput.click();
+        });
+
+        hiddenLogoInput.addEventListener('change', (e) => {
+            if (e.target.files[0]) {
+                let newLogoUrl = URL.createObjectURL(e.target.files[0]);
+                prevLogo.src = newLogoUrl;
+                logoInput.files = e.target.files;
+            }
+        });
+
+        // Direct On-Screen Click/Touch Editing for Texts
         prevNewsText.addEventListener('click', () => {
             let newVal = prompt("هيٺين خبر جو نئون متن داخل ڪريو:", newsTextInput.value);
             if(newVal !== null) {
@@ -593,9 +644,102 @@
             }
         });
 
+        // Universal Free Dragging for Logo, Breaking News, and Reporter Name
+        function makeElementDraggable(elm, isRightAligned = false) {
+            let startX = 0, startY = 0;
+
+            elm.addEventListener('mousedown', startDrag);
+            elm.addEventListener('touchstart', startDrag, {passive: false});
+
+            function startDrag(e) {
+                // Ignore if clicked on logo to change image
+                if(elm === prevLogo && e.target === prevLogo && e.detail > 1) return;
+                e.stopPropagation();
+                e.preventDefault();
+
+                startX = e.clientX || (e.touches && e.touches[0].clientX);
+                startY = e.clientY || (e.touches && e.touches[0].clientY);
+
+                document.addEventListener('mousemove', onDrag);
+                document.addEventListener('touchmove', onDrag, {passive: false});
+                document.addEventListener('mouseup', stopDrag);
+                document.addEventListener('touchend', stopDrag);
+            }
+
+            function onDrag(e) {
+                e.preventDefault();
+                let clientX = e.clientX || (e.touches && e.touches[0].clientX);
+                let clientY = e.clientY || (e.touches && e.touches[0].clientY);
+
+                let dx = clientX - startX;
+                let dy = clientY - startY;
+                startX = clientX;
+                startY = clientY;
+
+                let rect = captureArea.getBoundingClientRect();
+
+                if(elm === prevLogo) {
+                    let curLeft = parseInt(prevLogo.style.left || 12);
+                    let curTop = parseInt(prevLogo.style.top || 12);
+                    let nLeft = Math.max(0, Math.min(rect.width - 40, curLeft + dx));
+                    let nTop = Math.max(0, Math.min(rect.height - 40, curTop + dy));
+                    
+                    prevLogo.style.left = nLeft + 'px';
+                    prevLogo.style.right = 'auto';
+                    logoPosXRange.value = nLeft;
+                    logoPosXVal.innerText = nLeft;
+                    
+                    prevLogo.style.top = nTop + 'px';
+                    logoPosYRange.value = nTop;
+                    logoPosYVal.innerText = nTop;
+                } 
+                else if(elm === prevFloatingBreaking) {
+                    let curRight = parseInt(prevFloatingBreaking.style.right || 15);
+                    let curTop = parseInt(prevFloatingBreaking.style.top || 15);
+                    let nRight = Math.max(0, Math.min(rect.width - 50, curRight - dx));
+                    let nTop = Math.max(0, Math.min(rect.height - 30, curTop + dy));
+
+                    prevFloatingBreaking.style.right = nRight + 'px';
+                    prevFloatingBreaking.style.left = 'auto';
+                    breakingPosXRange.value = nRight;
+                    breakingPosXVal.innerText = nRight;
+
+                    prevFloatingBreaking.style.top = nTop + 'px';
+                    breakingPosYRange.value = nTop;
+                    breakingPosYVal.innerText = nTop;
+                } 
+                else if(elm === prevCustomName) {
+                    let curRight = parseInt(prevCustomName.style.right || 12);
+                    let curBottom = parseInt(prevCustomName.style.bottom || 120);
+                    let nRight = Math.max(0, Math.min(rect.width - 50, curRight - dx));
+                    let nBottom = Math.max(0, Math.min(rect.height - 30, curBottom - dy));
+
+                    prevCustomName.style.right = nRight + 'px';
+                    prevCustomName.style.left = 'auto';
+                    customNamePosXRange.value = nRight;
+                    customNamePosXVal.innerText = nRight;
+
+                    prevCustomName.style.bottom = nBottom + 'px';
+                    customNamePosYRange.value = nBottom;
+                    customNamePosYVal.innerText = nBottom;
+                }
+            }
+
+            function stopDrag() {
+                document.removeEventListener('mousemove', onDrag);
+                document.removeEventListener('touchmove', onDrag);
+                document.removeEventListener('mouseup', stopDrag);
+                document.removeEventListener('touchend', stopDrag);
+            }
+        }
+
+        makeElementDraggable(prevLogo);
+        makeElementDraggable(prevFloatingBreaking);
+        makeElementDraggable(prevCustomName);
+
         // Touch & Mouse Drag (Pan) & Pinch/Wheel Zoom for Main Image
-        let isDragging = false;
-        let startX = 0, startY = 0;
+        let isDraggingImg = false;
+        let startImgX = 0, startImgY = 0;
         let currentScale = 1;
         let currentPosX = 0;
         let currentPosY = 0;
@@ -611,39 +755,39 @@
         }
 
         prevImageBox.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            startX = e.clientX - currentPosX;
-            startY = e.clientY - currentPosY;
+            if(e.target === prevImageBox || e.target === prevMainImage) {
+                isDraggingImg = true;
+                startImgX = e.clientX - currentPosX;
+                startImgY = e.clientY - currentPosY;
+            }
         });
 
         window.addEventListener('mousemove', (e) => {
-            if (!isDragging) return;
-            currentPosX = e.clientX - startX;
-            currentPosY = e.clientY - startY;
+            if (!isDraggingImg) return;
+            currentPosX = e.clientX - startImgX;
+            currentPosY = e.clientY - startImgY;
             updateImageTransform();
         });
 
-        window.addEventListener('mouseup', () => { isDragging = false; });
+        window.addEventListener('mouseup', () => { isDraggingImg = false; });
 
-        // Touch support for mobile devices
         prevImageBox.addEventListener('touchstart', (e) => {
-            if(e.touches.length === 1) {
-                isDragging = true;
-                startX = e.touches[0].clientX - currentPosX;
-                startY = e.touches[0].clientY - currentPosY;
+            if(e.touches.length === 1 && (e.target === prevImageBox || e.target === prevMainImage)) {
+                isDraggingImg = true;
+                startImgX = e.touches[0].clientX - currentPosX;
+                startImgY = e.touches[0].clientY - currentPosY;
             }
         });
 
         window.addEventListener('touchmove', (e) => {
-            if (!isDragging || e.touches.length !== 1) return;
-            currentPosX = e.touches[0].clientX - startX;
-            currentPosY = e.touches[0].clientY - startY;
+            if (!isDraggingImg || e.touches.length !== 1) return;
+            currentPosX = e.touches[0].clientX - startImgX;
+            currentPosY = e.touches[0].clientY - startImgY;
             updateImageTransform();
         });
 
-        window.addEventListener('touchend', () => { isDragging = false; });
+        window.addEventListener('touchend', () => { isDraggingImg = false; });
 
-        // Mouse Wheel Zoom
         prevImageBox.addEventListener('wheel', (e) => {
             e.preventDefault();
             if(e.deltaY < 0) {
