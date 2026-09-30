@@ -7,7 +7,7 @@
     <!-- Bootstrap 5 CSS RTL -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css.rtl.min.css">
     <!-- Google Fonts for Sindhi / Urdu / Arabic support -->
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Lateef&family=Noto+Nastaliq+Urdu:wght@400;700&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Lateef&family=Noto+Nastaliq+Urdu:wght@400;700&family=Cairo:wght@400;700&family=Baloo+Sindhoo&display=swap" rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -20,15 +20,23 @@
             max-width: 450px;
             aspect-ratio: 4 / 5;
             background: #fff;
-            position: relative.
+            position: relative;
             overflow: hidden;
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             margin: 0 auto;
             border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+        }
+        .preview-image-box {
+            position: relative;
+            width: 100%;
+            flex-grow: 1;
+            overflow: hidden;
         }
         .preview-image {
             width: 100%;
-            height: 60%;
+            height: 100%;
             object-fit: cover;
         }
         .breaking-banner {
@@ -36,21 +44,22 @@
             color: white;
             text-align: center;
             font-weight: bold;
-            padding: 8px;
-            font-size: 1.5rem;
+            padding: 6px;
+            font-size: 1.3rem;
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 2;
         }
         .news-text-box {
             background-color: #cc0000;
-            color: white.
+            color: white;
             padding: 15px;
             text-align: center;
             font-weight: bold;
-            min-height: 100px;
             display: flex;
             align-items: center;
             justify-content: center;
             word-break: break-word;
+            transition: all 0.2s ease;
         }
         .watermark-logo {
             position: absolute;
@@ -60,6 +69,7 @@
             border: 2px solid white;
             background: white;
             object-fit: cover;
+            z-index: 5;
         }
     </style>
 </head>
@@ -68,9 +78,6 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="#">سنڌي نيوز پوسٽليڪر</a>
-            <div id="auth-section">
-                <!-- Auth status will load here -->
-            </div>
         </div>
     </nav>
 
@@ -101,19 +108,36 @@
                         <textarea class="form-control" id="newsTextInput" rows="3" placeholder="هتي پنهنجي خبر لکو...">رائونتي ۾ موٽر سائڪل سوارن تي مبينه درون حملو، نصير ڪورائي ۽ الله ڏتو ڪورائي زخمي</textarea>
                     </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">فونٽ جي چونڊ</label>
-                        <select class="form-select" id="fontSelector">
-                            <option value="'Cairo', sans-serif">Cairo (عام)</option>
-                            <option value="'Amiri', serif">Amiri (قاعدو)</option>
-                            <option value="'Lateef', cursive">Lateef (سنڌي روايتي)</option>
-                            <option value="'Noto Nastaliq Urdu', serif" selected>Noto Nastaliq (نستعليق)</option>
-                        </select>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">فونٽ جي سائيز: <span id="fontSizeVal">20</span>px</label>
+                            <input type="range" class="form-range" id="fontSizeRange" min="14" max="36" value="20">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">هيٺين پٽي جي اوچائي: <span id="barHeightVal">120</span>px</label>
+                            <input type="range" class="form-range" id="barHeightRange" min="80" max="250" value="120">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">فونٽ جي چونڊ</label>
+                            <select class="form-select" id="fontSelector">
+                                <option value="'Noto Nastaliq Urdu', serif" selected>Noto Nastaliq (نستعليق)</option>
+                                <option value="'Cairo', sans-serif">Cairo (عام)</option>
+                                <option value="'Amiri', serif">Amiri (قاعدو)</option>
+                                <option value="'Lateef', cursive">Lateef (سنڌي روايتي)</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">پٽي جو رنگ (Background)</label>
+                            <input type="color" class="form-control form-control-color w-100" id="barColorPicker" value="#cc0000">
+                        </div>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">سماجي رابطن جا آئڪن چونڊيو</label>
-                        <div class="d-flex gap-3">
+                        <div class="d-flex gap-3 flex-wrap">
                             <div class="form-check"><input class="form-check-input social-chk" type="checkbox" value="fa-facebook" id="chk-fb" checked><label class="form-check-label" for="chk-fb">فيس بوڪ</label></div>
                             <div class="form-check"><input class="form-check-input social-chk" type="checkbox" value="fa-instagram" id="chk-insta" checked><label class="form-check-label" for="chk-insta">انسٽाग्राम</label></div>
                             <div class="form-check"><input class="form-check-input social-chk" type="checkbox" value="fa-whatsapp" id="chk-wa" checked><label class="form-check-label" for="chk-wa">واٽس اپ</label></div>
@@ -130,9 +154,11 @@
                 <h4 class="text-center mb-3">لائيو پريوو (Live Preview)</h4>
                 <div class="preview-container" id="captureArea">
                     <img id="prevLogo" src="https://via.placeholder.com/80" class="watermark-logo" style="width: 80px; height: 80px;">
-                    <img id="prevMainImage" src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=600&q=80" class="preview-image">
+                    <div class="preview-image-box">
+                        <img id="prevMainImage" src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=600&q=80" class="preview-image">
+                    </div>
                     <div class="breaking-banner">برڪنگ نيوز</div>
-                    <div class="news-text-box" id="prevNewsText" style="font-family: 'Noto Nastaliq Urdu', serif; font-size: 1.2rem;">
+                    <div class="news-text-box" id="prevNewsText" style="font-family: 'Noto Nastaliq Urdu', serif; font-size: 20px; height: 120px; background-color: #cc0000;">
                         رائونتي ۾ موٽر سائڪل سوارن تي مبينه درون حملو، نصير ڪورائي ۽ الله ڏتو ڪورائي زخمي
                     </div>
                     <div class="bg-dark text-white p-2 d-flex justify-content-center gap-3 align-items-center" id="prevSocialBar" style="height: 40px;">
@@ -145,17 +171,10 @@
         </div>
     </div>
 
-    <!-- Supabase CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <!-- Html2Canvas for image generation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <script>
-        // Supabase Initialization
-        const SUPABASE_URL = 'https://dbkyqgfcopjhizchoxya.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRia3lxZ2Zjb3BqaGl6Y2hoxyaIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc5MDcyMjk4NCwiZXhwIjoyMTA2Mjk4OTg0fQ.U-5A0DoVnqaL67r96K4GumTiu3eyr_VL4aMpwgj2sRE'; // Note: For public frontend use anon key ideally, service_role is provided here.
-        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
         // UI Element bindings
         const logoInput = document.getElementById('logoInput');
         const logoSizeRange = document.getElementById('logoSizeRange');
@@ -163,6 +182,11 @@
         const mainImageInput = document.getElementById('mainImageInput');
         const newsTextInput = document.getElementById('newsTextInput');
         const fontSelector = document.getElementById('fontSelector');
+        const fontSizeRange = document.getElementById('fontSizeRange');
+        const fontSizeVal = document.getElementById('fontSizeVal');
+        const barHeightRange = document.getElementById('barHeightRange');
+        const barHeightVal = document.getElementById('barHeightVal');
+        const barColorPicker = document.getElementById('barColorPicker');
         
         const prevLogo = document.getElementById('prevLogo');
         const prevMainImage = document.getElementById('prevMainImage');
@@ -177,6 +201,25 @@
             logoSizeVal.innerText = val;
             prevLogo.style.width = val + 'px';
             prevLogo.style.height = val + 'px';
+        });
+
+        // Font Size adjustment
+        fontSizeRange.addEventListener('input', (e) => {
+            const val = e.target.value;
+            fontSizeVal.innerText = val;
+            prevNewsText.style.fontSize = val + 'px';
+        });
+
+        // Bar Height adjustment
+        barHeightRange.addEventListener('input', (e) => {
+            const val = e.target.value;
+            barHeightVal.innerText = val;
+            prevNewsText.style.height = val + 'px';
+        });
+
+        // Bar Color picker
+        barColorPicker.addEventListener('input', (e) => {
+            prevNewsText.style.backgroundColor = e.target.value;
         });
 
         // Logo Upload local preview
@@ -214,11 +257,11 @@
             prevSocialBar.innerHTML = '';
             if(document.getElementById('chk-fb').checked) prevSocialBar.innerHTML += '<i class="fab fa-facebook fa-lg text-primary"></i>';
             if(document.getElementById('chk-insta').checked) prevSocialBar.innerHTML += '<i class="fab fa-instagram fa-lg text-danger"></i>';
-            if(document.getElementById('chk-whatsapp') || document.getElementById('chk-wa').checked) prevSocialBar.innerHTML += '<i class="fab fa-whatsapp fa-lg text-success"></i>';
+            if(document.getElementById('chk-wa').checked) prevSocialBar.innerHTML += '<i class="fab fa-whatsapp fa-lg text-success"></i>';
             if(document.getElementById('chk-tt').checked) prevSocialBar.innerHTML += '<i class="fab fa-tiktok fa-lg text-light"></i>';
         }
 
-        // Download Image & Auto-cleanup (Memory saver)
+        // Download Image & Auto-cleanup
         downloadBtn.addEventListener('click', () => {
             downloadBtn.innerText = "ٽيمپليٽ تيار ٿي رهيو آهي...";
             downloadBtn.disabled = true;
@@ -229,7 +272,6 @@
                 link.href = canvas.toDataURL('image/png');
                 link.click();
 
-                // Clean up temporary object URLs or states to free up memory
                 setTimeout(() => {
                     downloadBtn.innerHTML = '<i class="fa fa-download me-2"></i> تصوير ڊائونلوڊ ڪريو';
                     downloadBtn.disabled = false;
