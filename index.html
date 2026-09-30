@@ -186,15 +186,15 @@
                 <div class="card shadow-sm p-3 border-0 settings-card">
                     <h5 class="mb-3 text-primary border-bottom pb-2 fs-6 fw-bold"><i class="fa fa-sliders me-2"></i> ڊزائن ۽ ايڊيٽنگ سيٽنگون</h5>
                     
-                    <!-- Tab Navigation Buttons Container -->
+                    <!-- Tab Navigation Buttons Container (Reordered as requested) -->
                     <div class="p-2 mb-3 bg-light rounded border shadow-sm">
                         <div class="d-flex flex-wrap gap-1 justify-content-center" id="settingTabs">
-                            <button class="btn btn-primary tab-btn active" data-target="sec-layout"><i class="fa fa-layer-group me-1"></i> ترتيب</button>
-                            <button class="btn btn-outline-primary tab-btn" data-target="sec-image"><i class="fa fa-image me-1"></i> تصوير</button>
+                            <button class="btn btn-primary tab-btn active" data-target="sec-news"><i class="fa fa-align-right me-1"></i> خبرون</button>
                             <button class="btn btn-outline-primary tab-btn" data-target="sec-logo"><i class="fa fa-circle-user me-1"></i> لوگو</button>
+                            <button class="btn btn-outline-primary tab-btn" data-target="sec-layout"><i class="fa fa-layer-group me-1"></i> ترتيب</button>
+                            <button class="btn btn-outline-primary tab-btn" data-target="sec-image"><i class="fa fa-image me-1"></i> تصوير</button>
                             <button class="btn btn-outline-primary tab-btn" data-target="sec-name"><i class="fa fa-font me-1"></i> نالو</button>
                             <button class="btn btn-outline-primary tab-btn" data-target="sec-breaking"><i class="fa fa-bullhorn me-1"></i> بريڪنگ</button>
-                            <button class="btn btn-outline-primary tab-btn" data-target="sec-news"><i class="fa fa-align-right me-1"></i> خبر</button>
                             <button class="btn btn-outline-primary tab-btn" data-target="sec-social"><i class="fa fa-share-nodes me-1"></i> آئڪن/نالو</button>
                         </div>
                     </div>
@@ -202,42 +202,48 @@
                     <!-- Tab Contents Container -->
                     <div class="tab-content-container">
 
-                        <!-- 1. Layout Order -->
-                        <div class="setting-section" id="sec-layout">
-                            <h6 class="text-secondary fw-bold mb-2 pb-1 border-bottom small"><i class="fa fa-layer-group me-1"></i> پٽين جي ترتيب (Layout Order)</h6>
-                            <div class="mb-3">
-                                <label class="form-label small mb-1">برڪنگ نيوز پٽي جي پوزيشن</label>
-                                <select class="form-select form-select-sm" id="layoutOrderSelect">
-                                    <option value="top" selected>سڀ کان مٿي</option>
-                                    <option value="above-news">خبر واري پٽي جي بلڪل مٿان</option>
+                        <!-- 1. News Text Settings (Default Active) -->
+                        <div class="setting-section" id="sec-news">
+                            <h6 class="text-secondary fw-bold mb-2 pb-1 border-bottom small"><i class="fa fa-align-right me-1"></i> خبر جو متن، رنگ ۽ فونٽ</h6>
+                            <div class="mb-2">
+                                <textarea class="form-control form-control-sm" id="newsTextInput" rows="2">رائونتي ۾ موٽر سائڪل سوارن تي مبينه درون حملو، نصير ڪورائي ۽ الله ڏتو ڪورائي زخمي</textarea>
+                            </div>
+                            <div class="row g-2 mb-2">
+                                <div class="col-6">
+                                    <label class="form-label small mb-1">پهريون رنگ (Gradient 1)</label>
+                                    <input type="color" class="form-control form-control-color form-control-sm w-100" id="bottomColor1" value="#0d6efd">
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-label small mb-1">ٻيو رنگ (Gradient 2)</label>
+                                    <input type="color" class="form-control form-control-color form-control-sm w-100" id="bottomColor2" value="#4dabf7">
+                                </div>
+                            </div>
+                            <div class="row g-2 mb-2">
+                                <div class="col-6">
+                                    <label class="form-label small mb-1">سائيز: <span id="fontSizeVal">24</span>px</label>
+                                    <input type="range" class="form-range" id="fontSizeRange" min="14" max="40" value="24">
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-label small mb-1">اوچائي: <span id="barHeightVal">110</span>px</label>
+                                    <input type="range" class="form-range" id="barHeightRange" min="70" max="200" value="110">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="form-label small mb-1">خبر جو فونٽ چونڊيو</label>
+                                <select class="form-select form-select-sm" id="fontSelector">
+                                    <option value="'MBSindhiWeb', sans-serif" selected>MB Sindhi Web</option>
+                                    <option value="'MBSarang', sans-serif">MB Sarang</option>
+                                    <option value="'NafeesSaleem', serif">Nafees Saleem</option>
+                                    <option value="'MBMajeed', sans-serif">MB Majeed</option>
+                                    <option value="'PakTypeNaskh', serif">PakType Naskh</option>
+                                    <option value="'MBTahoma', sans-serif">MB Tahoma</option>
+                                    <option value="'Lateef', cursive">Lateef</option>
+                                    <option value="'Noto Nastaliq Urdu', serif">Noto Nastaliq</option>
                                 </select>
                             </div>
                         </div>
 
-                        <!-- 2. Main Image Settings -->
-                        <div class="setting-section d-none" id="sec-image">
-                            <h6 class="text-secondary fw-bold mb-2 pb-1 border-bottom small"><i class="fa fa-image me-1"></i> مکيه تصوير سيٽنگون (زوم، پوزيشن)</h6>
-                            <div class="mb-2">
-                                <label class="form-label small mb-1">تصوير اپلوڊ ڪريو</label>
-                                <input type="file" class="form-control form-control-sm" id="mainImageInput" accept="image/*">
-                            </div>
-                            <div class="mb-2">
-                                <label class="form-label small mb-1">تصوير زوم (Zoom): <span id="imgScaleVal">1</span>x</label>
-                                <input type="range" class="form-range" id="imgScaleRange" min="1" max="3" step="0.1" value="1">
-                            </div>
-                            <div class="row g-2">
-                                <div class="col-6">
-                                    <label class="form-label small mb-1">کاٻي/سڄي (X): <span id="imgPosXVal">0</span>px</label>
-                                    <input type="range" class="form-range" id="imgPosXRange" min="-150" max="150" value="0">
-                                </div>
-                                <div class="col-6">
-                                    <label class="form-label small mb-1">مٿي/هيٺ (Y): <span id="imgPosYVal">0</span>px</label>
-                                    <input type="range" class="form-range" id="imgPosYRange" min="-150" max="150" value="0">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 3. Logo Settings -->
+                        <!-- 2. Logo Settings -->
                         <div class="setting-section d-none" id="sec-logo">
                             <h6 class="text-secondary fw-bold mb-2 pb-1 border-bottom small"><i class="fa fa-circle-user me-1"></i> لوگو سيٽنگون (سائيز، پوزيشن ۽ واٽر مارڪ)</h6>
                             <div class="mb-2">
@@ -264,7 +270,42 @@
                             </div>
                         </div>
 
-                        <!-- 4. Custom Name Settings -->
+                        <!-- 3. Layout Order -->
+                        <div class="setting-section d-none" id="sec-layout">
+                            <h6 class="text-secondary fw-bold mb-2 pb-1 border-bottom small"><i class="fa fa-layer-group me-1"></i> پٽين جي ترتيب (Layout Order)</h6>
+                            <div class="mb-3">
+                                <label class="form-label small mb-1">برڪنگ نيوز پٽي جي پوزيشن</label>
+                                <select class="form-select form-select-sm" id="layoutOrderSelect">
+                                    <option value="top" selected>سڀ کان مٿي</option>
+                                    <option value="above-news">خبر واري پٽي جي بلڪل مٿان</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- 4. Main Image Settings -->
+                        <div class="setting-section d-none" id="sec-image">
+                            <h6 class="text-secondary fw-bold mb-2 pb-1 border-bottom small"><i class="fa fa-image me-1"></i> مکيه تصوير سيٽنگون (زوم، پوزيشن)</h6>
+                            <div class="mb-2">
+                                <label class="form-label small mb-1">تصوير اپلوڊ ڪريو</label>
+                                <input type="file" class="form-control form-control-sm" id="mainImageInput" accept="image/*">
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label small mb-1">تصوير زوم (Zoom): <span id="imgScaleVal">1</span>x</label>
+                                <input type="range" class="form-range" id="imgScaleRange" min="1" max="3" step="0.1" value="1">
+                            </div>
+                            <div class="row g-2">
+                                <div class="col-6">
+                                    <label class="form-label small mb-1">کاٻي/سڄي (X): <span id="imgPosXVal">0</span>px</label>
+                                    <input type="range" class="form-range" id="imgPosXRange" min="-150" max="150" value="0">
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-label small mb-1">مٿي/هيٺ (Y): <span id="imgPosYVal">0</span>px</label>
+                                    <input type="range" class="form-range" id="imgPosYRange" min="-150" max="150" value="0">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 5. Custom Name Settings -->
                         <div class="setting-section d-none" id="sec-name">
                             <h6 class="text-secondary fw-bold mb-2 pb-1 border-bottom small"><i class="fa fa-font me-1"></i> رپورٽر جو نالو ۽ فونٽ سيٽنگون</h6>
                             <div class="mb-2">
@@ -304,7 +345,7 @@
                             </div>
                         </div>
 
-                        <!-- 5. Breaking News Banner Settings -->
+                        <!-- 6. Breaking News Banner Settings -->
                         <div class="setting-section d-none" id="sec-breaking">
                             <h6 class="text-secondary fw-bold mb-2 pb-1 border-bottom small"><i class="fa fa-bullhorn me-1"></i> بريڪنگ نيوز بينر سيٽنگون</h6>
                             <div class="mb-2">
@@ -330,47 +371,6 @@
                                     <label class="form-label small mb-1">اوچائي: <span id="breakingHeightVal">40</span>px</label>
                                     <input type="range" class="form-range" id="breakingHeightRange" min="30" max="70" value="40">
                                 </div>
-                            </div>
-                        </div>
-
-                        <!-- 6. News Text Settings -->
-                        <div class="setting-section d-none" id="sec-news">
-                            <h6 class="text-secondary fw-bold mb-2 pb-1 border-bottom small"><i class="fa fa-align-right me-1"></i> خبر جو متن، رنگ ۽ فونٽ</h6>
-                            <div class="mb-2">
-                                <textarea class="form-control form-control-sm" id="newsTextInput" rows="2">رائونتي ۾ موٽر سائڪل سوارن تي مبينه درون حملو، نصير ڪورائي ۽ الله ڏتو ڪورائي زخمي</textarea>
-                            </div>
-                            <div class="row g-2 mb-2">
-                                <div class="col-6">
-                                    <label class="form-label small mb-1">پهريون رنگ (Gradient 1)</label>
-                                    <input type="color" class="form-control form-control-color form-control-sm w-100" id="bottomColor1" value="#0d6efd">
-                                </div>
-                                <div class="col-6">
-                                    <label class="form-label small mb-1">ٻيو رنگ (Gradient 2)</label>
-                                    <input type="color" class="form-control form-control-color form-control-sm w-100" id="bottomColor2" value="#4dabf7">
-                                </div>
-                            </div>
-                            <div class="row g-2 mb-2">
-                                <div class="col-6">
-                                    <label class="form-label small mb-1">سائيز: <span id="fontSizeVal">24</span>px</label>
-                                    <input type="range" class="form-range" id="fontSizeRange" min="14" max="40" value="24">
-                                </div>
-                                <div class="col-6">
-                                    <label class="form-label small mb-1">اوچائي: <span id="barHeightVal">110</span>px</label>
-                                    <input type="range" class="form-range" id="barHeightRange" min="70" max="200" value="110">
-                                </div>
-                            </div>
-                            <div>
-                                <label class="form-label small mb-1">خبر جو فونٽ چونڊيو</label>
-                                <select class="form-select form-select-sm" id="fontSelector">
-                                    <option value="'MBSindhiWeb', sans-serif" selected>MB Sindhi Web</option>
-                                    <option value="'MBSarang', sans-serif">MB Sarang</option>
-                                    <option value="'NafeesSaleem', serif">Nafees Saleem</option>
-                                    <option value="'MBMajeed', sans-serif">MB Majeed</option>
-                                    <option value="'PakTypeNaskh', serif">PakType Naskh</option>
-                                    <option value="'MBTahoma', sans-serif">MB Tahoma</option>
-                                    <option value="'Lateef', cursive">Lateef</option>
-                                    <option value="'Noto Nastaliq Urdu', serif">Noto Nastaliq</option>
-                                </select>
                             </div>
                         </div>
 
