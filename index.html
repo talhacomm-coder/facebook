@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سنڌي نيوز پوسٽ جنريٽر - پرو ورشن</title>
+    <title>سنڌي نيوز پوسٽ جنريٽر - الٽيميٽ پرو</title>
     <!-- Bootstrap 5 CSS RTL -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css.rtl.min.css">
     <!-- Google Fonts -->
@@ -28,68 +28,42 @@
             display: flex;
             flex-direction: column;
         }
-        /* Dynamic Templates Styling */
-        .template-1 .preview-header-banner {
+        .preview-header-banner {
             background: #cc0000;
             color: white;
             text-align: center;
             font-weight: bold;
-            padding: 8px;
-            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             letter-spacing: 1px;
+            overflow: hidden;
         }
-        .template-1 .preview-image-box {
+        .preview-image-box {
             position: relative;
             width: 100%;
             flex-grow: 1;
             overflow: hidden;
-            border: 8px solid #cc0000;
-            border-top: none;
-            border-bottom: none;
+            background: #000;
         }
-        .template-1 .news-text-box {
-            background-color: #0d6efd;
-            color: white;
-            padding: 15px;
-            text-align: center;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            word-break: break-word;
-        }
-
-        /* Template 2 (Modern News Frame Style) */
-        .template-2 .preview-header-banner {
-            background: linear-gradient(90deg, #ffc107, #fd7e14);
-            color: #000;
-            text-align: center;
-            font-weight: bold;
-            padding: 10px;
-            font-size: 1.3rem;
-        }
-        .template-2 .preview-image-box {
-            position: relative;
-            width: 100%;
-            flex-grow: 1;
-            overflow: hidden;
-        }
-        .template-2 .news-text-box {
-            background-color: #212529;
-            color: #fff;
-            padding: 15px;
-            text-align: center;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            word-break: break-word;
-        }
-
         .preview-image {
+            position: absolute;
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transform-origin: center center;
+            transition: transform 0.1s ease;
+        }
+        .news-text-box {
+            background-color: #0d6efd;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            word-break: break-word;
         }
         .watermark-logo {
             position: absolute;
@@ -107,7 +81,7 @@
 
     <nav class="navbar navbar-dark bg-dark shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="#"><i class="fa fa-newspaper me-2"></i> سنڌي نيوز پوسٽ جنريٽر</a>
+            <a class="navbar-brand" href="#"><i class="fa fa-newspaper me-2"></i> سنڌي نيوز پوسٽليڪر</a>
         </div>
     </nav>
 
@@ -116,82 +90,106 @@
             <!-- Controls / Admin Panel -->
             <div class="col-lg-6 mb-4">
                 <div class="card shadow-sm p-4 border-0">
-                    <h3 class="mb-3 text-primary"><i class="fa fa-sliders me-2"></i> ايڊمن پينل ۽ ڊزائن سيٽنگون</h3>
+                    <h3 class="mb-3 text-primary"><i class="fa fa-sliders me-2"></i> ايڊمن پينل ۽ ڪنٽرول</h3>
                     
-                    <!-- Template Selector -->
-                    <div class="mb-3">
-                        <label class="form-label fw-bold">پوسٽ جو ڊزائن ٽيمپليٽ چونڊيو</label>
-                        <select class="form-select" id="templateSelector">
-                            <option value="template-1">ڊزائن 1 (ڪلاسيڪل بريڪنگ نيوز فريم)</option>
-                            <option value="template-2">ڊزائن 2 (ماڊرن گريڊيئنٽ انداز)</option>
-                        </select>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">لوگو اپلوڊ ڪريو</label>
-                        <input type="file" class="form-control" id="logoInput" accept="image/*">
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">لوگو جي سائيز: <span id="logoSizeVal">80</span>px</label>
-                            <input type="range" class="form-range" id="logoSizeRange" min="40" max="150" value="80">
+                    <!-- Logo Settings -->
+                    <div class="card p-3 mb-3 bg-light border-0">
+                        <h5 class="text-secondary">لوگو سيٽنگون</h5>
+                        <div class="mb-2">
+                            <label class="form-label">لوگو اپلوڊ ڪريو</label>
+                            <input type="file" class="form-control" id="logoInput" accept="image/*">
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">لوگو جي پوزيشن</label>
-                            <select class="form-select" id="logoPositionSelector">
-                                <option value="top-left">مٿي کاٻي پاسي</option>
-                                <option value="top-right">مٿي سڄي پاسي</option>
+                        <div class="row">
+                            <div class="col-md-6 mb-2">
+                                <label class="form-label">سائيز: <span id="logoSizeVal">80</span>px</label>
+                                <input type="range" class="form-range" id="logoSizeRange" min="40" max="150" value="80">
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label class="form-label">پوزيشن</label>
+                                <select class="form-select" id="logoPositionSelector">
+                                    <option value="top-left">مٿي کاٻي پاسي</option>
+                                    <option value="top-right">مٿي سڄي پاسي</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Main Image Settings -->
+                    <div class="card p-3 mb-3 bg-light border-0">
+                        <h5 class="text-secondary">مکيه تصوير سيٽنگون</h5>
+                        <div class="mb-2">
+                            <label class="form-label">تصوير اپلوڊ ڪريو</label>
+                            <input type="file" class="form-control" id="mainImageInput" accept="image/*">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-2">
+                                <label class="form-label">زوم (سائيز): <span id="imgScaleVal">1</span>x</label>
+                                <input type="range" class="form-range" id="imgScaleRange" min="1" max="2.5" step="0.1" value="1">
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label class="form-label">مٿي/هيٺ (Y-Pos): <span id="imgPosYVal">0</span>px</label>
+                                <input type="range" class="form-range" id="imgPosYRange" min="-150" max="150" value="0">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Breaking News Banner Settings -->
+                    <div class="card p-3 mb-3 bg-light border-0">
+                        <h5 class="text-secondary">بريڪنگ نيوز بينر</h5>
+                        <div class="row">
+                            <div class="col-md-6 mb-2">
+                                <label class="form-label">عنوان جو متن</label>
+                                <input type="text" class="form-control" id="breakingTitleInput" value="برڪنگ نيوز">
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label class="form-label">پٽي جو رنگ</label>
+                                <input type="color" class="form-control form-control-color w-100" id="topBannerColor" value="#cc0000">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-2">
+                                <label class="form-label">عنوان فونٽ سائيز: <span id="breakingFontSizeVal">20</span>px</label>
+                                <input type="range" class="form-range" id="breakingFontSizeRange" min="14" max="36" value="20">
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label class="form-label">بينر جي اوچائي: <span id="breakingHeightVal">45</span>px</label>
+                                <input type="range" class="form-range" id="breakingHeightRange" min="30" max="80" value="45">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- News Text Settings -->
+                    <div class="card p-3 mb-3 bg-light border-0">
+                        <h5 class="text-secondary">خبر جو متن ۽ فونٽ</h5>
+                        <div class="mb-2">
+                            <textarea class="form-control" id="newsTextInput" rows="2">رائونتي ۾ موٽر سائڪل سوارن تي مبينه درون حملو، نصير ڪورائي ۽ الله ڏتو ڪورائي زخمي</textarea>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 mb-2">
+                                <label class="form-label">فونٽ سائيز: <span id="fontSizeVal">20</span>px</label>
+                                <input type="range" class="form-range" id="fontSizeRange" min="14" max="36" value="20">
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label class="form-label">پٽي اوچائي: <span id="barHeightVal">120</span>px</label>
+                                <input type="range" class="form-range" id="barHeightRange" min="80" max="250" value="120">
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label class="form-label">پٽي جو رنگ</label>
+                                <input type="color" class="form-control form-control-color w-100" id="bottomBarColor" value="#0d6efd">
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">فونٽ جي چونڊ</label>
+                            <select class="form-select" id="fontSelector">
+                                <option value="'Noto Nastaliq Urdu', serif" selected>Noto Nastaliq (نستعليق)</option>
+                                <option value="'Lateef', cursive">Lateef (سنڌي روايتي)</option>
+                                <option value="'Amiri', serif">Amiri (قاعدو)</option>
+                                <option value="'Cairo', sans-serif">Cairo (عام)</option>
                             </select>
                         </div>
                     </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">مکيه تصوير اپلوڊ ڪريو</label>
-                        <input type="file" class="form-control" id="mainImageInput" accept="image/*">
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">برڪنگ نيوز جو عنوان</label>
-                            <input type="text" class="form-control" id="breakingTitleInput" value="برڪنگ نيوز">
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">مٿين پٽي جو رنگ</label>
-                            <input type="color" class="form-control form-control-color w-100" id="topBannerColor" value="#cc0000">
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">خبر جو متن (Text)</label>
-                        <textarea class="form-control" id="newsTextInput" rows="3">رائونتي ۾ موٽر سائڪل سوارن تي مبينه درون حملو، نصير ڪورائي ۽ الله ڏتو ڪورائي زخمي</textarea>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label">فونٽ سائيز: <span id="fontSizeVal">20</span>px</label>
-                            <input type="range" class="form-range" id="fontSizeRange" min="14" max="36" value="20">
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label">پٽي اوچائي: <span id="barHeightVal">120</span>px</label>
-                            <input type="range" class="form-range" id="barHeightRange" min="80" max="250" value="120">
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label">هيٺين پٽي جو رنگ</label>
-                            <input type="color" class="form-control form-control-color w-100" id="bottomBarColor" value="#0d6efd">
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">فونٽ جي چونڊ</label>
-                        <select class="form-select" id="fontSelector">
-                            <option value="'Noto Nastaliq Urdu', serif" selected>Noto Nastaliq (نستعليق)</option>
-                            <option value="'Lateef', cursive">Lateef (سنڌي روايتي)</option>
-                            <option value="'Amiri', serif">Amiri (قاعدو)</option>
-                            <option value="'Cairo', sans-serif">Cairo (عام)</option>
-                        </select>
-                    </div>
-
+                    <!-- Social Icons Selection -->
                     <div class="mb-3">
                         <label class="form-label">سماجي رابطن جا آئڪن چونڊيو</label>
                         <div class="d-flex gap-3 flex-wrap">
@@ -209,13 +207,13 @@
             <!-- Live Preview -->
             <div class="col-lg-6">
                 <h4 class="text-center mb-3 text-secondary">لائيو پريوو (Live Preview)</h4>
-                <div class="preview-container template-1" id="captureArea">
+                <div class="preview-container" id="captureArea">
                     <img id="prevLogo" src="https://via.placeholder.com/80" class="watermark-logo" style="width: 80px; height: 80px;">
-                    <div class="preview-header-banner" id="prevTopBanner">برڪنگ نيوز</div>
+                    <div class="preview-header-banner" id="prevTopBanner" style="font-size: 20px; height: 45px; background-color: #cc0000;">برڪنگ نيوز</div>
                     <div class="preview-image-box" id="prevImageBox">
-                        <img id="prevMainImage" src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=600&q=80" class="preview-image">
+                        <img id="prevMainImage" src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=600&q=80" class="preview-image" style="transform: scale(1) translateY(0px);">
                     </div>
-                    <div class="news-text-box" id="prevNewsText" style="font-family: 'Noto Nastaliq Urdu', serif; font-size: 20px; height: 120px;">
+                    <div class="news-text-box" id="prevNewsText" style="font-family: 'Noto Nastaliq Urdu', serif; font-size: 20px; height: 120px; background-color: #0d6efd;">
                         رائونتي ۾ موٽر سائڪل سوارن تي مبينه درون حملو، نصير ڪورائي ۽ الله ڏتو ڪورائي زخمي
                     </div>
                     <div class="bg-dark text-white p-2 d-flex justify-content-center gap-3 align-items-center" id="prevSocialBar" style="height: 40px;">
@@ -232,15 +230,25 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <script>
-        const templateSelector = document.getElementById('templateSelector');
         const captureArea = document.getElementById('captureArea');
         const logoInput = document.getElementById('logoInput');
         const logoSizeRange = document.getElementById('logoSizeRange');
         const logoSizeVal = document.getElementById('logoSizeVal');
         const logoPositionSelector = document.getElementById('logoPositionSelector');
+        
         const mainImageInput = document.getElementById('mainImageInput');
+        const imgScaleRange = document.getElementById('imgScaleRange');
+        const imgScaleVal = document.getElementById('imgScaleVal');
+        const imgPosYRange = document.getElementById('imgPosYRange');
+        const imgPosYVal = document.getElementById('imgPosYVal');
+
         const breakingTitleInput = document.getElementById('breakingTitleInput');
         const topBannerColor = document.getElementById('topBannerColor');
+        const breakingFontSizeRange = document.getElementById('breakingFontSizeRange');
+        const breakingFontSizeVal = document.getElementById('breakingFontSizeVal');
+        const breakingHeightRange = document.getElementById('breakingHeightRange');
+        const breakingHeightVal = document.getElementById('breakingHeightVal');
+
         const newsTextInput = document.getElementById('newsTextInput');
         const fontSelector = document.getElementById('fontSelector');
         const fontSizeRange = document.getElementById('fontSizeRange');
@@ -251,36 +259,12 @@
         
         const prevLogo = document.getElementById('prevLogo');
         const prevTopBanner = document.getElementById('prevTopBanner');
-        const prevImageBox = document.getElementById('prevImageBox');
         const prevMainImage = document.getElementById('prevMainImage');
         const prevNewsText = document.getElementById('prevNewsText');
         const prevSocialBar = document.getElementById('prevSocialBar');
         const downloadBtn = document.getElementById('downloadBtn');
 
-        // Template Switcher
-        templateSelector.addEventListener('change', (e) => {
-            captureArea.className = "preview-container " + e.target.value;
-            if(e.target.value === 'template-1') {
-                prevTopBanner.style.background = topBannerColor.value;
-                prevImageBox.style.borderColor = topBannerColor.value;
-                prevNewsText.style.background = bottomBarColor.value;
-            } else {
-                prevTopBanner.style.background = 'linear-gradient(90deg, #ffc107, #fd7e14)';
-                prevNewsText.style.background = '#212529';
-            }
-        });
-
-        topBannerColor.addEventListener('input', (e) => {
-            prevTopBanner.style.background = e.target.value;
-            if(templateSelector.value === 'template-1') {
-                prevImageBox.style.borderColor = e.target.value;
-            }
-        });
-
-        bottomBarColor.addEventListener('input', (e) => {
-            prevNewsText.style.background = e.target.value;
-        });
-
+        // Logo Controls
         logoSizeRange.addEventListener('input', (e) => {
             logoSizeVal.innerText = e.target.value;
             prevLogo.style.width = e.target.value + 'px';
@@ -297,6 +281,46 @@
             }
         });
 
+        // Main Image Scale & Position Controls
+        let currentScale = 1;
+        let currentPosY = 0;
+
+        imgScaleRange.addEventListener('input', (e) => {
+            currentScale = e.target.value;
+            imgScaleVal.innerText = currentScale;
+            updateImageTransform();
+        });
+
+        imgPosYRange.addEventListener('input', (e) => {
+            currentPosY = e.target.value;
+            imgPosYVal.innerText = currentPosY;
+            updateImageTransform();
+        });
+
+        function updateImageTransform() {
+            prevMainImage.style.transform = `scale(${currentScale}) translateY(${currentPosY}px)`;
+        }
+
+        // Breaking News Controls
+        breakingTitleInput.addEventListener('input', (e) => {
+            prevTopBanner.innerText = e.target.value;
+        });
+
+        topBannerColor.addEventListener('input', (e) => {
+            prevTopBanner.style.backgroundColor = e.target.value;
+        });
+
+        breakingFontSizeRange.addEventListener('input', (e) => {
+            breakingFontSizeVal.innerText = e.target.value;
+            prevTopBanner.style.fontSize = e.target.value + 'px';
+        });
+
+        breakingHeightRange.addEventListener('input', (e) => {
+            breakingHeightVal.innerText = e.target.value;
+            prevTopBanner.style.height = e.target.value + 'px';
+        });
+
+        // News Text Controls
         fontSizeRange.addEventListener('input', (e) => {
             fontSizeVal.innerText = e.target.value;
             prevNewsText.style.fontSize = e.target.value + 'px';
@@ -307,8 +331,8 @@
             prevNewsText.style.height = e.target.value + 'px';
         });
 
-        breakingTitleInput.addEventListener('input', (e) => {
-            prevTopBanner.innerText = e.target.value;
+        bottomBarColor.addEventListener('input', (e) => {
+            prevNewsText.style.backgroundColor = e.target.value;
         });
 
         logoInput.addEventListener('change', (e) => {
@@ -316,7 +340,16 @@
         });
 
         mainImageInput.addEventListener('change', (e) => {
-            if (e.target.files[0]) prevMainImage.src = URL.createObjectURL(e.target.files[0]);
+            if (e.target.files[0]) {
+                prevMainImage.src = URL.createObjectURL(e.target.files[0]);
+                currentScale = 1;
+                currentPosY = 0;
+                imgScaleRange.value = 1;
+                imgScaleVal.innerText = 1;
+                imgPosYRange.value = 0;
+                imgPosYVal.innerText = 0;
+                updateImageTransform();
+            }
         });
 
         newsTextInput.addEventListener('input', (e) => {
