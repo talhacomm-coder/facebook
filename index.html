@@ -3,25 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سنڌي نيوز پوسٽ جنريٽر - جديد ٽيب سسٽم سان</title>
+    <title>سنڌي نيوز پوسٽ جنريٽر</title>
     <!-- Bootstrap 5 CSS RTL -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css.rtl.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Lateef&family=Noto+Nastaliq+Urdu:wght@400;700&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts for Perfect Rendering -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Lateef&family=Noto+Naskh+Arabic:wght@400;700&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Custom Font Definitions */
-        @font-face { font-family: 'MBSindhiWeb'; src: url('mbsindhiweb.otf') format('opentype'); font-weight: normal; font-style: normal; }
-        @font-face { font-family: 'MBSarang'; src: url('MB Sarang.otf') format('opentype'); font-weight: normal; font-style: normal; }
-        @font-face { font-family: 'NafeesSaleem'; src: url('Nafees Saleem.otf') format('opentype'); font-weight: normal; font-style: normal; }
-        @font-face { font-family: 'MBMajeed'; src: url('MB Majeed.otf') format('opentype'); font-weight: normal; font-style: normal; }
-        @font-face { font-family: 'PakTypeNaskh'; src: url('PakType Naskh.otf') format('opentype'); font-weight: normal; font-style: normal; }
-        @font-face { font-family: 'MBTahoma'; src: url('MB Tahoma.otf') format('opentype'); font-weight: normal; font-style: normal; }
-
         body {
             background-color: #f4f6f9;
-            font-family: 'MBSindhiWeb', 'Lateef', cursive;
+            font-family: 'Noto Naskh Arabic', 'Lateef', sans-serif;
             overflow-x: hidden;
         }
         .preview-container {
@@ -52,7 +44,6 @@
             overflow: hidden;
             flex-shrink: 0;
             z-index: 2;
-            font-family: 'MBSindhiWeb', 'Lateef', cursive;
         }
         .preview-image-box {
             position: relative;
@@ -80,7 +71,6 @@
             word-break: break-word;
             flex-shrink: 0;
             z-index: 2;
-            font-family: 'MBSindhiWeb', 'Lateef', cursive;
         }
         .watermark-logo {
             position: absolute;
@@ -91,7 +81,6 @@
             background: white;
             object-fit: cover;
             z-index: 10;
-            opacity: 1;
         }
         .custom-name-watermark {
             position: absolute;
@@ -102,17 +91,15 @@
             z-index: 10;
             white-space: nowrap;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
-            opacity: 1;
-            font-family: 'MBSindhiWeb', 'Lateef', cursive;
         }
         .settings-card {
             background: #ffffff;
             border-radius: 12px;
         }
         .tab-btn {
-            font-size: 11px;
+            font-size: 12px;
             font-weight: bold;
-            padding: 5px 8px;
+            padding: 6px 10px;
             border-radius: 6px !important;
             transition: all 0.2s ease;
         }
@@ -143,24 +130,25 @@
                         
                         <div class="preview-container mb-2" id="captureArea">
                             <img id="prevLogo" src="https://via.placeholder.com/80" class="watermark-logo" style="width: 70px; height: 70px; top: 15px; left: 15px;">
-                            <div id="prevCustomName" class="custom-name-watermark" style="font-size: 22px; bottom: 130px; right: 15px; font-family: 'MBSindhiWeb', sans-serif;">رپورٽر جو نالو</div>
+                            <div id="prevCustomName" class="custom-name-watermark" style="font-size: 22px; bottom: 130px; right: 15px; font-family: 'Noto Naskh Arabic', sans-serif;">رپورٽر جو نالو</div>
                             
                             <!-- Main Flex Wrapper -->
                             <div class="dynamic-flex-wrapper" id="dynamicFlexWrapper">
-                                <div class="preview-header-banner" id="prevTopBanner" style="font-size: 24px; height: 40px; background: linear-gradient(135deg, #cc0000, #ff4d4d);">برڪنگ نيوز</div>
+                                <div class="preview-header-banner" id="prevTopBanner" style="font-size: 24px; height: 40px; background: linear-gradient(135deg, #cc0000, #ff4d4d); font-family: 'Noto Naskh Arabic', sans-serif;">برڪنگ نيوز</div>
                                 <div class="preview-image-box" id="prevImageBox">
                                     <img id="prevMainImage" src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=600&q=80" class="preview-image" style="transform: scale(1) translate(0px, 0px);">
                                 </div>
-                                <div class="news-text-box" id="prevNewsText" style="font-size: 24px; height: 110px; background: linear-gradient(135deg, #0d6efd, #4dabf7);">
+                                <div class="news-text-box" id="prevNewsText" style="font-size: 24px; height: 110px; background: linear-gradient(135deg, #0d6efd, #4dabf7); font-family: 'Noto Naskh Arabic', sans-serif;">
                                     رائونتي ۾ موٽر سائڪل سوارن تي مبينه درون حملو، نصير ڪورائي ۽ الله ڏتو ڪورائي زخمي
                                 </div>
                             </div>
 
-                            <!-- Separate Social/Footer Bar -->
-                            <div class="bg-dark text-white p-1 d-flex justify-content-center gap-3 align-items-center" id="prevSocialBar" style="height: 35px; z-index: 2; width: 100%; font-size: 14px;">
+                            <!-- Separate Social/Footer Bar with Icons + Name -->
+                            <div class="bg-dark text-white p-1 d-flex justify-content-center gap-2 align-items-center" id="prevSocialBar" style="height: 35px; z-index: 2; width: 100%; font-size: 13px; font-family: 'Noto Naskh Arabic', sans-serif;">
                                 <i class="fab fa-facebook text-primary"></i>
                                 <i class="fab fa-instagram text-danger"></i>
                                 <i class="fab fa-whatsapp text-success"></i>
+                                <span class="ms-1">www.sindhinews.com</span>
                             </div>
                         </div>
                         <div class="developer-footer">
@@ -186,23 +174,23 @@
                 <div class="card shadow-sm p-3 border-0 settings-card">
                     <h5 class="mb-3 text-primary border-bottom pb-2 fs-6 fw-bold"><i class="fa fa-sliders me-2"></i> ڊزائن ۽ ايڊيٽنگ سيٽنگون</h5>
                     
-                    <!-- Tab Navigation Buttons Container (Reordered as requested) -->
+                    <!-- Tab Navigation Buttons Container (Ordered strictly as requested) -->
                     <div class="p-2 mb-3 bg-light rounded border shadow-sm">
                         <div class="d-flex flex-wrap gap-1 justify-content-center" id="settingTabs">
                             <button class="btn btn-primary tab-btn active" data-target="sec-news"><i class="fa fa-align-right me-1"></i> خبرون</button>
                             <button class="btn btn-outline-primary tab-btn" data-target="sec-logo"><i class="fa fa-circle-user me-1"></i> لوگو</button>
-                            <button class="btn btn-outline-primary tab-btn" data-target="sec-layout"><i class="fa fa-layer-group me-1"></i> ترتيب</button>
                             <button class="btn btn-outline-primary tab-btn" data-target="sec-image"><i class="fa fa-image me-1"></i> تصوير</button>
                             <button class="btn btn-outline-primary tab-btn" data-target="sec-name"><i class="fa fa-font me-1"></i> نالو</button>
                             <button class="btn btn-outline-primary tab-btn" data-target="sec-breaking"><i class="fa fa-bullhorn me-1"></i> بريڪنگ</button>
-                            <button class="btn btn-outline-primary tab-btn" data-target="sec-social"><i class="fa fa-share-nodes me-1"></i> آئڪن/نالو</button>
+                            <button class="btn btn-outline-primary tab-btn" data-target="sec-layout"><i class="fa fa-layer-group me-1"></i> ترتيب</button>
+                            <button class="btn btn-outline-primary tab-btn" data-target="sec-social"><i class="fa fa-share-nodes me-1"></i> آئڪن ۽ نالو</button>
                         </div>
                     </div>
 
                     <!-- Tab Contents Container -->
                     <div class="tab-content-container">
 
-                        <!-- 1. News Text Settings (Default Active) -->
+                        <!-- 1. News Text Settings (First) -->
                         <div class="setting-section" id="sec-news">
                             <h6 class="text-secondary fw-bold mb-2 pb-1 border-bottom small"><i class="fa fa-align-right me-1"></i> خبر جو متن، رنگ ۽ فونٽ</h6>
                             <div class="mb-2">
@@ -231,14 +219,10 @@
                             <div>
                                 <label class="form-label small mb-1">خبر جو فونٽ چونڊيو</label>
                                 <select class="form-select form-select-sm" id="fontSelector">
-                                    <option value="'MBSindhiWeb', sans-serif" selected>MB Sindhi Web</option>
-                                    <option value="'MBSarang', sans-serif">MB Sarang</option>
-                                    <option value="'NafeesSaleem', serif">Nafees Saleem</option>
-                                    <option value="'MBMajeed', sans-serif">MB Majeed</option>
-                                    <option value="'PakTypeNaskh', serif">PakType Naskh</option>
-                                    <option value="'MBTahoma', sans-serif">MB Tahoma</option>
+                                    <option value="'Noto Naskh Arabic', sans-serif" selected>Noto Naskh Arabic</option>
                                     <option value="'Lateef', cursive">Lateef</option>
-                                    <option value="'Noto Nastaliq Urdu', serif">Noto Nastaliq</option>
+                                    <option value="'Amiri', serif">Amiri</option>
+                                    <option value="'Cairo', sans-serif">Cairo</option>
                                 </select>
                             </div>
                         </div>
@@ -270,19 +254,7 @@
                             </div>
                         </div>
 
-                        <!-- 3. Layout Order -->
-                        <div class="setting-section d-none" id="sec-layout">
-                            <h6 class="text-secondary fw-bold mb-2 pb-1 border-bottom small"><i class="fa fa-layer-group me-1"></i> پٽين جي ترتيب (Layout Order)</h6>
-                            <div class="mb-3">
-                                <label class="form-label small mb-1">برڪنگ نيوز پٽي جي پوزيشن</label>
-                                <select class="form-select form-select-sm" id="layoutOrderSelect">
-                                    <option value="top" selected>سڀ کان مٿي</option>
-                                    <option value="above-news">خبر واري پٽي جي بلڪل مٿان</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <!-- 4. Main Image Settings -->
+                        <!-- 3. Main Image Settings -->
                         <div class="setting-section d-none" id="sec-image">
                             <h6 class="text-secondary fw-bold mb-2 pb-1 border-bottom small"><i class="fa fa-image me-1"></i> مکيه تصوير سيٽنگون (زوم، پوزيشن)</h6>
                             <div class="mb-2">
@@ -305,7 +277,7 @@
                             </div>
                         </div>
 
-                        <!-- 5. Custom Name Settings -->
+                        <!-- 4. Custom Name Settings -->
                         <div class="setting-section d-none" id="sec-name">
                             <h6 class="text-secondary fw-bold mb-2 pb-1 border-bottom small"><i class="fa fa-font me-1"></i> رپورٽر جو نالو ۽ فونٽ سيٽنگون</h6>
                             <div class="mb-2">
@@ -315,14 +287,10 @@
                             <div class="mb-2">
                                 <label class="form-label small mb-1">نالي لاءِ فونٽ چونڊيو</label>
                                 <select class="form-select form-select-sm" id="customNameFontSelector">
-                                    <option value="'MBSindhiWeb', sans-serif" selected>MB Sindhi Web</option>
-                                    <option value="'MBSarang', sans-serif">MB Sarang</option>
-                                    <option value="'NafeesSaleem', serif">Nafees Saleem</option>
-                                    <option value="'MBMajeed', sans-serif">MB Majeed</option>
-                                    <option value="'PakTypeNaskh', serif">PakType Naskh</option>
-                                    <option value="'MBTahoma', sans-serif">MB Tahoma</option>
+                                    <option value="'Noto Naskh Arabic', sans-serif" selected>Noto Naskh Arabic</option>
                                     <option value="'Lateef', cursive">Lateef</option>
-                                    <option value="'Noto Nastaliq Urdu', serif">Noto Nastaliq</option>
+                                    <option value="'Amiri', serif">Amiri</option>
+                                    <option value="'Cairo', sans-serif">Cairo</option>
                                 </select>
                             </div>
                             <div class="row g-2">
@@ -345,7 +313,7 @@
                             </div>
                         </div>
 
-                        <!-- 6. Breaking News Banner Settings -->
+                        <!-- 5. Breaking News Banner Settings -->
                         <div class="setting-section d-none" id="sec-breaking">
                             <h6 class="text-secondary fw-bold mb-2 pb-1 border-bottom small"><i class="fa fa-bullhorn me-1"></i> بريڪنگ نيوز بينر سيٽنگون</h6>
                             <div class="mb-2">
@@ -374,32 +342,32 @@
                             </div>
                         </div>
 
-                        <!-- 7. Social Icons / Custom Text Settings -->
-                        <div class="setting-section d-none" id="sec-social">
-                            <h6 class="text-secondary fw-bold mb-2 pb-1 border-bottom small"><i class="fa fa-share-nodes me-1"></i> هيٺين پٽي (آئڪن يا پنهنجو نالو)</h6>
-                            <div class="mb-2">
-                                <label class="form-label small mb-1">هيٺين پٽي جو موڊ چونڊيو</label>
-                                <select class="form-select form-select-sm" id="footerModeSelect">
-                                    <option value="icons" selected>صرف سماجي رابطن جا آئڪن</option>
-                                    <option value="text">صرف پنهنجو نالو / متن لکو</option>
+                        <!-- 6. Layout Order -->
+                        <div class="setting-section d-none" id="sec-layout">
+                            <h6 class="text-secondary fw-bold mb-2 pb-1 border-bottom small"><i class="fa fa-layer-group me-1"></i> پٽين جي ترتيب (Layout Order)</h6>
+                            <div class="mb-3">
+                                <label class="form-label small mb-1">برڪنگ نيوز پٽي جي پوزيشن</label>
+                                <select class="form-select form-select-sm" id="layoutOrderSelect">
+                                    <option value="top" selected>سڀ کان مٿي</option>
+                                    <option value="above-news">خبر واري پٽي جي بلڪل مٿان</option>
                                 </select>
                             </div>
+                        </div>
 
-                            <!-- Custom Footer Text Input -->
-                            <div class="mb-2 d-none" id="footerTextWrapper">
+                        <!-- 7. Social Icons + Custom Name Settings -->
+                        <div class="setting-section d-none" id="sec-social">
+                            <h6 class="text-secondary fw-bold mb-2 pb-1 border-bottom small"><i class="fa fa-share-nodes me-1"></i> هيٺين پٽي (آئڪن ۽ نالو گڏ)</h6>
+                            <div class="mb-2">
                                 <label class="form-label small mb-1">هيٺين پٽي لاءِ نالو يا ويب سائٽ/صفحي جو نالو</label>
                                 <input type="text" class="form-control form-control-sm" id="footerCustomTextInput" value="www.sindhinews.com">
                             </div>
 
-                            <!-- Icons Settings -->
-                            <div id="footerIconsSettings">
-                                <div class="d-flex gap-3 flex-wrap mb-2">
-                                    <div class="form-check"><input class="form-check-input social-chk" type="checkbox" value="fa-facebook" id="chk-fb" checked><label class="form-check-label small" for="chk-fb">فيس بوڪ</label></div>
-                                    <div class="form-check"><input class="form-check-input social-chk" type="checkbox" value="fa-instagram" id="chk-insta" checked><label class="form-check-label small" for="chk-insta">انسٽाग्राम</label></div>
-                                    <div class="form-check"><input class="form-check-input social-chk" type="checkbox" value="fa-whatsapp" id="chk-wa" checked><label class="form-check-label small" for="chk-wa">واٽس اپ</label></div>
-                                    <div class="form-check"><input class="form-check-input social-chk" type="checkbox" value="fa-x-twitter" id="chk-x"><label class="form-check-label small" for="chk-x">ايڪس (X)</label></div>
-                                    <div class="form-check"><input class="form-check-input social-chk" type="checkbox" value="fa-tiktok" id="chk-tt"><label class="form-check-label small" for="chk-tt">ٽڪ تاڪ</label></div>
-                                </div>
+                            <div class="d-flex gap-3 flex-wrap mb-2">
+                                <div class="form-check"><input class="form-check-input social-chk" type="checkbox" value="fa-facebook" id="chk-fb" checked><label class="form-check-label small" for="chk-fb">فيس بوڪ</label></div>
+                                <div class="form-check"><input class="form-check-input social-chk" type="checkbox" value="fa-instagram" id="chk-insta" checked><label class="form-check-label small" for="chk-insta">انسٽाग्राम</label></div>
+                                <div class="form-check"><input class="form-check-input social-chk" type="checkbox" value="fa-whatsapp" id="chk-wa" checked><label class="form-check-label small" for="chk-wa">واٽس اپ</label></div>
+                                <div class="form-check"><input class="form-check-input social-chk" type="checkbox" value="fa-x-twitter" id="chk-x"><label class="form-check-label small" for="chk-x">ايڪس (X)</label></div>
+                                <div class="form-check"><input class="form-check-input social-chk" type="checkbox" value="fa-tiktok" id="chk-tt"><label class="form-check-label small" for="chk-tt">ٽڪ تاڪ</label></div>
                             </div>
 
                             <div class="row g-2">
@@ -412,8 +380,8 @@
                                     </select>
                                 </div>
                                 <div class="col-6">
-                                    <label class="form-label small mb-1">فاصلو (Gap): <span id="socialGapVal">3</span></label>
-                                    <input type="range" class="form-range" id="socialGapRange" min="1" max="15" value="10">
+                                    <label class="form-label small mb-1">فاصلو (Gap): <span id="socialGapVal">2</span></label>
+                                    <input type="range" class="form-range" id="socialGapRange" min="1" max="15" value="8">
                                 </div>
                             </div>
                         </div>
@@ -427,7 +395,7 @@
 
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Html2Canvas -->
+    <!-- Html2Canvas Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <script>
@@ -505,10 +473,7 @@
         const bottomColor1 = document.getElementById('bottomColor1');
         const bottomColor2 = document.getElementById('bottomColor2');
 
-        const footerModeSelect = document.getElementById('footerModeSelect');
-        const footerTextWrapper = document.getElementById('footerTextWrapper');
         const footerCustomTextInput = document.getElementById('footerCustomTextInput');
-        const footerIconsSettings = document.getElementById('footerIconsSettings');
         const socialAlignment = document.getElementById('socialAlignment');
         const socialGapRange = document.getElementById('socialGapRange');
         const socialGapVal = document.getElementById('socialGapVal');
@@ -679,24 +644,11 @@
             prevNewsText.style.fontFamily = e.target.value;
         });
 
-        // Footer Mode (Icons vs Text)
-        footerModeSelect.addEventListener('change', (e) => {
-            if(e.target.value === 'text') {
-                footerTextWrapper.classList.remove('d-none');
-                footerIconsSettings.classList.add('d-none');
-            } else {
-                footerTextWrapper.classList.add('d-none');
-                footerIconsSettings.classList.remove('d-none');
-            }
-            updateSocialIcons();
-        });
-
-        footerCustomTextInput.addEventListener('input', updateSocialIcons);
-
-        // Social Icons Controls Fix
+        // Social Icons + Name Combined Controls
         document.querySelectorAll('.social-chk').forEach(chk => {
             chk.addEventListener('change', updateSocialIcons);
         });
+        footerCustomTextInput.addEventListener('input', updateSocialIcons);
         socialAlignment.addEventListener('change', updateSocialIcons);
         socialGapRange.addEventListener('input', (e) => {
             socialGapVal.innerText = e.target.value;
@@ -723,32 +675,43 @@
             
             prevSocialBar.style.gap = socialGapRange.value + 'px';
 
-            if(footerModeSelect.value === 'text') {
-                prevSocialBar.innerText = footerCustomTextInput.value;
-            } else {
-                if(document.getElementById('chk-fb').checked) prevSocialBar.innerHTML += '<i class="fab fa-facebook text-primary"></i>';
-                if(document.getElementById('chk-insta').checked) prevSocialBar.innerHTML += '<i class="fab fa-instagram text-danger"></i>';
-                if(document.getElementById('chk-wa').checked) prevSocialBar.innerHTML += '<i class="fab fa-whatsapp text-success"></i>';
-                if(document.getElementById('chk-x').checked) prevSocialBar.innerHTML += '<i class="fab fa-x-twitter text-light"></i>';
-                if(document.getElementById('chk-tt').checked) prevSocialBar.innerHTML += '<i class="fab fa-tiktok text-light"></i>';
+            // Append selected icons first
+            if(document.getElementById('chk-fb').checked) prevSocialBar.innerHTML += '<i class="fab fa-facebook text-primary"></i>';
+            if(document.getElementById('chk-insta').checked) prevSocialBar.innerHTML += '<i class="fab fa-instagram text-danger"></i>';
+            if(document.getElementById('chk-wa').checked) prevSocialBar.innerHTML += '<i class="fab fa-whatsapp text-success"></i>';
+            if(document.getElementById('chk-x').checked) prevSocialBar.innerHTML += '<i class="fab fa-x-twitter text-light"></i>';
+            if(document.getElementById('chk-tt').checked) prevSocialBar.innerHTML += '<i class="fab fa-tiktok text-light"></i>';
+
+            // Append custom name/text alongside icons
+            let customText = footerCustomTextInput.value;
+            if(customText) {
+                prevSocialBar.innerHTML += `<span class="ms-1">${customText}</span>`;
             }
         }
 
+        // Reliable Download with Font Ready Verification
         downloadBtn.addEventListener('click', () => {
             let scaleVal = parseInt(downloadScaleSelect.value) || 2;
-            downloadBtn.innerText = "ٽيمپليٽ تيار ٿي رهيو آهي...";
+            downloadBtn.innerText = "فونٽ لوڊ ٿي رهيا آهن...";
             downloadBtn.disabled = true;
 
-            html2canvas(captureArea, { scale: scaleVal, useCORS: true }).then(canvas => {
-                const link = document.createElement('a');
-                link.download = `Sindhi-News-Post-${scaleVal}x.png`;
-                link.href = canvas.toDataURL('image/png');
-                link.click();
-
+            document.fonts.ready.then(() => {
+                downloadBtn.innerText = "تصوير تيار ٿي رهي آهي...";
                 setTimeout(() => {
-                    downloadBtn.innerHTML = '<i class="fa fa-download me-2"></i> تصوير ڊائونلوڊ ڪريو';
-                    downloadBtn.disabled = false;
-                }, 1000);
+                    html2canvas(captureArea, { scale: scaleVal, useCORS: true, allowTaint: true }).then(canvas => {
+                        const link = document.createElement('a');
+                        link.download = `Sindhi-News-Post-${scaleVal}x.png`;
+                        link.href = canvas.toDataURL('image/png');
+                        link.click();
+
+                        downloadBtn.innerHTML = '<i class="fa fa-download me-2"></i> تصوير ڊائونلوڊ ڪريو';
+                        downloadBtn.disabled = false;
+                    }).catch(err => {
+                        console.error(err);
+                        downloadBtn.innerHTML = '<i class="fa fa-download me-2"></i> تصوير ڊائونلوڊ ڪريو';
+                        downloadBtn.disabled = false;
+                    });
+                }, 300);
             });
         });
     </script>
