@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سنڌي نيوز پوسٽ جنريٽر - ايم بي سنڌي ويب فونٽ سان</title>
+    <title>سنڌي نيوز پوسٽ جنريٽر - سڀئي ڪسٽم فونٽس سان</title>
     <!-- Bootstrap 5 CSS RTL -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css.rtl.min.css">
     <!-- Google Fonts -->
@@ -11,12 +11,36 @@
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* MB Sindhi Web Font Definition */
+        /* Custom Font Definitions */
         @font-face {
             font-family: 'MBSindhiWeb';
             src: url('mbsindhiweb.otf') format('opentype');
-            font-weight: normal;
-            font-style: normal;
+            font-weight: normal; font-style: normal;
+        }
+        @font-face {
+            font-family: 'MBSarang';
+            src: url('MB Sarang.otf') format('opentype');
+            font-weight: normal; font-style: normal;
+        }
+        @font-face {
+            font-family: 'NafeesSaleem';
+            src: url('Nafees Saleem.otf') format('opentype');
+            font-weight: normal; font-style: normal;
+        }
+        @font-face {
+            font-family: 'MBMajeed';
+            src: url('MB Majeed.otf') format('opentype');
+            font-weight: normal; font-style: normal;
+        }
+        @font-face {
+            font-family: 'PakTypeNaskh';
+            src: url('PakType Naskh.otf') format('opentype');
+            font-weight: normal; font-style: normal;
+        }
+        @font-face {
+            font-family: 'MBTahoma';
+            src: url('MB Tahoma.otf') format('opentype');
+            font-weight: normal; font-style: normal;
         }
 
         body {
@@ -135,7 +159,7 @@
                         
                         <div class="preview-container mb-2" id="captureArea">
                             <img id="prevLogo" src="https://via.placeholder.com/80" class="watermark-logo" style="width: 70px; height: 70px; top: 15px; left: 15px;">
-                            <div id="prevCustomName" class="custom-name-watermark" style="font-size: 22px; bottom: 130px; right: 15px; font-family: 'MBSindhiWeb', cursive;">رپورٽر جو نالو</div>
+                            <div id="prevCustomName" class="custom-name-watermark" style="font-size: 22px; bottom: 130px; right: 15px; font-family: 'MBSindhiWeb', sans-serif;">رپورٽر جو نالو</div>
                             
                             <!-- Main Flex Wrapper -->
                             <div class="dynamic-flex-wrapper" id="dynamicFlexWrapper">
@@ -280,11 +304,14 @@
                                     <div class="mb-2">
                                         <label class="form-label small mb-1">نالي لاءِ فونٽ چونڊيو</label>
                                         <select class="form-select form-select-sm" id="customNameFontSelector">
-                                            <option value="'MBSindhiWeb', sans-serif" selected>MB Sindhi Web (ايم بي سنڌي)</option>
-                                            <option value="'Lateef', cursive">Lateef (سنڌي لطيفي)</option>
-                                            <option value="'Noto Nastaliq Urdu', serif">Noto Nastaliq (نستعليق)</option>
-                                            <option value="'Amiri', serif">Amiri (قاعدو)</option>
-                                            <option value="'Cairo', sans-serif">Cairo (عام)</option>
+                                            <option value="'MBSindhiWeb', sans-serif" selected>MB Sindhi Web</option>
+                                            <option value="'MBSarang', sans-serif">MB Sarang</option>
+                                            <option value="'NafeesSaleem', serif">Nafees Saleem</option>
+                                            <option value="'MBMajeed', sans-serif">MB Majeed</option>
+                                            <option value="'PakTypeNaskh', serif">PakType Naskh</option>
+                                            <option value="'MBTahoma', sans-serif">MB Tahoma</option>
+                                            <option value="'Lateef', cursive">Lateef</option>
+                                            <option value="'Noto Nastaliq Urdu', serif">Noto Nastaliq</option>
                                         </select>
                                     </div>
                                     <div class="row g-2">
@@ -381,11 +408,14 @@
                                     <div>
                                         <label class="form-label small mb-1">خبر جو فونٽ چونڊيو</label>
                                         <select class="form-select form-select-sm" id="fontSelector">
-                                            <option value="'MBSindhiWeb', sans-serif" selected>MB Sindhi Web (ايم بي سنڌي)</option>
-                                            <option value="'Lateef', cursive">Lateef (سنڌي لطيفي)</option>
-                                            <option value="'Noto Nastaliq Urdu', serif">Noto Nastaliq (نستعليق)</option>
-                                            <option value="'Amiri', serif">Amiri (قاعدو)</option>
-                                            <option value="'Cairo', sans-serif">Cairo (عام)</option>
+                                            <option value="'MBSindhiWeb', sans-serif" selected>MB Sindhi Web</option>
+                                            <option value="'MBSarang', sans-serif">MB Sarang</option>
+                                            <option value="'NafeesSaleem', serif">Nafees Saleem</option>
+                                            <option value="'MBMajeed', sans-serif">MB Majeed</option>
+                                            <option value="'PakTypeNaskh', serif">PakType Naskh</option>
+                                            <option value="'MBTahoma', sans-serif">MB Tahoma</option>
+                                            <option value="'Lateef', cursive">Lateef</option>
+                                            <option value="'Noto Nastaliq Urdu', serif">Noto Nastaliq</option>
                                         </select>
                                     </div>
                                 </div>
@@ -501,10 +531,6 @@
         const prevSocialBar = document.getElementById('prevSocialBar');
         const downloadBtn = document.getElementById('downloadBtn');
         const downloadScaleSelect = document.getElementById('downloadScaleSelect');
-
-        // Set default fonts to MBSindhiWeb on preview load
-        prevNewsText.style.fontFamily = "'MBSindhiWeb', sans-serif";
-        prevCustomName.style.fontFamily = "'MBSindhiWeb', sans-serif";
 
         // Layout Order Swap
         layoutOrderSelect.addEventListener('change', (e) => {
