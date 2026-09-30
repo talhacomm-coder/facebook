@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سنڌي نيوز پوسٽ جنريٽر - ڊوئل هيڊنگ فڪسڊ</title>
+    <title>سنڌي نيوز پوسٽ جنريٽر - فڪسڊ ايڊيشن</title>
     <!-- Bootstrap 5 CSS RTL -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css.rtl.min.css">
     <!-- Google Fonts -->
@@ -48,12 +48,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            letter-spacing: 0.5px;
             overflow: hidden;
             flex-shrink: 0;
             z-index: 2;
             width: 100%;
-            padding: 4px 12px;
             box-sizing: border-box;
             font-family: 'Lateef', 'MBSindhiWeb', sans-serif;
         }
@@ -108,6 +106,18 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
             font-family: 'Lateef', 'MBSindhiWeb', sans-serif;
         }
+        /* Free Floating Breaking News Overlay */
+        .floating-breaking-text {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            color: white;
+            font-weight: bold;
+            z-index: 10;
+            white-space: nowrap;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+            font-family: 'Lateef', 'MBSindhiWeb', sans-serif;
+        }
         .settings-card {
             background: #ffffff;
             border-radius: 12px;
@@ -149,11 +159,13 @@
                         <div class="preview-container mb-2" id="captureArea">
                             <img id="prevLogo" src="https://via.placeholder.com/80" class="watermark-logo" style="width: 60px; height: 60px; top: 12px; left: 12px;">
                             <div id="prevCustomName" class="custom-name-watermark" style="font-size: 20px; bottom: 120px; right: 12px;">رپورٽر جو نالو</div>
+                            <!-- Floating Breaking News Text Overlay -->
+                            <div id="prevFloatingBreaking" class="floating-breaking-text" style="font-size: 20px; top: 15px; right: 15px;">برڪنگ نيوز</div>
                             
                             <!-- Main Flex Wrapper -->
                             <div class="dynamic-flex-wrapper" id="dynamicFlexWrapper">
-                                <!-- Heading 1 (Top Heading) -->
-                                <div class="preview-header-banner" id="prevTopBanner" style="font-size: 20px; height: 38px; background: linear-gradient(135deg, #cc0000, #ff4d4d);">مٿين مکيه خبر جو عنوان</div>
+                                <!-- Heading 1 (Top Banner Stripe) -->
+                                <div class="preview-header-banner" id="prevTopBanner" style="height: 38px; background: linear-gradient(135deg, #cc0000, #ff4d4d);"></div>
                                 
                                 <!-- Main Image Box -->
                                 <div class="preview-image-box" id="prevImageBox">
@@ -201,10 +213,10 @@
                     <div class="p-1 mb-2 bg-light rounded border shadow-sm">
                         <div class="d-flex flex-wrap gap-1 justify-content-center" id="settingTabs">
                             <button class="btn btn-primary tab-btn active" data-target="sec-news"><i class="fa fa-align-right me-1"></i> هيٺين خبر</button>
-                            <button class="btn btn-outline-primary tab-btn" data-target="sec-topheading"><i class="fa fa-heading me-1"></i> مٿين خبر</button>
+                            <button class="btn btn-outline-primary tab-btn" data-target="sec-topheading"><i class="fa fa-heading me-1"></i> مٿين پٽي ۽ برڪنگ</button>
                             <button class="btn btn-outline-primary tab-btn" data-target="sec-logo"><i class="fa fa-circle-user me-1"></i> لوگو</button>
                             <button class="btn btn-outline-primary tab-btn" data-target="sec-image"><i class="fa fa-image me-1"></i> تصوير</button>
-                            <button class="btn btn-outline-primary tab-btn" data-target="sec-name"><i class="fa fa-font me-1"></i> نالو</button>
+                            <button class="btn btn-outline-primary tab-btn" data-target="sec-name"><i class="fa fa-font me-1"></i> رپورٽر جو نالو</button>
                             <button class="btn btn-outline-primary tab-btn" data-target="sec-layout"><i class="fa fa-layer-group me-1"></i> ترتيب</button>
                             <button class="btn btn-outline-primary tab-btn" data-target="sec-social"><i class="fa fa-share-nodes me-1"></i> آئڪن ۽ نالو</button>
                         </div>
@@ -255,31 +267,41 @@
                             </div>
                         </div>
 
-                        <!-- 2. Top Heading Settings -->
+                        <!-- 2. Top Banner & Floating Breaking News Settings -->
                         <div class="setting-section d-none" id="sec-topheading">
-                            <h6 class="text-secondary fw-bold mb-2 pb-1 border-bottom small"><i class="fa fa-heading me-1"></i> مٿين خبر جو متن، رنگ ۽ فونٽ</h6>
+                            <h6 class="text-secondary fw-bold mb-2 pb-1 border-bottom small"><i class="fa fa-heading me-1"></i> مٿين پٽي رنگ ۽ فري برڪنگ ٽيڪسٽ سيٽنگون</h6>
                             <div class="mb-2">
-                                <label class="form-label small mb-1">عنوان جو متن</label>
-                                <input type="text" class="form-control form-control-sm" id="breakingTitleInput" value="مٿين مکيه خبر جو عنوان">
+                                <label class="form-label small mb-1">برڪنگ نيوز (فلوٽنگ ٽيڪسٽ)</label>
+                                <input type="text" class="form-control form-control-sm" id="breakingTitleInput" value="برڪنگ نيوز">
                             </div>
                             <div class="row g-2 mb-2">
                                 <div class="col-6">
-                                    <label class="form-label small mb-1">پهريون رنگ (Gradient 1)</label>
+                                    <label class="form-label small mb-1">مٿين پٽي جو رنگ 1</label>
                                     <input type="color" class="form-control form-control-color form-control-sm w-100" id="topColor1" value="#cc0000">
                                 </div>
                                 <div class="col-6">
-                                    <label class="form-label small mb-1">ٻيو رنگ (Gradient 2)</label>
+                                    <label class="form-label small mb-1">مٿين پٽي جو رنگ 2</label>
                                     <input type="color" class="form-control form-control-color form-control-sm w-100" id="topColor2" value="#ff4d4d">
                                 </div>
                             </div>
                             <div class="row g-2 mb-2">
                                 <div class="col-6">
-                                    <label class="form-label small mb-1">فونٽ سائيز: <span id="breakingFontSizeVal">20</span>px</label>
+                                    <label class="form-label small mb-1">ٽيڪسٽ سائيز: <span id="breakingFontSizeVal">20</span>px</label>
                                     <input type="range" class="form-range" id="breakingFontSizeRange" min="14" max="40" value="20">
                                 </div>
                                 <div class="col-6">
-                                    <label class="form-label small mb-1">اوچائي: <span id="breakingHeightVal">38</span>px</label>
+                                    <label class="form-label small mb-1">پٽي اوچائي: <span id="breakingHeightVal">38</span>px</label>
                                     <input type="range" class="form-range" id="breakingHeightRange" min="25" max="80" value="38">
+                                </div>
+                            </div>
+                            <div class="row g-2 mb-2">
+                                <div class="col-6">
+                                    <label class="form-label small mb-1">کاٻي/سڄي (Right): <span id="breakingPosXVal">15</span>px</label>
+                                    <input type="range" class="form-range" id="breakingPosXRange" min="0" max="250" value="15">
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-label small mb-1">مٿي/هيٺ (Top): <span id="breakingPosYVal">15</span>px</label>
+                                    <input type="range" class="form-range" id="breakingPosYRange" min="0" max="250" value="15">
                                 </div>
                             </div>
                             <div>
@@ -508,12 +530,17 @@
         const customNamePosYVal = document.getElementById('customNamePosYVal');
 
         const breakingTitleInput = document.getElementById('breakingTitleInput');
+        const prevFloatingBreaking = document.getElementById('prevFloatingBreaking');
         const topColor1 = document.getElementById('topColor1');
         const topColor2 = document.getElementById('topColor2');
         const breakingFontSizeRange = document.getElementById('breakingFontSizeRange');
         const breakingFontSizeVal = document.getElementById('breakingFontSizeVal');
         const breakingHeightRange = document.getElementById('breakingHeightRange');
         const breakingHeightVal = document.getElementById('breakingHeightVal');
+        const breakingPosXRange = document.getElementById('breakingPosXRange');
+        const breakingPosXVal = document.getElementById('breakingPosXVal');
+        const breakingPosYRange = document.getElementById('breakingPosYRange');
+        const breakingPosYVal = document.getElementById('breakingPosYVal');
         const topFontSelector = document.getElementById('topFontSelector');
 
         const newsTextInput = document.getElementById('newsTextInput');
@@ -601,6 +628,31 @@
             prevCustomName.style.bottom = e.target.value + 'px';
         });
 
+        // Floating Breaking News Controls
+        breakingTitleInput.addEventListener('input', (e) => {
+            prevFloatingBreaking.innerText = e.target.value;
+        });
+
+        breakingFontSizeRange.addEventListener('input', (e) => {
+            breakingFontSizeVal.innerText = e.target.value;
+            prevFloatingBreaking.style.fontSize = e.target.value + 'px';
+        });
+
+        breakingPosXRange.addEventListener('input', (e) => {
+            breakingPosXVal.innerText = e.target.value;
+            prevFloatingBreaking.style.right = e.target.value + 'px';
+            prevFloatingBreaking.style.left = 'auto';
+        });
+
+        breakingPosYRange.addEventListener('input', (e) => {
+            breakingPosYVal.innerText = e.target.value;
+            prevFloatingBreaking.style.top = e.target.value + 'px';
+        });
+
+        topFontSelector.addEventListener('change', (e) => {
+            prevFloatingBreaking.style.fontFamily = e.target.value;
+        });
+
         let currentScale = 1;
         let currentPosX = 0;
         let currentPosY = 0;
@@ -627,28 +679,15 @@
             updateImageTransform();
         });
 
-        breakingTitleInput.addEventListener('input', (e) => {
-            prevTopBanner.innerText = e.target.value;
-        });
-
         function updateTopGradient() {
             prevTopBanner.style.background = `linear-gradient(135deg, ${topColor1.value}, ${topColor2.value})`;
         }
         topColor1.addEventListener('input', updateTopGradient);
         topColor2.addEventListener('input', updateTopGradient);
 
-        breakingFontSizeRange.addEventListener('input', (e) => {
-            breakingFontSizeVal.innerText = e.target.value;
-            prevTopBanner.style.fontSize = e.target.value + 'px';
-        });
-
         breakingHeightRange.addEventListener('input', (e) => {
             breakingHeightVal.innerText = e.target.value;
             prevTopBanner.style.height = e.target.value + 'px';
-        });
-
-        topFontSelector.addEventListener('change', (e) => {
-            prevTopBanner.style.fontFamily = e.target.value;
         });
 
         fontSizeRange.addEventListener('input', (e) => {
@@ -741,7 +780,7 @@
             }
         }
 
-        // Robust Download Function with Proper Padding & Font Ready Verification
+        // Final Reliable Download Function
         downloadBtn.addEventListener('click', () => {
             let scaleVal = parseInt(downloadScaleSelect.value) || 2;
             downloadBtn.innerText = "تصوير تيار ٿي رهي آهي...";
