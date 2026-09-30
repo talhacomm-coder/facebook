@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="sd" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سنڌي نيوز پوسٽ جنريٽر</title>
+    <!-- Bootstrap 5 CSS RTL -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css.rtl.min.css">
+    <!-- Google Fonts for Sindhi / Urdu / Arabic support -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Lateef&family=Noto+Nastaliq+Urdu:wght@400;700&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Cairo', sans-serif;
+        }
+        .preview-container {
+            width: 100%;
+            max-width: 450px;
+            aspect-ratio: 4 / 5;
+            background: #fff;
+            position: relative.
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            margin: 0 auto;
+            border-radius: 12px;
+        }
+        .preview-image {
+            width: 100%;
+            height: 60%;
+            object-fit: cover;
+        }
+        .breaking-banner {
+            background: linear-gradient(45deg, #0d6efd, #0dcaf0);
+            color: white;
+            text-align: center;
+            font-weight: bold;
+            padding: 8px;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .news-text-box {
+            background-color: #cc0000;
+            color: white.
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            word-break: break-word;
+        }
+        .watermark-logo {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            border-radius: 50%;
+            border: 2px solid white;
+            background: white;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">سنڌي نيوز پوسٽليڪر</a>
+            <div id="auth-section">
+                <!-- Auth status will load here -->
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-4">
+        <div class="row">
+            <!-- Controls / Admin Panel -->
+            <div class="col-lg-6 mb-4">
+                <div class="card shadow-sm p-4">
+                    <h3 class="mb-3 text-primary">ايڊمن پينل ۽ سيٽنگون</h3>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">لوگو اپلوڊ ڪريو</label>
+                        <input type="file" class="form-control" id="logoInput" accept="image/*">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">لوگو جي سائيز: <span id="logoSizeVal">80</span>px</label>
+                        <input type="range" class="form-range" id="logoSizeRange" min="40" max="150" value="80">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">مکيه تصوير اپلوڊ ڪريو</label>
+                        <input type="file" class="form-control" id="mainImageInput" accept="image/*">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">خبر جو متن (Text)</label>
+                        <textarea class="form-control" id="newsTextInput" rows="3" placeholder="هتي پنهنجي خبر لکو...">رائونتي ۾ موٽر سائڪل سوارن تي مبينه درون حملو، نصير ڪورائي ۽ الله ڏتو ڪورائي زخمي</textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">فونٽ جي چونڊ</label>
+                        <select class="form-select" id="fontSelector">
+                            <option value="'Cairo', sans-serif">Cairo (عام)</option>
+                            <option value="'Amiri', serif">Amiri (قاعدو)</option>
+                            <option value="'Lateef', cursive">Lateef (سنڌي روايتي)</option>
+                            <option value="'Noto Nastaliq Urdu', serif" selected>Noto Nastaliq (نستعليق)</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">سماجي رابطن جا آئڪن چونڊيو</label>
+                        <div class="d-flex gap-3">
+                            <div class="form-check"><input class="form-check-input social-chk" type="checkbox" value="fa-facebook" id="chk-fb" checked><label class="form-check-label" for="chk-fb">فيس بوڪ</label></div>
+                            <div class="form-check"><input class="form-check-input social-chk" type="checkbox" value="fa-instagram" id="chk-insta" checked><label class="form-check-label" for="chk-insta">انسٽाग्राम</label></div>
+                            <div class="form-check"><input class="form-check-input social-chk" type="checkbox" value="fa-whatsapp" id="chk-wa" checked><label class="form-check-label" for="chk-wa">واٽس اپ</label></div>
+                            <div class="form-check"><input class="form-check-input social-chk" type="checkbox" value="fa-tiktok" id="chk-tt"><label class="form-check-label" for="chk-tt">ٽڪ تاڪ</label></div>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-success w-100 py-2" id="downloadBtn"><i class="fa fa-download me-2"></i> تصوير ڊائونلوڊ ڪريو</button>
+                </div>
+            </div>
+
+            <!-- Live Preview -->
+            <div class="col-lg-6">
+                <h4 class="text-center mb-3">لائيو پريوو (Live Preview)</h4>
+                <div class="preview-container" id="captureArea">
+                    <img id="prevLogo" src="https://via.placeholder.com/80" class="watermark-logo" style="width: 80px; height: 80px;">
+                    <img id="prevMainImage" src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=600&q=80" class="preview-image">
+                    <div class="breaking-banner">برڪنگ نيوز</div>
+                    <div class="news-text-box" id="prevNewsText" style="font-family: 'Noto Nastaliq Urdu', serif; font-size: 1.2rem;">
+                        رائونتي ۾ موٽر سائڪل سوارن تي مبينه درون حملو، نصير ڪورائي ۽ الله ڏتو ڪورائي زخمي
+                    </div>
+                    <div class="bg-dark text-white p-2 d-flex justify-content-center gap-3 align-items-center" id="prevSocialBar" style="height: 40px;">
+                        <i class="fab fa-facebook fa-lg text-primary"></i>
+                        <i class="fab fa-instagram fa-lg text-danger"></i>
+                        <i class="fab fa-whatsapp fa-lg text-success"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Supabase CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Html2Canvas for image generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <script>
+        // Supabase Initialization
+        const SUPABASE_URL = 'https://dbkyqgfcopjhizchoxya.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRia3lxZ2Zjb3BqaGl6Y2hoxyaIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc5MDcyMjk4NCwiZXhwIjoyMTA2Mjk4OTg0fQ.U-5A0DoVnqaL67r96K4GumTiu3eyr_VL4aMpwgj2sRE'; // Note: For public frontend use anon key ideally, service_role is provided here.
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // UI Element bindings
+        const logoInput = document.getElementById('logoInput');
+        const logoSizeRange = document.getElementById('logoSizeRange');
+        const logoSizeVal = document.getElementById('logoSizeVal');
+        const mainImageInput = document.getElementById('mainImageInput');
+        const newsTextInput = document.getElementById('newsTextInput');
+        const fontSelector = document.getElementById('fontSelector');
+        
+        const prevLogo = document.getElementById('prevLogo');
+        const prevMainImage = document.getElementById('prevMainImage');
+        const prevNewsText = document.getElementById('prevNewsText');
+        const prevSocialBar = document.getElementById('prevSocialBar');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const captureArea = document.getElementById('captureArea');
+
+        // Logo Size adjustment
+        logoSizeRange.addEventListener('input', (e) => {
+            const val = e.target.value;
+            logoSizeVal.innerText = val;
+            prevLogo.style.width = val + 'px';
+            prevLogo.style.height = val + 'px';
+        });
+
+        // Logo Upload local preview
+        logoInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                prevLogo.src = URL.createObjectURL(file);
+            }
+        });
+
+        // Main Image Upload local preview
+        mainImageInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                prevMainImage.src = URL.createObjectURL(file);
+            }
+        });
+
+        // News Text real-time update
+        newsTextInput.addEventListener('input', (e) => {
+            prevNewsText.innerText = e.target.value;
+        });
+
+        // Font family change
+        fontSelector.addEventListener('change', (e) => {
+            prevNewsText.style.fontFamily = e.target.value;
+        });
+
+        // Social Media checkboxes toggle
+        document.querySelectorAll('.social-chk').forEach(chk => {
+            chk.addEventListener('change', updateSocialIcons);
+        });
+
+        function updateSocialIcons() {
+            prevSocialBar.innerHTML = '';
+            if(document.getElementById('chk-fb').checked) prevSocialBar.innerHTML += '<i class="fab fa-facebook fa-lg text-primary"></i>';
+            if(document.getElementById('chk-insta').checked) prevSocialBar.innerHTML += '<i class="fab fa-instagram fa-lg text-danger"></i>';
+            if(document.getElementById('chk-whatsapp') || document.getElementById('chk-wa').checked) prevSocialBar.innerHTML += '<i class="fab fa-whatsapp fa-lg text-success"></i>';
+            if(document.getElementById('chk-tt').checked) prevSocialBar.innerHTML += '<i class="fab fa-tiktok fa-lg text-light"></i>';
+        }
+
+        // Download Image & Auto-cleanup (Memory saver)
+        downloadBtn.addEventListener('click', () => {
+            downloadBtn.innerText = "ٽيمپليٽ تيار ٿي رهيو آهي...";
+            downloadBtn.disabled = true;
+
+            html2canvas(captureArea, { scale: 2, useCORS: true }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'Sindhi-News-Post.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+
+                // Clean up temporary object URLs or states to free up memory
+                setTimeout(() => {
+                    downloadBtn.innerHTML = '<i class="fa fa-download me-2"></i> تصوير ڊائونلوڊ ڪريو';
+                    downloadBtn.disabled = false;
+                }, 1000);
+            }).catch(err => {
+                console.error(err);
+                downloadBtn.innerHTML = '<i class="fa fa-download me-2"></i> تصوير ڊائونلوڊ ڪريو';
+                downloadBtn.disabled = false;
+            });
+        });
+    </script>
+</body>
+</html>
