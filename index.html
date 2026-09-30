@@ -11,9 +11,17 @@
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* User Custom Sindhi Fonts */
+        @font-face { font-family: 'MBSindhiWeb'; src: url('mbsindhiweb.otf') format('opentype'); font-weight: normal; font-style: normal; }
+        @font-face { font-family: 'MBSarang'; src: url('MB Sarang.otf') format('opentype'); font-weight: normal; font-style: normal; }
+        @font-face { font-family: 'NafeesSaleem'; src: url('Nafees Saleem.otf') format('opentype'); font-weight: normal; font-style: normal; }
+        @font-face { font-family: 'MBMajeed'; src: url('MB Majeed.otf') format('opentype'); font-weight: normal; font-style: normal; }
+        @font-face { font-family: 'PakTypeNaskh'; src: url('PakType Naskh.otf') format('opentype'); font-weight: normal; font-style: normal; }
+        @font-face { font-family: 'MBTahoma'; src: url('MB Tahoma.otf') format('opentype'); font-weight: normal; font-style: normal; }
+
         body {
             background-color: #f4f6f9;
-            font-family: 'Lateef', 'Amiri', Arial, sans-serif;
+            font-family: 'Lateef', 'MBSindhiWeb', sans-serif;
             overflow-x: hidden;
         }
         .preview-container {
@@ -45,6 +53,7 @@
             flex-shrink: 0;
             z-index: 2;
             width: 100%;
+            font-family: 'Lateef', 'MBSindhiWeb', sans-serif;
         }
         .preview-image-box {
             position: relative;
@@ -63,7 +72,7 @@
         }
         .news-text-box {
             color: white;
-            padding: 6px;
+            padding: 8px 12px;
             text-align: center;
             font-weight: bold;
             display: flex;
@@ -73,6 +82,8 @@
             flex-shrink: 0;
             z-index: 2;
             width: 100%;
+            line-height: 1.4;
+            font-family: 'Lateef', 'MBSindhiWeb', sans-serif;
         }
         .watermark-logo {
             position: absolute;
@@ -93,6 +104,7 @@
             z-index: 10;
             white-space: nowrap;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+            font-family: 'Lateef', 'MBSindhiWeb', sans-serif;
         }
         .settings-card {
             background: #ffffff;
@@ -134,21 +146,21 @@
                         
                         <div class="preview-container mb-2" id="captureArea">
                             <img id="prevLogo" src="https://via.placeholder.com/80" class="watermark-logo" style="width: 60px; height: 60px; top: 12px; left: 12px;">
-                            <div id="prevCustomName" class="custom-name-watermark" style="font-size: 20px; bottom: 100px; right: 12px; font-family: 'Lateef', sans-serif;">رپورٽر جو نالو</div>
+                            <div id="prevCustomName" class="custom-name-watermark" style="font-size: 20px; bottom: 100px; right: 12px;">رپورٽر جو نالو</div>
                             
                             <!-- Main Flex Wrapper -->
                             <div class="dynamic-flex-wrapper" id="dynamicFlexWrapper">
-                                <div class="preview-header-banner" id="prevTopBanner" style="font-size: 20px; height: 35px; background: linear-gradient(135deg, #cc0000, #ff4d4d); font-family: 'Lateef', sans-serif;">برڪنگ نيوز</div>
+                                <div class="preview-header-banner" id="prevTopBanner" style="font-size: 20px; height: 35px; background: linear-gradient(135deg, #cc0000, #ff4d4d);">برڪنگ نيوز</div>
                                 <div class="preview-image-box" id="prevImageBox">
                                     <img id="prevMainImage" src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=600&q=80" class="preview-image" style="transform: scale(1) translate(0px, 0px);">
                                 </div>
-                                <div class="news-text-box" id="prevNewsText" style="font-size: 20px; height: 95px; background: linear-gradient(135deg, #0d6efd, #4dabf7); font-family: 'Lateef', sans-serif;">
+                                <div class="news-text-box" id="prevNewsText" style="font-size: 20px; height: 95px; background: linear-gradient(135deg, #0d6efd, #4dabf7);">
                                     رائونتي ۾ موٽر سائڪل سوارن تي مبينه درون حملو، نصير ڪورائي ۽ الله ڏتو ڪورائي زخمي
                                 </div>
                             </div>
 
                             <!-- Separate Social/Footer Bar -->
-                            <div class="text-white p-1 d-flex justify-content-center gap-2 align-items-center" id="prevSocialBar" style="height: 32px; z-index: 2; width: 100%; font-size: 12px; background-color: #212529; font-family: 'Lateef', sans-serif; box-sizing: border-box;">
+                            <div class="text-white p-1 d-flex justify-content-center gap-2 align-items-center" id="prevSocialBar" style="height: 32px; z-index: 2; width: 100%; font-size: 12px; background-color: #212529; box-sizing: border-box;">
                                 <i class="fab fa-facebook text-primary"></i>
                                 <i class="fab fa-instagram text-danger"></i>
                                 <i class="fab fa-whatsapp text-success"></i>
@@ -224,9 +236,14 @@
                                 <label class="form-label small mb-1">خبر جو فونٽ چونڊيو</label>
                                 <select class="form-select form-select-sm" id="fontSelector">
                                     <option value="Lateef" selected>Lateef (بيحد صاف)</option>
+                                    <option value="MBSindhiWeb">MB Sindhi Web</option>
+                                    <option value="MBSarang">MB Sarang</option>
+                                    <option value="NafeesSaleem">Nafees Saleem</option>
+                                    <option value="MBMajeed">MB Majeed</option>
+                                    <option value="PakTypeNaskh">PakType Naskh</option>
+                                    <option value="MBTahoma">MB Tahoma</option>
                                     <option value="Amiri">Amiri Arabic</option>
                                     <option value="Noto Nastaliq Urdu">Noto Nastaliq</option>
-                                    <option value="Cairo">Cairo</option>
                                 </select>
                             </div>
                         </div>
@@ -292,9 +309,14 @@
                                 <label class="form-label small mb-1">نالي لاءِ فونٽ چونڊيو</label>
                                 <select class="form-select form-select-sm" id="customNameFontSelector">
                                     <option value="Lateef" selected>Lateef</option>
+                                    <option value="MBSindhiWeb">MB Sindhi Web</option>
+                                    <option value="MBSarang">MB Sarang</option>
+                                    <option value="NafeesSaleem">Nafees Saleem</option>
+                                    <option value="MBMajeed">MB Majeed</option>
+                                    <option value="PakTypeNaskh">PakType Naskh</option>
+                                    <option value="MBTahoma">MB Tahoma</option>
                                     <option value="Amiri">Amiri Arabic</option>
                                     <option value="Noto Nastaliq Urdu">Noto Nastaliq</option>
-                                    <option value="Cairo">Cairo</option>
                                 </select>
                             </div>
                             <div class="row g-2">
@@ -644,7 +666,10 @@
         });
 
         fontSelector.addEventListener('change', (e) => {
-            prevNewsText.style.fontFamily = e.target.value;
+            let selectedFont = e.target.value;
+            prevNewsText.style.fontFamily = selectedFont;
+            // Sync Breaking banner font family to match main news font to prevent breaking
+            prevTopBanner.style.fontFamily = selectedFont;
         });
 
         footerBgColor.addEventListener('input', (e) => {
@@ -693,7 +718,7 @@
             }
         }
 
-        // Reliable html2canvas Download Implementation
+        // Robust Download Function with Font Ready Verification
         downloadBtn.addEventListener('click', () => {
             let scaleVal = parseInt(downloadScaleSelect.value) || 2;
             downloadBtn.innerText = "تصوير تيار ٿي رهي آهي...";
