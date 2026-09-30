@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سنڌي نيوز پوسٽ جنريٽر - پرفेक्ट فريم ورشن</title>
+    <title>سنڌي نيوز پوسٽ جنريٽر - مڪمل ڪنٽرول ورشن</title>
     <!-- Bootstrap 5 CSS RTL -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css.rtl.min.css">
     <!-- Google Fonts -->
@@ -39,6 +39,7 @@
             letter-spacing: 1px;
             overflow: hidden;
             flex-shrink: 0;
+            z-index: 2;
         }
         .preview-image-box {
             position: relative;
@@ -46,14 +47,13 @@
             flex-grow: 1;
             overflow: hidden;
             background: #111;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
         .preview-image {
+            position: absolute;
             width: 100%;
             height: 100%;
-            object-fit: contain; /* ensures image never cuts and stays fully visible */
+            object-fit: cover;
+            transform-origin: center center;
             transition: transform 0.05s ease;
         }
         .news-text-box {
@@ -67,6 +67,7 @@
             justify-content: center;
             word-break: break-word;
             flex-shrink: 0;
+            z-index: 2;
         }
         .watermark-logo {
             position: absolute;
@@ -76,7 +77,20 @@
             border: 2px solid white;
             background: white;
             object-fit: cover;
-            z-index: 5;
+            z-index: 10;
+        }
+        .custom-name-watermark {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            color: white;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            z-index: 10;
+            white-space: nowrap;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
         }
         .settings-card {
             max-height: 85vh;
@@ -102,14 +116,15 @@
                         
                         <div class="preview-container mb-3" id="captureArea">
                             <img id="prevLogo" src="https://via.placeholder.com/80" class="watermark-logo" style="width: 70px; height: 70px; top: 15px; left: 15px;">
+                            <div id="prevCustomName" class="custom-name-watermark" style="font-size: 16px; bottom: 130px; right: 15px;">رپورٽر جو نالو</div>
                             <div class="preview-header-banner" id="prevTopBanner" style="font-size: 18px; height: 40px; background-color: #cc0000;">برڪنگ نيوز</div>
                             <div class="preview-image-box" id="prevImageBox">
-                                <img id="prevMainImage" src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=600&q=80" class="preview-image" style="transform: scale(1);">
+                                <img id="prevMainImage" src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=600&q=80" class="preview-image" style="transform: scale(1) translate(0px, 0px);">
                             </div>
                             <div class="news-text-box" id="prevNewsText" style="font-family: 'Noto Nastaliq Urdu', serif; font-size: 18px; height: 110px; background-color: #0d6efd;">
                                 رائونتي ۾ موٽر سائڪل سوارن تي مبينه درون حملو، نصير ڪورائي ۽ الله ڏتو ڪورائي زخمي
                             </div>
-                            <div class="bg-dark text-white p-1 d-flex justify-content-center gap-3 align-items-center" id="prevSocialBar" style="height: 35px;">
+                            <div class="bg-dark text-white p-1 d-flex justify-content-center gap-3 align-items-center" id="prevSocialBar" style="height: 35px; z-index: 2;">
                                 <i class="fab fa-facebook text-primary"></i>
                                 <i class="fab fa-instagram text-danger"></i>
                                 <i class="fab fa-whatsapp text-success"></i>
@@ -132,7 +147,7 @@
                         <div class="accordion-item mb-2 border">
                             <h2 class="accordion-header" id="headingImage">
                                 <button class="accordion-button py-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseImage" aria-expanded="true" aria-controls="collapseImage">
-                                    <i class="fa fa-image me-2 text-primary"></i> مکيه تصوير سيٽنگون (زوم ۽ اپلوڊ)
+                                    <i class="fa fa-image me-2 text-primary"></i> مکيه تصوير سيٽنگون (زوم، مٿي/هيٺ، کاٻي/سڄي)
                                 </button>
                             </h2>
                             <div id="collapseImage" class="accordion-collapse collapse show" aria-labelledby="headingImage" data-bs-parent="#settingsAccordion">
@@ -141,9 +156,19 @@
                                         <label class="form-label small mb-1">تصوير اپلوڊ ڪريو</label>
                                         <input type="file" class="form-control form-control-sm" id="mainImageInput" accept="image/*">
                                     </div>
-                                    <div>
+                                    <div class="mb-2">
                                         <label class="form-label small mb-1">تصوير زوم (Zoom): <span id="imgScaleVal">1</span>x</label>
-                                        <input type="range" class="form-range" id="imgScaleRange" min="1" max="2.5" step="0.1" value="1">
+                                        <input type="range" class="form-range" id="imgScaleRange" min="1" max="3" step="0.1" value="1">
+                                    </div>
+                                    <div class="row g-2">
+                                        <div class="col-6">
+                                            <label class="form-label small mb-1">کاٻي/سڄي (X): <span id="imgPosXVal">0</span>px</label>
+                                            <input type="range" class="form-range" id="imgPosXRange" min="-150" max="150" value="0">
+                                        </div>
+                                        <div class="col-6">
+                                            <label class="form-label small mb-1">مٿي/هيٺ (Y): <span id="imgPosYVal">0</span>px</label>
+                                            <input type="range" class="form-range" id="imgPosYRange" min="-150" max="150" value="0">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -180,7 +205,38 @@
                             </div>
                         </div>
 
-                        <!-- 3. Breaking News Banner Settings -->
+                        <!-- 3. Custom Name / Reporter Name Settings -->
+                        <div class="accordion-item mb-2 border">
+                            <h2 class="accordion-header" id="headingCustomName">
+                                <button class="accordion-button collapsed py-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCustomName" aria-expanded="false" aria-controls="collapseCustomName">
+                                    <i class="fa fa-font me-2 text-primary"></i> نالو / واٽر مارڪ ٽيڪست سيٽنگون
+                                </button>
+                            </h2>
+                            <div id="collapseCustomName" class="accordion-collapse collapse" aria-labelledby="headingCustomName" data-bs-parent="#settingsAccordion">
+                                <div class="accordion-body bg-light py-2">
+                                    <div class="mb-2">
+                                        <label class="form-label small mb-1">پنهنجو نالو يا چينل جو نالو لکو</label>
+                                        <input type="text" class="form-control form-control-sm" id="customNameInput" value="رپورٽر جو نالو">
+                                    </div>
+                                    <div class="row g-2">
+                                        <div class="col-12 mb-1">
+                                            <label class="form-label small mb-1">فونٽ سائيز: <span id="customNameSizeVal">16</span>px</label>
+                                            <input type="range" class="form-range" id="customNameSizeRange" min="10" max="30" value="16">
+                                        </div>
+                                        <div class="col-6">
+                                            <label class="form-label small mb-1">کاٻي/سڄي (سڄي پاسي کان فاصلي لاءِ): <span id="customNamePosXVal">15</span>px</label>
+                                            <input type="range" class="form-range" id="customNamePosXRange" min="0" max="300" value="15">
+                                        </div>
+                                        <div class="col-6">
+                                            <label class="form-label small mb-1">مٿي/هيٺ (Y): <span id="customNamePosYVal">130</span>px</label>
+                                            <input type="range" class="form-range" id="customNamePosYRange" min="0" max="350" value="130">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 4. Breaking News Banner Settings -->
                         <div class="accordion-item mb-2 border">
                             <h2 class="accordion-header" id="headingBreaking">
                                 <button class="accordion-button collapsed py-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBreaking" aria-expanded="false" aria-controls="collapseBreaking">
@@ -213,7 +269,7 @@
                             </div>
                         </div>
 
-                        <!-- 4. News Text Settings -->
+                        <!-- 5. News Text Settings -->
                         <div class="accordion-item mb-2 border">
                             <h2 class="accordion-header" id="headingNewsText">
                                 <button class="accordion-button collapsed py-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNewsText" aria-expanded="false" aria-controls="collapseNewsText">
@@ -252,7 +308,7 @@
                             </div>
                         </div>
 
-                        <!-- 5. Social Icons Settings -->
+                        <!-- 6. Social Icons Settings -->
                         <div class="accordion-item mb-2 border">
                             <h2 class="accordion-header" id="headingSocial">
                                 <button class="accordion-button collapsed py-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSocial" aria-expanded="false" aria-controls="collapseSocial">
@@ -296,6 +352,18 @@
         const mainImageInput = document.getElementById('mainImageInput');
         const imgScaleRange = document.getElementById('imgScaleRange');
         const imgScaleVal = document.getElementById('imgScaleVal');
+        const imgPosXRange = document.getElementById('imgPosXRange');
+        const imgPosXVal = document.getElementById('imgPosXVal');
+        const imgPosYRange = document.getElementById('imgPosYRange');
+        const imgPosYVal = document.getElementById('imgPosYVal');
+
+        const customNameInput = document.getElementById('customNameInput');
+        const customNameSizeRange = document.getElementById('customNameSizeRange');
+        const customNameSizeVal = document.getElementById('customNameSizeVal');
+        const customNamePosXRange = document.getElementById('customNamePosXRange');
+        const customNamePosXVal = document.getElementById('customNamePosXVal');
+        const customNamePosYRange = document.getElementById('customNamePosYRange');
+        const customNamePosYVal = document.getElementById('customNamePosYVal');
 
         const breakingTitleInput = document.getElementById('breakingTitleInput');
         const topBannerColor = document.getElementById('topBannerColor');
@@ -313,6 +381,7 @@
         const bottomBarColor = document.getElementById('bottomBarColor');
         
         const prevLogo = document.getElementById('prevLogo');
+        const prevCustomName = document.getElementById('prevCustomName');
         const prevTopBanner = document.getElementById('prevTopBanner');
         const prevMainImage = document.getElementById('prevMainImage');
         const prevNewsText = document.getElementById('prevNewsText');
@@ -337,12 +406,52 @@
             prevLogo.style.top = e.target.value + 'px';
         });
 
-        // Main Image Scale Control (Object-fit contain ensures no cutting)
+        // Custom Name / Watermark Text Controls
+        customNameInput.addEventListener('input', (e) => {
+            prevCustomName.innerText = e.target.value;
+        });
+
+        customNameSizeRange.addEventListener('input', (e) => {
+            customNameSizeVal.innerText = e.target.value;
+            prevCustomName.style.fontSize = e.target.value + 'px';
+        });
+
+        customNamePosXRange.addEventListener('input', (e) => {
+            customNamePosXVal.innerText = e.target.value;
+            prevCustomName.style.right = e.target.value + 'px';
+            prevCustomName.style.left = 'auto';
+        });
+
+        customNamePosYRange.addEventListener('input', (e) => {
+            customNamePosYVal.innerText = e.target.value;
+            prevCustomName.style.bottom = e.target.value + 'px';
+        });
+
+        // Main Image Scale & Position Controls
         let currentScale = 1;
+        let currentPosX = 0;
+        let currentPosY = 0;
+
+        function updateImageTransform() {
+            prevMainImage.style.transform = `scale(${currentScale}) translate(${currentPosX}px, ${currentPosY}px)`;
+        }
+
         imgScaleRange.addEventListener('input', (e) => {
             currentScale = e.target.value;
             imgScaleVal.innerText = currentScale;
-            prevMainImage.style.transform = `scale(${currentScale})`;
+            updateImageTransform();
+        });
+
+        imgPosXRange.addEventListener('input', (e) => {
+            currentPosX = e.target.value;
+            imgPosXVal.innerText = currentPosX;
+            updateImageTransform();
+        });
+
+        imgPosYRange.addEventListener('input', (e) => {
+            currentPosY = e.target.value;
+            imgPosYVal.innerText = currentPosY;
+            updateImageTransform();
         });
 
         // Breaking News Controls
@@ -387,9 +496,15 @@
             if (e.target.files[0]) {
                 prevMainImage.src = URL.createObjectURL(e.target.files[0]);
                 currentScale = 1;
+                currentPosX = 0;
+                currentPosY = 0;
                 imgScaleRange.value = 1;
                 imgScaleVal.innerText = 1;
-                prevMainImage.style.transform = `scale(1)`;
+                imgPosXRange.value = 0;
+                imgPosXVal.innerText = 0;
+                imgPosYRange.value = 0;
+                imgPosYVal.innerText = 0;
+                updateImageTransform();
             }
         });
 
