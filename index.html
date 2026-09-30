@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سنڌي نيوز پوسٽ جنريٽر - فڪسڊ ايڊيشن</title>
+    <title>Social Media Post Studio</title>
     <!-- Bootstrap 5 CSS RTL -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css.rtl.min.css">
     <!-- Google Fonts -->
@@ -89,10 +89,7 @@
             position: absolute;
             top: 15px;
             left: 15px;
-            border-radius: 50%;
-            border: 2px solid white;
-            background: white;
-            object-fit: cover;
+            object-fit: contain;
             z-index: 10;
         }
         .custom-name-watermark {
@@ -106,7 +103,6 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
             font-family: 'Lateef', 'MBSindhiWeb', sans-serif;
         }
-        /* Free Floating Breaking News Overlay */
         .floating-breaking-text {
             position: absolute;
             top: 15px;
@@ -144,7 +140,7 @@
 
     <nav class="navbar navbar-dark bg-dark shadow-sm mb-2 py-1">
         <div class="container-fluid px-3">
-            <a class="navbar-brand fs-6" href="#"><i class="fa fa-newspaper me-2"></i> سنڌي نيوز پوسٽليڪر</a>
+            <a class="navbar-brand fs-6" href="#"><i class="fa fa-photo-film me-2"></i> Social Media Post Studio</a>
         </div>
     </nav>
 
@@ -159,20 +155,14 @@
                         <div class="preview-container mb-2" id="captureArea">
                             <img id="prevLogo" src="https://via.placeholder.com/80" class="watermark-logo" style="width: 60px; height: 60px; top: 12px; left: 12px;">
                             <div id="prevCustomName" class="custom-name-watermark" style="font-size: 20px; bottom: 120px; right: 12px;">رپورٽر جو نالو</div>
-                            <!-- Floating Breaking News Text Overlay -->
                             <div id="prevFloatingBreaking" class="floating-breaking-text" style="font-size: 20px; top: 15px; right: 15px;">برڪنگ نيوز</div>
                             
                             <!-- Main Flex Wrapper -->
                             <div class="dynamic-flex-wrapper" id="dynamicFlexWrapper">
-                                <!-- Heading 1 (Top Banner Stripe) -->
                                 <div class="preview-header-banner" id="prevTopBanner" style="height: 38px; background: linear-gradient(135deg, #cc0000, #ff4d4d);"></div>
-                                
-                                <!-- Main Image Box -->
                                 <div class="preview-image-box" id="prevImageBox">
                                     <img id="prevMainImage" src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=600&q=80" class="preview-image" style="transform: scale(1) translate(0px, 0px);">
                                 </div>
-
-                                <!-- Heading 2 (Bottom Heading) -->
                                 <div class="news-text-box" id="prevNewsText" style="font-size: 20px; height: 95px; background: linear-gradient(135deg, #0d6efd, #4dabf7);">
                                     رائونتي ۾ موٽر سائڪل سوارن تي مبينه درون حملو، نصير ڪورائي ۽ الله ڏتو ڪورائي زخمي
                                 </div>
@@ -207,7 +197,7 @@
             <!-- Settings Frame Column -->
             <div class="col-xl-8 col-lg-7 col-md-7">
                 <div class="card shadow-sm p-3 border-0 settings-card">
-                    <h6 class="mb-2 text-primary border-bottom pb-1 fw-bold fs-7"><i class="fa fa-sliders me-1"></i> ڊزائن ۽ ايڊيٽنگ سيٽنگون</h6>
+                    <h6 class="mb-2 text-primary border-bottom pb-1 fw-bold fs-7"><i class="fa fa-sliders me-1"></i> Social Media Post Studio - سيٽنگون</h6>
                     
                     <!-- Tab Navigation Buttons Container -->
                     <div class="p-1 mb-2 bg-light rounded border shadow-sm">
@@ -322,9 +312,9 @@
 
                         <!-- 3. Logo Settings -->
                         <div class="setting-section d-none" id="sec-logo">
-                            <h6 class="text-secondary fw-bold mb-2 pb-1 border-bottom small"><i class="fa fa-circle-user me-1"></i> لوگو سيٽنگون</h6>
+                            <h6 class="text-secondary fw-bold mb-2 pb-1 border-bottom small"><i class="fa fa-circle-user me-1"></i> لوگو سيٽنگون (شفاف PNG)</h6>
                             <div class="mb-2">
-                                <label class="form-label small mb-1">لوگو اپلوڊ ڪريو</label>
+                                <label class="form-label small mb-1">لوگو اپلوڊ ڪريو (PNG)</label>
                                 <input type="file" class="form-control form-control-sm" id="logoInput" accept="image/*">
                             </div>
                             <div class="row g-2">
@@ -628,7 +618,6 @@
             prevCustomName.style.bottom = e.target.value + 'px';
         });
 
-        // Floating Breaking News Controls
         breakingTitleInput.addEventListener('input', (e) => {
             prevFloatingBreaking.innerText = e.target.value;
         });
@@ -780,7 +769,7 @@
             }
         }
 
-        // Final Reliable Download Function
+        // Fully Fixed Download Function preventing Image/Logo Missing Bug
         downloadBtn.addEventListener('click', () => {
             let scaleVal = parseInt(downloadScaleSelect.value) || 2;
             downloadBtn.innerText = "تصوير تيار ٿي رهي آهي...";
@@ -793,10 +782,11 @@
                         useCORS: true, 
                         allowTaint: true,
                         logging: false,
-                        letterRendering: true
+                        letterRendering: true,
+                        backgroundColor: null // Ensures proper transparency rendering for PNG logos
                     }).then(canvas => {
                         const link = document.createElement('a');
-                        link.download = `Sindhi-News-Post-${scaleVal}x.png`;
+                        link.download = `Social-Media-Post-${scaleVal}x.png`;
                         link.href = canvas.toDataURL('image/png');
                         link.click();
 
@@ -809,7 +799,7 @@
                         downloadBtn.disabled = false;
                     });
                 });
-            }, 300);
+            }, 500);
         });
     </script>
 </body>
