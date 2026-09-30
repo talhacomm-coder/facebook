@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سنڌي نيوز پوسٽ جنريٽر - پرفेक्ट فريم</title>
+    <title>سنڌي نيوز پوسٽ جنريٽر - پرفेक्ट ڊراپڊائون ورشن</title>
     <!-- Bootstrap 5 CSS RTL -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css.rtl.min.css">
     <!-- Google Fonts -->
@@ -17,7 +17,7 @@
         }
         .preview-container {
             width: 100%;
-            max-width: 420px;
+            max-width: 400px;
             aspect-ratio: 4 / 5;
             background: #fff;
             position: relative;
@@ -87,14 +87,14 @@
 
     <div class="container mb-5">
         <div class="row">
-            <!-- Live Preview & Direct Image Controls Column -->
+            <!-- Live Preview Column (Sticky so it stays visible while adjusting settings) -->
             <div class="col-lg-5 mb-4">
                 <div class="card shadow-sm p-3 border-0 sticky-top" style="top: 20px;">
-                    <h5 class="text-center mb-3 text-secondary">لائيو پريوو ۽ تصويري سيٽنگون</h5>
+                    <h5 class="text-center mb-3 text-secondary">لائيو پريوو فريم</h5>
                     
                     <!-- The Template Preview -->
                     <div class="preview-container mb-3" id="captureArea">
-                        <img id="prevLogo" src="https://via.placeholder.com/80" class="watermark-logo" style="width: 80px; height: 80px;">
+                        <img id="prevLogo" src="https://via.placeholder.com/80" class="watermark-logo" style="width: 80px; height: 80px; top: 15px; left: 15px;">
                         <div class="preview-header-banner" id="prevTopBanner" style="font-size: 20px; height: 45px; background-color: #cc0000;">برڪنگ نيوز</div>
                         <div class="preview-image-box" id="prevImageBox">
                             <img id="prevMainImage" src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=600&q=80" class="preview-image" style="transform: scale(1) translateY(0px);">
@@ -109,128 +109,175 @@
                         </div>
                     </div>
 
-                    <!-- Direct Image Adjustments (Right Below Preview) -->
-                    <div class="card p-2 bg-light border-0">
-                        <h6 class="text-dark fw-bold mb-2"><i class="fa fa-image me-1"></i> مين تصوير جا سيٽنگ آپشن</h6>
-                        <div class="mb-2">
-                            <label class="form-label small mb-1">تصوير تبديل ڪريو</label>
-                            <input type="file" class="form-control form-control-sm" id="mainImageInput" accept="image/*">
-                        </div>
-                        <div class="row g-2">
-                            <div class="col-6">
-                                <label class="form-label small mb-1">زوم: <span id="imgScaleVal">1</span>x</label>
-                                <input type="range" class="form-range" id="imgScaleRange" min="1" max="2.5" step="0.1" value="1">
-                            </div>
-                            <div class="col-6">
-                                <label class="form-label small mb-1">مٿي/هيٺ: <span id="imgPosYVal">0</span>px</label>
-                                <input type="range" class="form-range" id="imgPosYRange" min="-150" max="150" value="0">
-                            </div>
-                        </div>
-                    </div>
-
+                    <button class="btn btn-success w-100 py-2 fw-bold shadow" id="downloadBtn"><i class="fa fa-download me-2"></i> تصوير ڊائونلوڊ ڪريو</button>
                 </div>
             </div>
 
-            <!-- General Settings Panel Column -->
+            <!-- Accordion Settings Panel Column -->
             <div class="col-lg-7">
-                <div class="card shadow-sm p-4 border-0">
-                    <h3 class="mb-3 text-primary"><i class="fa fa-sliders me-2"></i> ٻيون سموريون سيٽنگون</h3>
+                <div class="card shadow-sm p-3 border-0">
+                    <h3 class="mb-3 text-primary fs-5"><i class="fa fa-sliders me-2"></i> ڊزائن سيٽنگون (ڊراپ ڊائون مينيو)</h3>
                     
-                    <!-- Logo Settings -->
-                    <div class="card p-3 mb-3 bg-light border-0">
-                        <h5 class="text-secondary fs-6 fw-bold">لوگو سيٽنگون</h5>
-                        <div class="mb-2">
-                            <label class="form-label small">لوگو اپلوڊ ڪريو</label>
-                            <input type="file" class="form-control form-control-sm" id="logoInput" accept="image/*">
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 mb-2">
-                                <label class="form-label small">سائيز: <span id="logoSizeVal">80</span>px</label>
-                                <input type="range" class="form-range" id="logoSizeRange" min="40" max="150" value="80">
+                    <div class="accordion" id="settingsAccordion">
+
+                        <!-- 1. Main Image Settings -->
+                        <div class="accordion-item mb-2 border">
+                            <h2 class="accordion-header" id="headingImage">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseImage" aria-expanded="true" aria-controls="collapseImage">
+                                    <i class="fa fa-image me-2 text-primary"></i> مکيه تصوير جون سيٽنگون
+                                </button>
+                            </h2>
+                            <div id="collapseImage" class="accordion-collapse collapse show" aria-labelledby="headingImage" data-bs-parent="#settingsAccordion">
+                                <div class="accordion-body bg-light">
+                                    <div class="mb-2">
+                                        <label class="form-label small">تصوير اپلوڊ ڪريو</label>
+                                        <input type="file" class="form-control form-control-sm" id="mainImageInput" accept="image/*">
+                                    </div>
+                                    <div class="row g-2">
+                                        <div class="col-6">
+                                            <label class="form-label small">زوم: <span id="imgScaleVal">1</span>x</label>
+                                            <input type="range" class="form-range" id="imgScaleRange" min="1" max="2.5" step="0.1" value="1">
+                                        </div>
+                                        <div class="col-6">
+                                            <label class="form-label small">مٿي/هيٺ: <span id="imgPosYVal">0</span>px</label>
+                                            <input type="range" class="form-range" id="imgPosYRange" min="-150" max="150" value="0">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-6 mb-2">
-                                <label class="form-label small">پوزيشن</label>
-                                <select class="form-select form-select-sm" id="logoPositionSelector">
-                                    <option value="top-left">مٿي کاٻي پاسي</option>
-                                    <option value="top-right">مٿي سڄي پاسي</option>
-                                </select>
+                        </div>
+
+                        <!-- 2. Logo Settings -->
+                        <div class="accordion-item mb-2 border">
+                            <h2 class="accordion-header" id="headingLogo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLogo" aria-expanded="false" aria-controls="collapseLogo">
+                                    <i class="fa fa-circle-user me-2 text-primary"></i> لوگو سيٽنگون (سائيز ۽ پوزيشن)
+                                </button>
+                            </h2>
+                            <div id="collapseLogo" class="accordion-collapse collapse" aria-labelledby="headingLogo" data-bs-parent="#settingsAccordion">
+                                <div class="accordion-body bg-light">
+                                    <div class="mb-2">
+                                        <label class="form-label small">لوگو اپلوڊ ڪريو</label>
+                                        <input type="file" class="form-control form-control-sm" id="logoInput" accept="image/*">
+                                    </div>
+                                    <div class="row g-2">
+                                        <div class="col-12 mb-1">
+                                            <label class="form-label small">سائيز: <span id="logoSizeVal">80</span>px</label>
+                                            <input type="range" class="form-range" id="logoSizeRange" min="40" max="150" value="80">
+                                        </div>
+                                        <div class="col-6">
+                                            <label class="form-label small">آسپاس (کاٻي/سڄي - X): <span id="logoPosXVal">15</span>px</label>
+                                            <input type="range" class="form-range" id="logoPosXRange" min="0" max="320" value="15">
+                                        </div>
+                                        <div class="col-6">
+                                            <label class="form-label small">مٿي/هيٺ (Y): <span id="logoPosYVal">15</span>px</label>
+                                            <input type="range" class="form-range" id="logoPosYRange" min="0" max="300" value="15">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
+                        <!-- 3. Breaking News Banner Settings -->
+                        <div class="accordion-item mb-2 border">
+                            <h2 class="accordion-header" id="headingBreaking">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBreaking" aria-expanded="false" aria-controls="collapseBreaking">
+                                    <i class="fa fa-bullhorn me-2 text-primary"></i> بريڪنگ نيوز بينر سيٽنگون
+                                </button>
+                            </h2>
+                            <div id="collapseBreaking" class="accordion-collapse collapse" aria-labelledby="headingBreaking" data-bs-parent="#settingsAccordion">
+                                <div class="accordion-body bg-light">
+                                    <div class="row g-2 mb-2">
+                                        <div class="col-6">
+                                            <label class="form-label small">عنوان جو متن</label>
+                                            <input type="text" class="form-control form-control-sm" id="breakingTitleInput" value="برڪنگ نيوز">
+                                        </div>
+                                        <div class="col-6">
+                                            <label class="form-label small">پٽي جو رنگ</label>
+                                            <input type="color" class="form-control form-control-color form-control-sm w-100" id="topBannerColor" value="#cc0000">
+                                        </div>
+                                    </div>
+                                    <div class="row g-2">
+                                        <div class="col-6">
+                                            <label class="form-label small">فونٽ سائيز: <span id="breakingFontSizeVal">20</span>px</label>
+                                            <input type="range" class="form-range" id="breakingFontSizeRange" min="14" max="36" value="20">
+                                        </div>
+                                        <div class="col-6">
+                                            <label class="form-label small">اوچائي: <span id="breakingHeightVal">45</span>px</label>
+                                            <input type="range" class="form-range" id="breakingHeightRange" min="30" max="80" value="45">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 4. News Text Settings -->
+                        <div class="accordion-item mb-2 border">
+                            <h2 class="accordion-header" id="headingNewsText">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNewsText" aria-expanded="false" aria-controls="collapseNewsText">
+                                    <i class="fa fa-align-right me-2 text-primary"></i> خبر جو متن ۽ فونٽ سيٽنگون
+                                </button>
+                            </h2>
+                            <div id="collapseNewsText" class="accordion-collapse collapse" aria-labelledby="headingNewsText" data-bs-parent="#settingsAccordion">
+                                <div class="accordion-body bg-light">
+                                    <div class="mb-2">
+                                        <textarea class="form-control form-control-sm" id="newsTextInput" rows="2">رائونتي ۾ موٽر سائڪل سوارن تي مبينه درون حملو، نصير ڪورائي ۽ الله ڏتو ڪورائي زخمي</textarea>
+                                    </div>
+                                    <div class="row g-2 mb-2">
+                                        <div class="col-4">
+                                            <label class="form-label small">سائيز: <span id="fontSizeVal">20</span>px</label>
+                                            <input type="range" class="form-range" id="fontSizeRange" min="14" max="36" value="20">
+                                        </div>
+                                        <div class="col-4">
+                                            <label class="form-label small">اوچائي: <span id="barHeightVal">120</span>px</label>
+                                            <input type="range" class="form-range" id="barHeightRange" min="80" max="250" value="120">
+                                        </div>
+                                        <div class="col-4">
+                                            <label class="form-label small">رنگ</label>
+                                            <input type="color" class="form-control form-control-color form-control-sm w-100" id="bottomBarColor" value="#0d6efd">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label class="form-label small">فونٽ جي چونڊ</label>
+                                        <select class="form-select form-select-sm" id="fontSelector">
+                                            <option value="'Noto Nastaliq Urdu', serif" selected>Noto Nastaliq (نستعليق)</option>
+                                            <option value="'Lateef', cursive">Lateef (سنڌي روايتي)</option>
+                                            <option value="'Amiri', serif">Amiri (قاعدو)</option>
+                                            <option value="'Cairo', sans-serif">Cairo (عام)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 5. Social Icons Settings -->
+                        <div class="accordion-item mb-2 border">
+                            <h2 class="accordion-header" id="headingSocial">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSocial" aria-expanded="false" aria-controls="collapseSocial">
+                                    <i class="fa fa-share-nodes me-2 text-primary"></i> سماجي رابطن جا آئڪن
+                                </button>
+                            </h2>
+                            <div id="collapseSocial" class="accordion-collapse collapse" aria-labelledby="headingSocial" data-bs-parent="#settingsAccordion">
+                                <div class="accordion-body bg-light">
+                                    <div class="d-flex gap-3 flex-wrap">
+                                        <div class="form-check"><input class="form-check-input social-chk" type="checkbox" value="fa-facebook" id="chk-fb" checked><label class="form-check-label small" for="chk-fb">فيس بوڪ</label></div>
+                                        <div class="form-check"><input class="form-check-input social-chk" type="checkbox" value="fa-instagram" id="chk-insta" checked><label class="form-check-label small" for="chk-insta">انسٽाग्राम</label></div>
+                                        <div class="form-check"><input class="form-check-input social-chk" type="checkbox" value="fa-whatsapp" id="chk-wa" checked><label class="form-check-label small" for="chk-wa">واٽس اپ</label></div>
+                                        <div class="form-check"><input class="form-check-input social-chk" type="checkbox" value="fa-tiktok" id="chk-tt"><label class="form-check-label small" for="chk-tt">ٽڪ تاڪ</label></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
 
-                    <!-- Breaking News Banner Settings -->
-                    <div class="card p-3 mb-3 bg-light border-0">
-                        <h5 class="text-secondary fs-6 fw-bold">بريڪنگ نيوز بينر سيٽنگون</h5>
-                        <div class="row">
-                            <div class="col-md-6 mb-2">
-                                <label class="form-label small">عنوان جو متن</label>
-                                <input type="text" class="form-control form-control-sm" id="breakingTitleInput" value="برڪنگ نيوز">
-                            </div>
-                            <div class="col-md-6 mb-2">
-                                <label class="form-label small">پٽي جو رنگ</label>
-                                <input type="color" class="form-control form-control-color form-control-sm w-100" id="topBannerColor" value="#cc0000">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 mb-2">
-                                <label class="form-label small">عنوان فونٽ سائيز: <span id="breakingFontSizeVal">20</span>px</label>
-                                <input type="range" class="form-range" id="breakingFontSizeRange" min="14" max="36" value="20">
-                            </div>
-                            <div class="col-md-6 mb-2">
-                                <label class="form-label small">بينر جي اوچائي: <span id="breakingHeightVal">45</span>px</label>
-                                <input type="range" class="form-range" id="breakingHeightRange" min="30" max="80" value="45">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- News Text Settings -->
-                    <div class="card p-3 mb-3 bg-light border-0">
-                        <h5 class="text-secondary fs-6 fw-bold">خبر جو متن ۽ فونٽ</h5>
-                        <div class="mb-2">
-                            <textarea class="form-control form-control-sm" id="newsTextInput" rows="2">رائونتي ۾ موٽر سائڪل سوارن تي مبينه درون حملو، نصير ڪورائي ۽ الله ڏتو ڪورائي زخمي</textarea>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4 mb-2">
-                                <label class="form-label small">فونٽ سائيز: <span id="fontSizeVal">20</span>px</label>
-                                <input type="range" class="form-range" id="fontSizeRange" min="14" max="36" value="20">
-                            </div>
-                            <div class="col-md-4 mb-2">
-                                <label class="form-label small">پٽي اوچائي: <span id="barHeightVal">120</span>px</label>
-                                <input type="range" class="form-range" id="barHeightRange" min="80" max="250" value="120">
-                            </div>
-                            <div class="col-md-4 mb-2">
-                                <label class="form-label small">پٽي جو رنگ</label>
-                                <input type="color" class="form-control form-control-color form-control-sm w-100" id="bottomBarColor" value="#0d6efd">
-                            </div>
-                        </div>
-                        <div class="mb-2">
-                            <label class="form-label small">فونٽ جي چونڊ</label>
-                            <select class="form-select form-select-sm" id="fontSelector">
-                                <option value="'Noto Nastaliq Urdu', serif" selected>Noto Nastaliq (نستعليق)</option>
-                                <option value="'Lateef', cursive">Lateef (سنڌي روايتي)</option>
-                                <option value="'Amiri', serif">Amiri (قاعدو)</option>
-                                <option value="'Cairo', sans-serif">Cairo (عام)</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- Social Icons Selection -->
-                    <div class="mb-3">
-                        <label class="form-label fw-bold small">سماجي رابطن جا آئڪن چونڊيو</label>
-                        <div class="d-flex gap-3 flex-wrap">
-                            <div class="form-check"><input class="form-check-input social-chk" type="checkbox" value="fa-facebook" id="chk-fb" checked><label class="form-check-label small" for="chk-fb">فيس بوڪ</label></div>
-                            <div class="form-check"><input class="form-check-input social-chk" type="checkbox" value="fa-instagram" id="chk-insta" checked><label class="form-check-label small" for="chk-insta">انسٽाग्राम</label></div>
-                            <div class="form-check"><input class="form-check-input social-chk" type="checkbox" value="fa-whatsapp" id="chk-wa" checked><label class="form-check-label small" for="chk-wa">واٽس اپ</label></div>
-                            <div class="form-check"><input class="form-check-input social-chk" type="checkbox" value="fa-tiktok" id="chk-tt"><label class="form-check-label small" for="chk-tt">ٽڪ تاڪ</label></div>
-                        </div>
-                    </div>
-
-                    <button class="btn btn-success w-100 py-2 fw-bold shadow" id="downloadBtn"><i class="fa fa-download me-2"></i> تصوير ڊائونلوڊ ڪريو</button>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Html2Canvas -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
@@ -239,7 +286,10 @@
         const logoInput = document.getElementById('logoInput');
         const logoSizeRange = document.getElementById('logoSizeRange');
         const logoSizeVal = document.getElementById('logoSizeVal');
-        const logoPositionSelector = document.getElementById('logoPositionSelector');
+        const logoPosXRange = document.getElementById('logoPosXRange');
+        const logoPosXVal = document.getElementById('logoPosXVal');
+        const logoPosYRange = document.getElementById('logoPosYRange');
+        const logoPosYVal = document.getElementById('logoPosYVal');
         
         const mainImageInput = document.getElementById('mainImageInput');
         const imgScaleRange = document.getElementById('imgScaleRange');
@@ -269,21 +319,22 @@
         const prevSocialBar = document.getElementById('prevSocialBar');
         const downloadBtn = document.getElementById('downloadBtn');
 
-        // Logo Controls
+        // Logo Controls (Size, X, Y)
         logoSizeRange.addEventListener('input', (e) => {
             logoSizeVal.innerText = e.target.value;
             prevLogo.style.width = e.target.value + 'px';
             prevLogo.style.height = e.target.value + 'px';
         });
 
-        logoPositionSelector.addEventListener('change', (e) => {
-            if(e.target.value === 'top-left') {
-                prevLogo.style.left = '15px';
-                prevLogo.style.right = 'auto';
-            } else {
-                prevLogo.style.right = '15px';
-                prevLogo.style.left = 'auto';
-            }
+        logoPosXRange.addEventListener('input', (e) => {
+            logoPosXVal.innerText = e.target.value;
+            prevLogo.style.left = e.target.value + 'px';
+            prevLogo.style.right = 'auto';
+        });
+
+        logoPosYRange.addEventListener('input', (e) => {
+            logoPosYVal.innerText = e.target.value;
+            prevLogo.style.top = e.target.value + 'px';
         });
 
         // Main Image Scale & Position Controls
@@ -373,7 +424,7 @@
             prevSocialBar.innerHTML = '';
             if(document.getElementById('chk-fb').checked) prevSocialBar.innerHTML += '<i class="fab fa-facebook fa-lg text-primary"></i>';
             if(document.getElementById('chk-insta').checked) prevSocialBar.innerHTML += '<i class="fab fa-instagram fa-lg text-danger"></i>';
-            if(document.getElementById('chk-wa').checked) prevSocialbar.innerHTML += '<i class="fab fa-whatsapp fa-lg text-success"></i>';
+            if(document.getElementById('chk-wa').checked) prevSocialBar.innerHTML += '<i class="fab fa-whatsapp fa-lg text-success"></i>';
             if(document.getElementById('chk-tt').checked) prevSocialBar.innerHTML += '<i class="fab fa-tiktok fa-lg text-light"></i>';
         }
 
