@@ -165,10 +165,73 @@
         <div class="container-fluid px-3 d-flex justify-content-between align-items-center">
             <a class="navbar-brand fs-6" href="#"><i class="fa fa-photo-film me-2"></i> Social Media Post Studio</a>
             <div id="authContainer">
-                <button class="btn btn-outline-light btn-sm" id="loginBtn" style="font-size: 11px;"><i class="fa fa-sign-in-alt me-1"></i> لاگ ان / سائن اپ</button>
+                <button class="btn btn-outline-light btn-sm" id="openAuthModalBtn" data-bs-toggle="modal" data-bs-target="#authModal" style="font-size: 11px;"><i class="fa fa-sign-in-alt me-1"></i> لاگ ان / سائن اپ</button>
             </div>
         </div>
     </nav>
+
+    <!-- Auth Modal (Login / Signup) -->
+    <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-dark text-white py-2">
+                    <h5 class="modal-title fs-6" id="authModalLabel">يوزر لاگ ان يا سائن اپ</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Toggle Tabs for Login / Signup -->
+                    <ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active py-1 small" id="pills-login-tab" data-bs-toggle="pill" data-bs-target="#pills-login" type="button" role="tab">لاگ ان (Login)</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link py-1 small" id="pills-signup-tab" data-bs-toggle="pill" data-bs-target="#pills-signup" type="button" role="tab">سائن اپ (Sign Up)</button>
+                        </li>
+                    </ul>
+                    
+                    <div class="tab-content" id="pills-tabContent">
+                        <!-- Login Form -->
+                        <div class="tab-pane fade show active" id="pills-login" role="tabpanel">
+                            <div class="mb-2">
+                                <label class="form-label small">اي ميل يا موبائيل نمبر</label>
+                                <input type="text" class="form-control form-control-sm" id="loginEmailPhone" placeholder="اي ميل يا فون نمبر داخل ڪريو">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label small">پاسورڊ</label>
+                                <input type="password" class="form-control form-control-sm" id="loginPassword" placeholder="پاسورڊ">
+                            </div>
+                            <button type="button" class="btn btn-primary btn-sm w-100 fw-bold" id="executeLoginBtn">لاگ ان ٿيو</button>
+                        </div>
+
+                        <!-- Signup Form -->
+                        <div class="tab-pane fade" id="pills-signup" role="tabpanel">
+                            <div class="mb-2">
+                                <label class="form-label small">مڪمل نالو (Full Name)</label>
+                                <input type="text" class="form-control form-control-sm" id="signupFullName" placeholder="نهل خان / علی وغيره">
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label small">فون نمبر (Phone Number)</label>
+                                <input type="tel" class="form-control form-control-sm" id="signupPhone" placeholder="03363152236">
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label small">اي ميل اڊريس (Email Address)</label>
+                                <input type="email" class="form-control form-control-sm" id="signupEmail" placeholder="example@gmail.com">
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label small">شهر جو نالو (City Name)</label>
+                                <input type="text" class="form-control form-control-sm" id="signupCity" placeholder="دھarki / سکر وغيره">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label small">پاسورڊ (Password)</label>
+                                <input type="password" class="form-control form-control-sm" id="signupPassword" placeholder="مضبوط پاسورڊ ڏيو">
+                            </div>
+                            <button type="button" class="btn btn-success btn-sm w-100 fw-bold" id="executeSignupBtn">سائن اپ ڪريو</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="container-fluid px-2 mb-4">
         <div class="row g-2 justify-content-center">
@@ -494,12 +557,11 @@
         const SUPABASE_URL = 'https://dbkyqgfcopjhizchoxya.supabase.co';
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRia3lxZ2Zjb3BqaGl6Y2hoxHlhIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc5MDcyMjk4NCwiZXhwIjoyMTA2Mjk4OTg0fQ.U-5A0DoVnqaL67r96K4GumTiu3eyr_VL4aMpwgj2sRE';
         
-        // Note: Using Service Role Key in browser is functional for simple apps, but Auth operations require proper client configuration
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
         let currentUser = null;
 
-        // Check Auth and Load Settings
+        // Check Auth Session on Load
         async function initAuth() {
             const { data: { session } } = await supabaseClient.auth.getSession();
             if (session) {
@@ -509,13 +571,60 @@
             }
         }
 
-        const loginBtn = document.getElementById('loginBtn');
-        loginBtn.addEventListener('click', async () => {
-            let email = prompt("پنهنجو اي ميل (Email) داخل ڪريو لاگ ان لاءِ:");
-            if(email) {
-                const { error } = await supabaseClient.auth.signInWithOtp({ email: email });
-                if(error) alert("مسئلو آيو: " . error.message);
-                else alert("لاگ ان لاءِ لنڪ توهان جي اي ميل تي موڪليو ويو آهي!");
+        // Signup Action
+        document.getElementById('executeSignupBtn').addEventListener('click', async () => {
+            let fullName = document.getElementById('signupFullName').value;
+            let phone = document.getElementById('signupPhone').value;
+            let email = document.getElementById('signupEmail').value;
+            let city = document.getElementById('signupCity').value;
+            let password = document.getElementById('signupPassword').value;
+
+            if(!email || !password || !phone) {
+                alert("مهرباني ڪري اي ميل، فون نمبر ۽ پاسورڊ ضرور داخل ڪريو!");
+                return;
+            }
+
+            const { data, error } = await supabaseClient.auth.signUp({
+                email: email,
+                password: password,
+                options: {
+                    data: { full_name: fullName, phone: phone, city: city }
+                }
+            });
+
+            if(error) {
+                alert("سائن اپ ۾ نقص: " + error.message);
+            } else {
+                alert("سائن اپ ڪامياب ٿي ويو! مهرباني ڪري لاگ ان ٿيو.");
+                var myModal = bootstrap.Modal.getInstance(document.getElementById('authModal'));
+                myModal.hide();
+            }
+        });
+
+        // Login Action
+        document.getElementById('executeLoginBtn').addEventListener('click', async () => {
+            let emailOrPhone = document.getElementById('loginEmailPhone').value;
+            let password = document.getElementById('loginPassword').value;
+
+            if(!emailOrPhone || !password) {
+                alert("سڀ خانا ڀرڻ ضروري آهن!");
+                return;
+            }
+
+            const { data, error } = await supabaseClient.auth.signInWithPassword({
+                email: emailOrPhone,
+                password: password
+            });
+
+            if(error) {
+                alert("لاگ ان غلط آهي: " + error.message);
+            } else {
+                currentUser = data.user;
+                updateAuthUI();
+                loadCloudSettings(currentUser.id);
+                var myModal = bootstrap.Modal.getInstance(document.getElementById('authModal'));
+                myModal.hide();
+                alert("ڪاميابيءَ سان لاگ ان ٿي ويا آهيو!");
             }
         });
 
