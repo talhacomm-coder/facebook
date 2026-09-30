@@ -187,7 +187,7 @@
                                     <img id="prevMainImage" src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=600&q=80" class="preview-image" style="transform: scale(1) translate(0px, 0px);">
                                 </div>
                                 <div class="news-text-box" id="prevNewsText" style="font-size: 20px; height: 95px; background: linear-gradient(135deg, #0d6efd, #4dabf7);" title="ڪلڪ ڪري خبر تبديل ڪريو">
-                                    رائونتي ۾ موٽر سائڪل سوارن تي مبينه درون حملو، نصير ڪورائي ۽ الله ڏتو ڪورائي زخمي
+                                    پنهنجي تازاھ خبر ھتي اپڊيٽ ڪيو ۽ سوشل ميڊيا تي فاسٽ شيئر ڪيو
                                 </div>
                             </div>
 
@@ -246,7 +246,7 @@
                         <div class="setting-section" id="sec-news">
                             <h6 class="text-secondary fw-bold mb-2 pb-1 border-bottom small"><i class="fa fa-align-right me-1"></i> هيٺين خبر جو متن، رنگ ۽ فونٽ</h6>
                             <div class="mb-2">
-                                <textarea class="form-control form-control-sm" id="newsTextInput" rows="2">رائونتي ۾ موٽر سائڪل سوارن تي مبينه درون حملو، نصير ڪورائي ۽ الله ڏتو ڪورائي زخمي</textarea>
+                                <textarea class="form-control form-control-sm" id="newsTextInput" rows="2">پنهنجي تازاھ خبر ھتي اپڊيٽ ڪيو ۽ سوشل ميڊيا تي فاسٽ شيئر ڪيو</textarea>
                             </div>
                             <div class="row g-2 mb-2">
                                 <div class="col-6">
@@ -462,15 +462,11 @@
 
                             <div class="row g-2">
                                 <div class="col-6">
-                                    <label class="form-label small mb-1">پوزيشن (Alignment)</label>
-                                    <select class="form-select form-select-sm" id="socialAlignment">
-                                        <option value="center" selected>وچ ۾ (Center)</option>
-                                        <option value="flex-start">کاٻي طرف (Left)</option>
-                                        <option value="flex-end">سڄي طرف (Right)</option>
-                                    </select>
+                                    <label class="form-label small mb-1">آئڪن سائيز: <span id="socialIconSizeVal">14</span>px</label>
+                                    <input type="range" class="form-range" id="socialIconSizeRange" min="10" max="28" value="14">
                                 </div>
                                 <div class="col-6">
-                                    <label class="form-label small mb-1">فاصلو (Gap): <span id="socialGapVal">2</span></label>
+                                    <label class="form-label small mb-1">فاصلو (Gap): <span id="socialGapVal">8</span></label>
                                     <input type="range" class="form-range" id="socialGapRange" min="1" max="15" value="8">
                                 </div>
                             </div>
@@ -573,7 +569,8 @@
 
         const footerBgColor = document.getElementById('footerBgColor');
         const footerCustomTextInput = document.getElementById('footerCustomTextInput');
-        const socialAlignment = document.getElementById('socialAlignment');
+        const socialIconSizeRange = document.getElementById('socialIconSizeRange');
+        const socialIconSizeVal = document.getElementById('socialIconSizeVal');
         const socialGapRange = document.getElementById('socialGapRange');
         const socialGapVal = document.getElementById('socialGapVal');
         
@@ -645,15 +642,13 @@
         });
 
         // Universal Free Dragging for Logo, Breaking News, and Reporter Name
-        function makeElementDraggable(elm, isRightAligned = false) {
+        function makeElementDraggable(elm) {
             let startX = 0, startY = 0;
 
             elm.addEventListener('mousedown', startDrag);
             elm.addEventListener('touchstart', startDrag, {passive: false});
 
             function startDrag(e) {
-                // Ignore if clicked on logo to change image
-                if(elm === prevLogo && e.target === prevLogo && e.detail > 1) return;
                 e.stopPropagation();
                 e.preventDefault();
 
@@ -964,7 +959,10 @@
             chk.addEventListener('change', updateSocialIcons);
         });
         footerCustomTextInput.addEventListener('input', updateSocialIcons);
-        socialAlignment.addEventListener('change', updateSocialIcons);
+        socialIconSizeRange.addEventListener('input', (e) => {
+            socialIconSizeVal.innerText = e.target.value;
+            updateSocialIcons();
+        });
         socialGapRange.addEventListener('input', (e) => {
             socialGapVal.innerText = e.target.value;
             prevSocialBar.style.gap = e.target.value + 'px';
@@ -972,33 +970,22 @@
 
         function updateSocialIcons() {
             prevSocialBar.innerHTML = '';
-            let alignVal = socialAlignment.value;
-            
-            if(alignVal === 'flex-start') {
-                prevSocialBar.style.justifyContent = 'flex-start';
-                prevSocialBar.style.paddingRight = '12px';
-                prevSocialBar.style.paddingLeft = '0';
-            } else if(alignVal === 'flex-end') {
-                prevSocialBar.style.justifyContent = 'flex-end';
-                prevSocialBar.style.paddingLeft = '12px';
-                prevSocialBar.style.paddingRight = '0';
-            } else {
-                prevSocialBar.style.justifyContent = 'center';
-                prevSocialBar.style.paddingLeft = '0';
-                prevSocialBar.style.paddingRight = '0';
-            }
-            
+            prevSocialBar.style.justifyContent = 'center';
+            prevSocialBar.style.paddingLeft = '0';
+            prevSocialBar.style.paddingRight = '0';
             prevSocialBar.style.gap = socialGapRange.value + 'px';
 
-            if(document.getElementById('chk-fb').checked) prevSocialBar.innerHTML += '<i class="fab fa-facebook text-primary"></i>';
-            if(document.getElementById('chk-insta').checked) prevSocialBar.innerHTML += '<i class="fab fa-instagram text-danger"></i>';
-            if(document.getElementById('chk-wa').checked) prevSocialBar.innerHTML += '<i class="fab fa-whatsapp text-success"></i>';
-            if(document.getElementById('chk-x').checked) prevSocialBar.innerHTML += '<i class="fab fa-x-twitter text-light"></i>';
-            if(document.getElementById('chk-tt').checked) prevSocialBar.innerHTML += '<i class="fab fa-tiktok text-light"></i>';
+            let iconSize = socialIconSizeRange.value + 'px';
+
+            if(document.getElementById('chk-fb').checked) prevSocialBar.innerHTML += `<i class="fab fa-facebook text-primary" style="font-size: ${iconSize};"></i>`;
+            if(document.getElementById('chk-insta').checked) prevSocialBar.innerHTML += `<i class="fab fa-instagram text-danger" style="font-size: ${iconSize};"></i>`;
+            if(document.getElementById('chk-wa').checked) prevSocialBar.innerHTML += `<i class="fab fa-whatsapp text-success" style="font-size: ${iconSize};"></i>`;
+            if(document.getElementById('chk-x').checked) prevSocialBar.innerHTML += `<i class="fab fa-x-twitter text-light" style="font-size: ${iconSize};"></i>`;
+            if(document.getElementById('chk-tt').checked) prevSocialBar.innerHTML += `<i class="fab fa-tiktok text-light" style="font-size: ${iconSize};"></i>`;
 
             let customText = footerCustomTextInput.value;
             if(customText) {
-                prevSocialBar.innerHTML += `<span class="ms-1">${customText}</span>`;
+                prevSocialBar.innerHTML += `<span class="ms-1" style="font-size: ${iconSize};">${customText}</span>`;
             }
         }
 
