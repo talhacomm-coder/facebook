@@ -54,6 +54,7 @@
             width: 100%;
             box-sizing: border-box;
             font-family: 'Lateef', 'MBSindhiWeb', sans-serif;
+            cursor: pointer;
         }
         .preview-image-box {
             position: relative;
@@ -61,6 +62,11 @@
             aspect-ratio: 4 / 4;
             overflow: hidden;
             background: #111;
+            cursor: grab;
+            touch-action: none;
+        }
+        .preview-image-box:active {
+            cursor: grabbing;
         }
         .preview-image {
             position: absolute;
@@ -68,7 +74,8 @@
             height: 100%;
             object-fit: cover;
             transform-origin: center center;
-            transition: transform 0.05s ease;
+            user-select: none;
+            pointer-events: none;
         }
         .news-text-box {
             color: white;
@@ -84,6 +91,7 @@
             width: 100%;
             box-sizing: border-box;
             font-family: 'Lateef', 'MBSindhiWeb', sans-serif;
+            cursor: pointer;
         }
         .watermark-logo {
             position: absolute;
@@ -102,6 +110,7 @@
             white-space: nowrap;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
             font-family: 'Lateef', 'MBSindhiWeb', sans-serif;
+            cursor: pointer;
         }
         .floating-breaking-text {
             position: absolute;
@@ -113,6 +122,7 @@
             white-space: nowrap;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
             font-family: 'Lateef', 'MBSindhiWeb', sans-serif;
+            cursor: pointer;
         }
         .settings-card {
             background: #ffffff;
@@ -150,20 +160,20 @@
             <div class="col-xl-4 col-lg-5 col-md-5">
                 <div class="sticky-top" style="top: 10px;">
                     <div class="card shadow-sm p-2 border-0">
-                        <h6 class="text-center mb-1 text-secondary fw-bold fs-7">لائيو پريوو فريم</h6>
+                        <h6 class="text-center mb-1 text-secondary fw-bold fs-7">لائيو پريوو (تصوير يا ٽيڪسٽ تي سڌو ڪلڪ ڪري تبديل ڪريو)</h6>
                         
                         <div class="preview-container mb-2" id="captureArea">
                             <img id="prevLogo" src="https://via.placeholder.com/80" class="watermark-logo" style="width: 60px; height: 60px; top: 12px; left: 12px;">
-                            <div id="prevCustomName" class="custom-name-watermark" style="font-size: 20px; bottom: 120px; right: 12px;">رپورٽر جو نالو</div>
-                            <div id="prevFloatingBreaking" class="floating-breaking-text" style="font-size: 20px; top: 15px; right: 15px;">برڪنگ نيوز</div>
+                            <div id="prevCustomName" class="custom-name-watermark" style="font-size: 20px; bottom: 120px; right: 12px;" title="ڪلڪ ڪري نالو تبديل ڪريو">رپورٽر جو نالو</div>
+                            <div id="prevFloatingBreaking" class="floating-breaking-text" style="font-size: 20px; top: 15px; right: 15px;" title="ڪلڪ ڪري مٿين خبر تبديل ڪريو">برڪنگ نيوز</div>
                             
                             <!-- Main Flex Wrapper -->
                             <div class="dynamic-flex-wrapper" id="dynamicFlexWrapper">
                                 <div class="preview-header-banner" id="prevTopBanner" style="height: 38px; background: linear-gradient(135deg, #cc0000, #ff4d4d);"></div>
-                                <div class="preview-image-box" id="prevImageBox">
+                                <div class="preview-image-box" id="prevImageBox" title="تصوير کي هتان پڪڙي کڻي سگهو ٿا">
                                     <img id="prevMainImage" src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=600&q=80" class="preview-image" style="transform: scale(1) translate(0px, 0px);">
                                 </div>
-                                <div class="news-text-box" id="prevNewsText" style="font-size: 20px; height: 95px; background: linear-gradient(135deg, #0d6efd, #4dabf7);">
+                                <div class="news-text-box" id="prevNewsText" style="font-size: 20px; height: 95px; background: linear-gradient(135deg, #0d6efd, #4dabf7);" title="ڪلڪ ڪري خبر تبديل ڪريو">
                                     رائونتي ۾ موٽر سائڪل سوارن تي مبينه درون حملو، نصير ڪورائي ۽ الله ڏتو ڪورائي زخمي
                                 </div>
                             </div>
@@ -556,6 +566,93 @@
         const prevSocialBar = document.getElementById('prevSocialBar');
         const downloadBtn = document.getElementById('downloadBtn');
         const downloadScaleSelect = document.getElementById('downloadScaleSelect');
+        const prevImageBox = document.getElementById('prevImageBox');
+
+        // Direct On-Screen Click/Touch Editing Support
+        prevNewsText.addEventListener('click', () => {
+            let newVal = prompt("هيٺين خبر جو نئون متن داخل ڪريو:", newsTextInput.value);
+            if(newVal !== null) {
+                newsTextInput.value = newVal;
+                prevNewsText.innerText = newVal;
+            }
+        });
+
+        prevFloatingBreaking.addEventListener('click', () => {
+            let newVal = prompt("برڪنگ نيوز جو نئون متن داخل ڪريو:", breakingTitleInput.value);
+            if(newVal !== null) {
+                breakingTitleInput.value = newVal;
+                prevFloatingBreaking.innerText = newVal;
+            }
+        });
+
+        prevCustomName.addEventListener('click', () => {
+            let newVal = prompt("رپورٽر جو نئون نالو داخل ڪريو:", customNameInput.value);
+            if(newVal !== null) {
+                customNameInput.value = newVal;
+                prevCustomName.innerText = newVal;
+            }
+        });
+
+        // Touch & Mouse Drag (Pan) & Pinch/Wheel Zoom for Main Image
+        let isDragging = false;
+        let startX = 0, startY = 0;
+        let currentScale = 1;
+        let currentPosX = 0;
+        let currentPosY = 0;
+
+        function updateImageTransform() {
+            prevMainImage.style.transform = `scale(${currentScale}) translate(${currentPosX}px, ${currentPosY}px)`;
+            imgScaleRange.value = currentScale;
+            imgScaleVal.innerText = currentScale.toFixed(1);
+            imgPosXRange.value = currentPosX;
+            imgPosXVal.innerText = Math.round(currentPosX);
+            imgPosYRange.value = currentPosY;
+            imgPosYVal.innerText = Math.round(currentPosY);
+        }
+
+        prevImageBox.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            startX = e.clientX - currentPosX;
+            startY = e.clientY - currentPosY;
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            currentPosX = e.clientX - startX;
+            currentPosY = e.clientY - startY;
+            updateImageTransform();
+        });
+
+        window.addEventListener('mouseup', () => { isDragging = false; });
+
+        // Touch support for mobile devices
+        prevImageBox.addEventListener('touchstart', (e) => {
+            if(e.touches.length === 1) {
+                isDragging = true;
+                startX = e.touches[0].clientX - currentPosX;
+                startY = e.touches[0].clientY - currentPosY;
+            }
+        });
+
+        window.addEventListener('touchmove', (e) => {
+            if (!isDragging || e.touches.length !== 1) return;
+            currentPosX = e.touches[0].clientX - startX;
+            currentPosY = e.touches[0].clientY - startY;
+            updateImageTransform();
+        });
+
+        window.addEventListener('touchend', () => { isDragging = false; });
+
+        // Mouse Wheel Zoom
+        prevImageBox.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            if(e.deltaY < 0) {
+                currentScale = Math.min(3, currentScale + 0.1);
+            } else {
+                currentScale = Math.max(1, currentScale - 0.1);
+            }
+            updateImageTransform();
+        });
 
         layoutOrderSelect.addEventListener('change', (e) => {
             if (e.target.value === 'top') {
@@ -642,28 +739,20 @@
             prevFloatingBreaking.style.fontFamily = e.target.value;
         });
 
-        let currentScale = 1;
-        let currentPosX = 0;
-        let currentPosY = 0;
-
-        function updateImageTransform() {
-            prevMainImage.style.transform = `scale(${currentScale}) translate(${currentPosX}px, ${currentPosY}px)`;
-        }
-
         imgScaleRange.addEventListener('input', (e) => {
-            currentScale = e.target.value;
+            currentScale = parseFloat(e.target.value);
             imgScaleVal.innerText = currentScale;
             updateImageTransform();
         });
 
         imgPosXRange.addEventListener('input', (e) => {
-            currentPosX = e.target.value;
+            currentPosX = parseFloat(e.target.value);
             imgPosXVal.innerText = currentPosX;
             updateImageTransform();
         });
 
         imgPosYRange.addEventListener('input', (e) => {
-            currentPosY = e.target.value;
+            currentPosY = parseFloat(e.target.value);
             imgPosYVal.innerText = currentPosY;
             updateImageTransform();
         });
@@ -769,7 +858,7 @@
             }
         }
 
-        // Fully Fixed Download Function preventing Image/Logo Missing Bug
+        // Reliable Download Function
         downloadBtn.addEventListener('click', () => {
             let scaleVal = parseInt(downloadScaleSelect.value) || 2;
             downloadBtn.innerText = "تصوير تيار ٿي رهي آهي...";
@@ -783,7 +872,7 @@
                         allowTaint: true,
                         logging: false,
                         letterRendering: true,
-                        backgroundColor: null // Ensures proper transparency rendering for PNG logos
+                        backgroundColor: null
                     }).then(canvas => {
                         const link = document.createElement('a');
                         link.download = `Social-Media-Post-${scaleVal}x.png`;
