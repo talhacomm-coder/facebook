@@ -7,13 +7,13 @@
     <!-- Bootstrap 5 CSS RTL -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css.rtl.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Lateef&family=Noto+Nastaliq+Urdu:wght@400;700&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;700&family=Lateef&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
             background-color: #f4f6f9;
-            font-family: 'Lateef', cursive, sans-serif;
+            font-family: 'Lateef', 'Amiri', Arial, sans-serif;
             overflow-x: hidden;
         }
         .preview-container {
@@ -147,7 +147,7 @@
                                 </div>
                             </div>
 
-                            <!-- Separate Social/Footer Bar with Icons + Name -->
+                            <!-- Separate Social/Footer Bar -->
                             <div class="text-white p-1 d-flex justify-content-center gap-2 align-items-center" id="prevSocialBar" style="height: 32px; z-index: 2; width: 100%; font-size: 12px; background-color: #212529; font-family: 'Lateef', sans-serif; box-sizing: border-box;">
                                 <i class="fab fa-facebook text-primary"></i>
                                 <i class="fab fa-instagram text-danger"></i>
@@ -226,14 +226,14 @@
                                     <option value="Lateef" selected>Lateef (بيحد صاف)</option>
                                     <option value="Amiri">Amiri Arabic</option>
                                     <option value="Noto Nastaliq Urdu">Noto Nastaliq</option>
-                                    <option value="Cairo">Cairo (English/Modern)</option>
+                                    <option value="Cairo">Cairo</option>
                                 </select>
                             </div>
                         </div>
 
                         <!-- 2. Logo Settings -->
                         <div class="setting-section d-none" id="sec-logo">
-                            <h6 class="text-secondary fw-bold mb-2 pb-1 border-bottom small"><i class="fa fa-circle-user me-1"></i> لوگو سيٽنگون (سائيز، پوزيشن ۽ واٽر مارڪ)</h6>
+                            <h6 class="text-secondary fw-bold mb-2 pb-1 border-bottom small"><i class="fa fa-circle-user me-1"></i> لوگو سيٽنگون</h6>
                             <div class="mb-2">
                                 <label class="form-label small mb-1">لوگو اپلوڊ ڪريو</label>
                                 <input type="file" class="form-control form-control-sm" id="logoInput" accept="image/*">
@@ -260,7 +260,7 @@
 
                         <!-- 3. Main Image Settings -->
                         <div class="setting-section d-none" id="sec-image">
-                            <h6 class="text-secondary fw-bold mb-2 pb-1 border-bottom small"><i class="fa fa-image me-1"></i> مکيه تصوير سيٽنگون (زوم، پوزيشن)</h6>
+                            <h6 class="text-secondary fw-bold mb-2 pb-1 border-bottom small"><i class="fa fa-image me-1"></i> مکيه تصوير سيٽنگون</h6>
                             <div class="mb-2">
                                 <label class="form-label small mb-1">تصوير اپلوڊ ڪريو</label>
                                 <input type="file" class="form-control form-control-sm" id="mainImageInput" accept="image/*">
@@ -283,9 +283,9 @@
 
                         <!-- 4. Custom Name Settings -->
                         <div class="setting-section d-none" id="sec-name">
-                            <h6 class="text-secondary fw-bold mb-2 pb-1 border-bottom small"><i class="fa fa-font me-1"></i> رپورٽر جو نالو ۽ فونٽ سيٽنگون</h6>
+                            <h6 class="text-secondary fw-bold mb-2 pb-1 border-bottom small"><i class="fa fa-font me-1"></i> رپورٽر جو نالو ۽ فونٽ</h6>
                             <div class="mb-2">
-                                <label class="form-label small mb-1">رپورٽر يا چينل جو نالو</label>
+                                <label class="form-label small mb-1">رپورٽر جو نالو</label>
                                 <input type="text" class="form-control form-control-sm" id="customNameInput" value="رپورٽر جو نالو">
                             </div>
                             <div class="mb-2">
@@ -348,7 +348,7 @@
 
                         <!-- 6. Layout Order -->
                         <div class="setting-section d-none" id="sec-layout">
-                            <h6 class="text-secondary fw-bold mb-2 pb-1 border-bottom small"><i class="fa fa-layer-group me-1"></i> پٽين جي ترتيب (Layout Order)</h6>
+                            <h6 class="text-secondary fw-bold mb-2 pb-1 border-bottom small"><i class="fa fa-layer-group me-1"></i> پٽين جي ترتيب</h6>
                             <div class="mb-3">
                                 <label class="form-label small mb-1">برڪنگ نيوز پٽي جي پوزيشن</label>
                                 <select class="form-select form-select-sm" id="layoutOrderSelect">
@@ -360,13 +360,13 @@
 
                         <!-- 7. Social Icons + Custom Name Settings -->
                         <div class="setting-section d-none" id="sec-social">
-                            <h6 class="text-secondary fw-bold mb-2 pb-1 border-bottom small"><i class="fa fa-share-nodes me-1"></i> هيٺين پٽي (آئڪن، نالو، رنگ ۽ چرپر)</h6>
+                            <h6 class="text-secondary fw-bold mb-2 pb-1 border-bottom small"><i class="fa fa-share-nodes me-1"></i> هيٺين پٽي (آئڪن ۽ نالو)</h6>
                             <div class="mb-2">
                                 <label class="form-label small mb-1">هيٺين پٽي جو رنگ</label>
                                 <input type="color" class="form-control form-control-color form-control-sm w-100" id="footerBgColor" value="#212529">
                             </div>
                             <div class="mb-2">
-                                <label class="form-label small mb-1">هيٺين پٽي لاءِ نالو يا ويب سائٽ/صفحي جو نالو</label>
+                                <label class="form-label small mb-1">ويب سائٽ يا صفحي جو نالو</label>
                                 <input type="text" class="form-control form-control-sm" id="footerCustomTextInput" value="www.sindhinews.com">
                             </div>
 
@@ -493,7 +493,6 @@
         const downloadBtn = document.getElementById('downloadBtn');
         const downloadScaleSelect = document.getElementById('downloadScaleSelect');
 
-        // Layout Order Swap
         layoutOrderSelect.addEventListener('change', (e) => {
             if (e.target.value === 'top') {
                 dynamicFlexWrapper.insertBefore(prevTopBanner, prevImageBox);
@@ -502,7 +501,6 @@
             }
         });
 
-        // Logo Controls
         logoSizeRange.addEventListener('input', (e) => {
             logoSizeVal.innerText = e.target.value;
             prevLogo.style.width = e.target.value + 'px';
@@ -526,7 +524,6 @@
             prevLogo.style.top = e.target.value + 'px';
         });
 
-        // Custom Name Controls
         customNameInput.addEventListener('input', (e) => {
             prevCustomName.innerText = e.target.value;
         });
@@ -557,7 +554,6 @@
             prevCustomName.style.bottom = e.target.value + 'px';
         });
 
-        // Main Image Controls
         let currentScale = 1;
         let currentPosX = 0;
         let currentPosY = 0;
@@ -584,7 +580,6 @@
             updateImageTransform();
         });
 
-        // Breaking News Controls
         breakingTitleInput.addEventListener('input', (e) => {
             prevTopBanner.innerText = e.target.value;
         });
@@ -605,7 +600,6 @@
             prevTopBanner.style.height = e.target.value + 'px';
         });
 
-        // News Text Controls
         fontSizeRange.addEventListener('input', (e) => {
             fontSizeVal.innerText = e.target.value;
             prevNewsText.style.fontSize = e.target.value + 'px';
@@ -650,7 +644,6 @@
             prevNewsText.style.fontFamily = e.target.value;
         });
 
-        // Footer Controls (Color, Icons + Name, Alignment, Gap)
         footerBgColor.addEventListener('input', (e) => {
             prevSocialBar.style.backgroundColor = e.target.value;
         });
@@ -697,28 +690,31 @@
             }
         }
 
-        // Native HTML5 Canvas Direct Rendering Solution (Zero Font Breaking)
+        // Guaranteed Font-Loaded Canvas Rendering with Safe Fallbacks
         downloadBtn.addEventListener('click', async () => {
             let scale = parseInt(downloadScaleSelect.value) || 2;
-            downloadBtn.innerText = "تصوير تيار ٿي رهي آهي...";
+            downloadBtn.innerText = "فونٽ لوڊ ٿي رهيا آهن...";
             downloadBtn.disabled = true;
 
             try {
-                const baseWidth = 600; // High resolution base width
+                // Ensure fonts are fully loaded by browser
+                await document.fonts.ready;
+
+                downloadBtn.innerText = "تصوير تيار ٿي رهي آهي...";
+                const baseWidth = 600; 
                 const canvas = document.createElement('canvas');
                 const ctx = canvas.getContext('2d');
 
-                // Compute heights based on proportions
                 let topH = parseInt(breakingHeightRange.value) * (baseWidth / 300);
                 let newsH = parseInt(barHeightRange.value) * (baseWidth / 300);
-                let footerH = 64; // Footer height
-                let imgBoxH = baseWidth; // 1:1 ratio image box
+                let footerH = 64; 
+                let imgBoxH = baseWidth; 
 
                 canvas.width = baseWidth * scale;
                 canvas.height = (topH + imgBoxH + newsH + footerH) * scale;
                 ctx.scale(scale, scale);
 
-                // 1. Draw Main Image with Zoom & Pan translations
+                // 1. Draw Main Image
                 ctx.save();
                 let isTopOrder = (layoutOrderSelect.value === 'top');
                 let imgY = isTopOrder ? topH : 0;
@@ -756,35 +752,31 @@
                 ctx.restore();
                 ctx.restore();
 
-                // 2. Draw Gradients & Banners
+                // 2. Draw Banners
                 let newsY = isTopOrder ? (topH + imgBoxH) : topH;
 
-                // Top Banner
                 let topGrad = ctx.createLinearGradient(0, isTopOrder ? 0 : imgBoxH, 0, isTopOrder ? topH : (imgBoxH + topH));
                 topGrad.addColorStop(0, topColor1.value);
                 topGrad.addColorStop(1, topColor2.value);
                 ctx.fillStyle = topGrad;
                 ctx.fillRect(0, isTopOrder ? 0 : imgBoxH, baseWidth, topH);
 
-                // News Bar Banner
                 let newsGrad = ctx.createLinearGradient(0, newsY, 0, newsY + newsH);
                 newsGrad.addColorStop(0, bottomColor1.value);
                 newsGrad.addColorStop(1, bottomColor2.value);
                 ctx.fillStyle = newsGrad;
                 ctx.fillRect(0, newsY, baseWidth, newsH);
 
-                // 3. Draw Text with Proper Styling
+                // 3. Draw Text with Explicit Font Families
                 let fontName = fontSelector.value;
 
-                // Top Banner Text
                 ctx.fillStyle = "#ffffff";
-                ctx.font = `bold ${parseInt(breakingFontSizeRange.value) * (baseWidth / 300)}px ${fontName}, 'Lateef', sans-serif`;
+                ctx.font = `bold ${parseInt(breakingFontSizeRange.value) * (baseWidth / 300)}px "${fontName}", 'Lateef', Arial, sans-serif`;
                 ctx.textAlign = "center";
                 ctx.textBaseline = "middle";
                 ctx.fillText(breakingTitleInput.value, baseWidth / 2, (isTopOrder ? 0 : imgBoxH) + topH / 2);
 
-                // News Text (Multi-line auto wrap support)
-                ctx.font = `bold ${parseInt(fontSizeRange.value) * (baseWidth / 300)}px ${fontName}, 'Lateef', sans-serif`;
+                ctx.font = `bold ${parseInt(fontSizeRange.value) * (baseWidth / 300)}px "${fontName}", 'Lateef', Arial, sans-serif`;
                 let newsText = newsTextInput.value;
                 let maxWidth = baseWidth - 40;
                 let words = newsText.split(' ');
@@ -812,7 +804,8 @@
 
                 // 4. Draw Custom Name Watermark
                 ctx.save();
-                ctx.font = `bold ${parseInt(customNameSizeRange.value) * (baseWidth / 300)}px ${customNameFontSelector.value}, 'Lateef', sans-serif`;
+                let customFont = customNameFontSelector.value;
+                ctx.font = `bold ${parseInt(customNameSizeRange.value) * (baseWidth / 300)}px "${customFont}", 'Lateef', Arial, sans-serif`;
                 ctx.fillStyle = `rgba(255, 255, 255, ${parseFloat(customNameOpacityRange.value) / 100})`;
                 ctx.textAlign = "right";
                 ctx.shadowColor = "rgba(0, 0, 0, 0.9)";
@@ -848,7 +841,6 @@
                 ctx.drawImage(logoObj, logoX, logoY, logoSize, logoSize);
                 ctx.restore();
 
-                // Draw White Border around Logo
                 ctx.save();
                 ctx.globalAlpha = logoOpacity;
                 ctx.strokeStyle = '#ffffff';
@@ -869,7 +861,6 @@
                 ctx.textBaseline = "middle";
                 ctx.fillText(footerCustomTextInput.value, baseWidth / 2, footerY + footerH / 2);
 
-                // Trigger Download
                 const link = document.createElement('a');
                 link.download = `Sindhi-News-Post-${scale}x.png`;
                 link.href = canvas.toDataURL('image/png');
