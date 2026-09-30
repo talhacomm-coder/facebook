@@ -6,19 +6,27 @@
     <title>سنڌي نيوز پوسٽ جنريٽر</title>
     <!-- Bootstrap 5 CSS RTL -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css.rtl.min.css">
-    <!-- Google Fonts for Perfect Rendering -->
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Lateef&family=Noto+Naskh+Arabic:wght@400;700&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Lateef&family=Noto+Nastaliq+Urdu:wght@400;700&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Custom Font Definitions */
+        @font-face { font-family: 'MBSindhiWeb'; src: url('mbsindhiweb.otf') format('opentype'); font-weight: normal; font-style: normal; }
+        @font-face { font-family: 'MBSarang'; src: url('MB Sarang.otf') format('opentype'); font-weight: normal; font-style: normal; }
+        @font-face { font-family: 'NafeesSaleem'; src: url('Nafees Saleem.otf') format('opentype'); font-weight: normal; font-style: normal; }
+        @font-face { font-family: 'MBMajeed'; src: url('MB Majeed.otf') format('opentype'); font-weight: normal; font-style: normal; }
+        @font-face { font-family: 'PakTypeNaskh'; src: url('PakType Naskh.otf') format('opentype'); font-weight: normal; font-style: normal; }
+        @font-face { font-family: 'MBTahoma'; src: url('MB Tahoma.otf') format('opentype'); font-weight: normal; font-style: normal; }
+
         body {
             background-color: #f4f6f9;
-            font-family: 'Noto Naskh Arabic', 'Lateef', sans-serif;
+            font-family: 'MBSindhiWeb', 'Lateef', cursive;
             overflow-x: hidden;
         }
         .preview-container {
             width: 100%;
-            max-width: 350px;
+            max-width: 300px;
             background: #fff;
             position: relative;
             overflow: hidden;
@@ -44,6 +52,7 @@
             overflow: hidden;
             flex-shrink: 0;
             z-index: 2;
+            font-family: 'MBSindhiWeb', 'Lateef', cursive;
         }
         .preview-image-box {
             position: relative;
@@ -62,7 +71,7 @@
         }
         .news-text-box {
             color: white;
-            padding: 8px;
+            padding: 6px;
             text-align: center;
             font-weight: bold;
             display: flex;
@@ -71,6 +80,7 @@
             word-break: break-word;
             flex-shrink: 0;
             z-index: 2;
+            font-family: 'MBSindhiWeb', 'Lateef', cursive;
         }
         .watermark-logo {
             position: absolute;
@@ -84,67 +94,70 @@
         }
         .custom-name-watermark {
             position: absolute;
-            bottom: 130px;
+            bottom: 110px;
             right: 15px;
             color: white;
             font-weight: bold;
             z-index: 10;
             white-space: nowrap;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+            font-family: 'MBSindhiWeb', 'Lateef', cursive;
         }
         .settings-card {
             background: #ffffff;
             border-radius: 12px;
+            max-height: 85vh;
+            overflow-y: auto;
         }
         .tab-btn {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: bold;
-            padding: 6px 10px;
-            border-radius: 6px !important;
+            padding: 5px 8px;
+            border-radius: 5px !important;
             transition: all 0.2s ease;
         }
         .developer-footer {
             font-size: 10px;
             color: #6c757d;
             text-align: center;
-            margin-top: 6px;
+            margin-top: 4px;
             font-family: 'Cairo', sans-serif;
         }
     </style>
 </head>
 <body>
 
-    <nav class="navbar navbar-dark bg-dark shadow-sm mb-3">
-        <div class="container-fluid px-4">
+    <nav class="navbar navbar-dark bg-dark shadow-sm mb-2 py-1">
+        <div class="container-fluid px-3">
             <a class="navbar-brand fs-6" href="#"><i class="fa fa-newspaper me-2"></i> سنڌي نيوز پوسٽليڪر</a>
         </div>
     </nav>
 
-    <div class="container-fluid px-3 mb-5">
-        <div class="row g-3 justify-content-center">
+    <div class="container-fluid px-2 mb-4">
+        <div class="row g-2 justify-content-center">
             <!-- Live Preview Column -->
-            <div class="col-xl-4 col-lg-5 col-md-6">
-                <div class="sticky-top" style="top: 20px;">
-                    <div class="card shadow-sm p-3 border-0">
-                        <h6 class="text-center mb-2 text-secondary fw-bold fs-6">لائيو پريوو فريم</h6>
+            <div class="col-xl-4 col-lg-5 col-md-5">
+                <div class="sticky-top" style="top: 10px;">
+                    <div class="card shadow-sm p-2 border-0">
+                        <h6 class="text-center mb-1 text-secondary fw-bold fs-7">لائيو پريوو فريم</h6>
                         
                         <div class="preview-container mb-2" id="captureArea">
-                            <img id="prevLogo" src="https://via.placeholder.com/80" class="watermark-logo" style="width: 70px; height: 70px; top: 15px; left: 15px;">
-                            <div id="prevCustomName" class="custom-name-watermark" style="font-size: 22px; bottom: 130px; right: 15px; font-family: 'Noto Naskh Arabic', sans-serif;">رپورٽر جو نالو</div>
+                            <img id="prevLogo" src="https://via.placeholder.com/80" class="watermark-logo" style="width: 60px; height: 60px; top: 12px; left: 12px;">
+                            <div id="prevCustomName" class="custom-name-watermark" style="font-size: 20px; bottom: 100px; right: 12px; font-family: 'MBSindhiWeb', sans-serif;">رپورٽر جو نالو</div>
                             
                             <!-- Main Flex Wrapper -->
                             <div class="dynamic-flex-wrapper" id="dynamicFlexWrapper">
-                                <div class="preview-header-banner" id="prevTopBanner" style="font-size: 24px; height: 40px; background: linear-gradient(135deg, #cc0000, #ff4d4d); font-family: 'Noto Naskh Arabic', sans-serif;">برڪنگ نيوز</div>
+                                <div class="preview-header-banner" id="prevTopBanner" style="font-size: 20px; height: 35px; background: linear-gradient(135deg, #cc0000, #ff4d4d); font-family: 'MBSindhiWeb', sans-serif;">برڪنگ نيوز</div>
                                 <div class="preview-image-box" id="prevImageBox">
                                     <img id="prevMainImage" src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=600&q=80" class="preview-image" style="transform: scale(1) translate(0px, 0px);">
                                 </div>
-                                <div class="news-text-box" id="prevNewsText" style="font-size: 24px; height: 110px; background: linear-gradient(135deg, #0d6efd, #4dabf7); font-family: 'Noto Naskh Arabic', sans-serif;">
+                                <div class="news-text-box" id="prevNewsText" style="font-size: 20px; height: 95px; background: linear-gradient(135deg, #0d6efd, #4dabf7); font-family: 'MBSindhiWeb', sans-serif;">
                                     رائونتي ۾ موٽر سائڪل سوارن تي مبينه درون حملو، نصير ڪورائي ۽ الله ڏتو ڪورائي زخمي
                                 </div>
                             </div>
 
                             <!-- Separate Social/Footer Bar with Icons + Name -->
-                            <div class="bg-dark text-white p-1 d-flex justify-content-center gap-2 align-items-center" id="prevSocialBar" style="height: 35px; z-index: 2; width: 100%; font-size: 13px; font-family: 'Noto Naskh Arabic', sans-serif;">
+                            <div class="text-white p-1 d-flex justify-content-center gap-2 align-items-center" id="prevSocialBar" style="height: 32px; z-index: 2; width: 100%; font-size: 12px; background-color: #212529; font-family: 'MBSindhiWeb', sans-serif;">
                                 <i class="fab fa-facebook text-primary"></i>
                                 <i class="fab fa-instagram text-danger"></i>
                                 <i class="fab fa-whatsapp text-success"></i>
@@ -156,26 +169,26 @@
                         </div>
 
                         <!-- Download Controls -->
-                        <div class="input-group input-group-sm mb-2 mt-2">
-                            <label class="input-group-text bg-secondary text-white">ڊائونلوڊ سائيز</label>
-                            <select class="form-select" id="downloadScaleSelect">
+                        <div class="input-group input-group-sm mb-1 mt-1">
+                            <label class="input-group-text bg-secondary text-white py-1" style="font-size: 11px;">ڊائونلوڊ سائيز</label>
+                            <select class="form-select form-select-sm" id="downloadScaleSelect">
                                 <option value="1">عام (1x)</option>
                                 <option value="2" selected>ايڇ ڊي (2x - بھترين)</option>
                                 <option value="3">الٽرا ايڇ ڊي (3x - وڏي)</option>
                             </select>
                         </div>
-                        <button class="btn btn-success btn-sm w-100 py-2 fw-bold shadow-sm" id="downloadBtn"><i class="fa fa-download me-2"></i> تصوير ڊائونلوڊ ڪريو</button>
+                        <button class="btn btn-success btn-sm w-100 py-1 fw-bold shadow-sm" id="downloadBtn" style="font-size: 12px;"><i class="fa fa-download me-1"></i> تصوير ڊائونلوڊ ڪريو</button>
                     </div>
                 </div>
             </div>
 
             <!-- Settings Frame Column -->
-            <div class="col-xl-7 col-lg-7 col-md-6">
+            <div class="col-xl-8 col-lg-7 col-md-7">
                 <div class="card shadow-sm p-3 border-0 settings-card">
-                    <h5 class="mb-3 text-primary border-bottom pb-2 fs-6 fw-bold"><i class="fa fa-sliders me-2"></i> ڊزائن ۽ ايڊيٽنگ سيٽنگون</h5>
+                    <h6 class="mb-2 text-primary border-bottom pb-1 fw-bold fs-7"><i class="fa fa-sliders me-1"></i> ڊزائن ۽ ايڊيٽنگ سيٽنگون</h6>
                     
-                    <!-- Tab Navigation Buttons Container (Ordered strictly as requested) -->
-                    <div class="p-2 mb-3 bg-light rounded border shadow-sm">
+                    <!-- Tab Navigation Buttons Container -->
+                    <div class="p-1 mb-2 bg-light rounded border shadow-sm">
                         <div class="d-flex flex-wrap gap-1 justify-content-center" id="settingTabs">
                             <button class="btn btn-primary tab-btn active" data-target="sec-news"><i class="fa fa-align-right me-1"></i> خبرون</button>
                             <button class="btn btn-outline-primary tab-btn" data-target="sec-logo"><i class="fa fa-circle-user me-1"></i> لوگو</button>
@@ -190,7 +203,7 @@
                     <!-- Tab Contents Container -->
                     <div class="tab-content-container">
 
-                        <!-- 1. News Text Settings (First) -->
+                        <!-- 1. News Text Settings -->
                         <div class="setting-section" id="sec-news">
                             <h6 class="text-secondary fw-bold mb-2 pb-1 border-bottom small"><i class="fa fa-align-right me-1"></i> خبر جو متن، رنگ ۽ فونٽ</h6>
                             <div class="mb-2">
@@ -208,21 +221,25 @@
                             </div>
                             <div class="row g-2 mb-2">
                                 <div class="col-6">
-                                    <label class="form-label small mb-1">سائيز: <span id="fontSizeVal">24</span>px</label>
-                                    <input type="range" class="form-range" id="fontSizeRange" min="14" max="40" value="24">
+                                    <label class="form-label small mb-1">سائيز: <span id="fontSizeVal">20</span>px</label>
+                                    <input type="range" class="form-range" id="fontSizeRange" min="14" max="40" value="20">
                                 </div>
                                 <div class="col-6">
-                                    <label class="form-label small mb-1">اوچائي: <span id="barHeightVal">110</span>px</label>
-                                    <input type="range" class="form-range" id="barHeightRange" min="70" max="200" value="110">
+                                    <label class="form-label small mb-1">اوچائي: <span id="barHeightVal">95</span>px</label>
+                                    <input type="range" class="form-range" id="barHeightRange" min="60" max="180" value="95">
                                 </div>
                             </div>
                             <div>
                                 <label class="form-label small mb-1">خبر جو فونٽ چونڊيو</label>
                                 <select class="form-select form-select-sm" id="fontSelector">
-                                    <option value="'Noto Naskh Arabic', sans-serif" selected>Noto Naskh Arabic</option>
+                                    <option value="'MBSindhiWeb', sans-serif" selected>MB Sindhi Web</option>
+                                    <option value="'MBSarang', sans-serif">MB Sarang</option>
+                                    <option value="'NafeesSaleem', serif">Nafees Saleem</option>
+                                    <option value="'MBMajeed', sans-serif">MB Majeed</option>
+                                    <option value="'PakTypeNaskh', serif">PakType Naskh</option>
+                                    <option value="'MBTahoma', sans-serif">MB Tahoma</option>
                                     <option value="'Lateef', cursive">Lateef</option>
-                                    <option value="'Amiri', serif">Amiri</option>
-                                    <option value="'Cairo', sans-serif">Cairo</option>
+                                    <option value="'Noto Nastaliq Urdu', serif">Noto Nastaliq</option>
                                 </select>
                             </div>
                         </div>
@@ -236,20 +253,20 @@
                             </div>
                             <div class="row g-2">
                                 <div class="col-12 mb-1">
-                                    <label class="form-label small mb-1">سائيز: <span id="logoSizeVal">70</span>px</label>
-                                    <input type="range" class="form-range" id="logoSizeRange" min="30" max="120" value="70">
+                                    <label class="form-label small mb-1">سائيز: <span id="logoSizeVal">60</span>px</label>
+                                    <input type="range" class="form-range" id="logoSizeRange" min="30" max="120" value="60">
                                 </div>
                                 <div class="col-12 mb-1">
                                     <label class="form-label small mb-1">شفافيت (Opacity): <span id="logoOpacityVal">100</span>%</label>
                                     <input type="range" class="form-range" id="logoOpacityRange" min="0" max="100" value="100">
                                 </div>
                                 <div class="col-6">
-                                    <label class="form-label small mb-1">کاٻي/سڄي (X): <span id="logoPosXVal">15</span>px</label>
-                                    <input type="range" class="form-range" id="logoPosXRange" min="0" max="300" value="15">
+                                    <label class="form-label small mb-1">کاٻي/سڄي (X): <span id="logoPosXVal">12</span>px</label>
+                                    <input type="range" class="form-range" id="logoPosXRange" min="0" max="250" value="12">
                                 </div>
                                 <div class="col-6">
-                                    <label class="form-label small mb-1">مٿي/هيٺ (Y): <span id="logoPosYVal">15</span>px</label>
-                                    <input type="range" class="form-range" id="logoPosYRange" min="0" max="250" value="15">
+                                    <label class="form-label small mb-1">مٿي/هيٺ (Y): <span id="logoPosYVal">12</span>px</label>
+                                    <input type="range" class="form-range" id="logoPosYRange" min="0" max="200" value="12">
                                 </div>
                             </div>
                         </div>
@@ -287,28 +304,32 @@
                             <div class="mb-2">
                                 <label class="form-label small mb-1">نالي لاءِ فونٽ چونڊيو</label>
                                 <select class="form-select form-select-sm" id="customNameFontSelector">
-                                    <option value="'Noto Naskh Arabic', sans-serif" selected>Noto Naskh Arabic</option>
+                                    <option value="'MBSindhiWeb', sans-serif" selected>MB Sindhi Web</option>
+                                    <option value="'MBSarang', sans-serif">MB Sarang</option>
+                                    <option value="'NafeesSaleem', serif">Nafees Saleem</option>
+                                    <option value="'MBMajeed', sans-serif">MB Majeed</option>
+                                    <option value="'PakTypeNaskh', serif">PakType Naskh</option>
+                                    <option value="'MBTahoma', sans-serif">MB Tahoma</option>
                                     <option value="'Lateef', cursive">Lateef</option>
-                                    <option value="'Amiri', serif">Amiri</option>
-                                    <option value="'Cairo', sans-serif">Cairo</option>
+                                    <option value="'Noto Nastaliq Urdu', serif">Noto Nastaliq</option>
                                 </select>
                             </div>
                             <div class="row g-2">
                                 <div class="col-12 mb-1">
-                                    <label class="form-label small mb-1">فونٽ سائيز: <span id="customNameSizeVal">22</span>px</label>
-                                    <input type="range" class="form-range" id="customNameSizeRange" min="12" max="40" value="22">
+                                    <label class="form-label small mb-1">فونٽ سائيز: <span id="customNameSizeVal">20</span>px</label>
+                                    <input type="range" class="form-range" id="customNameSizeRange" min="12" max="40" value="20">
                                 </div>
                                 <div class="col-12 mb-1">
                                     <label class="form-label small mb-1">شفافيت (Opacity): <span id="customNameOpacityVal">100</span>%</label>
                                     <input type="range" class="form-range" id="customNameOpacityRange" min="0" max="100" value="100">
                                 </div>
                                 <div class="col-6">
-                                    <label class="form-label small mb-1">کاٻي/سڄي (Right): <span id="customNamePosXVal">15</span>px</label>
-                                    <input type="range" class="form-range" id="customNamePosXRange" min="0" max="300" value="15">
+                                    <label class="form-label small mb-1">کاٻي/سڄي (Right): <span id="customNamePosXVal">12</span>px</label>
+                                    <input type="range" class="form-range" id="customNamePosXRange" min="0" max="250" value="12">
                                 </div>
                                 <div class="col-6">
-                                    <label class="form-label small mb-1">مٿي/هيٺ (Bottom): <span id="customNamePosYVal">130</span>px</label>
-                                    <input type="range" class="form-range" id="customNamePosYRange" min="0" max="350" value="130">
+                                    <label class="form-label small mb-1">مٿي/هيٺ (Bottom): <span id="customNamePosYVal">100</span>px</label>
+                                    <input type="range" class="form-range" id="customNamePosYRange" min="0" max="300" value="100">
                                 </div>
                             </div>
                         </div>
@@ -332,12 +353,12 @@
                             </div>
                             <div class="row g-2">
                                 <div class="col-6">
-                                    <label class="form-label small mb-1">فونٽ سائيز: <span id="breakingFontSizeVal">24</span>px</label>
-                                    <input type="range" class="form-range" id="breakingFontSizeRange" min="14" max="40" value="24">
+                                    <label class="form-label small mb-1">فونٽ سائيز: <span id="breakingFontSizeVal">20</span>px</label>
+                                    <input type="range" class="form-range" id="breakingFontSizeRange" min="14" max="40" value="20">
                                 </div>
                                 <div class="col-6">
-                                    <label class="form-label small mb-1">اوچائي: <span id="breakingHeightVal">40</span>px</label>
-                                    <input type="range" class="form-range" id="breakingHeightRange" min="30" max="70" value="40">
+                                    <label class="form-label small mb-1">اوچائي: <span id="breakingHeightVal">35</span>px</label>
+                                    <input type="range" class="form-range" id="breakingHeightRange" min="25" max="60" value="35">
                                 </div>
                             </div>
                         </div>
@@ -356,7 +377,11 @@
 
                         <!-- 7. Social Icons + Custom Name Settings -->
                         <div class="setting-section d-none" id="sec-social">
-                            <h6 class="text-secondary fw-bold mb-2 pb-1 border-bottom small"><i class="fa fa-share-nodes me-1"></i> هيٺين پٽي (آئڪن ۽ نالو گڏ)</h6>
+                            <h6 class="text-secondary fw-bold mb-2 pb-1 border-bottom small"><i class="fa fa-share-nodes me-1"></i> هيٺين پٽي (آئڪن، نالو، رنگ ۽ چرپر)</h6>
+                            <div class="mb-2">
+                                <label class="form-label small mb-1">هيٺين پٽي جو رنگ</label>
+                                <input type="color" class="form-control form-control-color form-control-sm w-100" id="footerBgColor" value="#212529">
+                            </div>
                             <div class="mb-2">
                                 <label class="form-label small mb-1">هيٺين پٽي لاءِ نالو يا ويب سائٽ/صفحي جو نالو</label>
                                 <input type="text" class="form-control form-control-sm" id="footerCustomTextInput" value="www.sindhinews.com">
@@ -473,6 +498,7 @@
         const bottomColor1 = document.getElementById('bottomColor1');
         const bottomColor2 = document.getElementById('bottomColor2');
 
+        const footerBgColor = document.getElementById('footerBgColor');
         const footerCustomTextInput = document.getElementById('footerCustomTextInput');
         const socialAlignment = document.getElementById('socialAlignment');
         const socialGapRange = document.getElementById('socialGapRange');
@@ -644,7 +670,11 @@
             prevNewsText.style.fontFamily = e.target.value;
         });
 
-        // Social Icons + Name Combined Controls
+        // Footer Controls (Color, Icons + Name, Alignment, Gap)
+        footerBgColor.addEventListener('input', (e) => {
+            prevSocialBar.style.backgroundColor = e.target.value;
+        });
+
         document.querySelectorAll('.social-chk').forEach(chk => {
             chk.addEventListener('change', updateSocialIcons);
         });
@@ -661,11 +691,11 @@
             
             if(alignVal === 'flex-start') {
                 prevSocialBar.style.justifyContent = 'flex-start';
-                prevSocialBar.style.paddingRight = '15px';
+                prevSocialBar.style.paddingRight = '12px';
                 prevSocialBar.style.paddingLeft = '0';
             } else if(alignVal === 'flex-end') {
                 prevSocialBar.style.justifyContent = 'flex-end';
-                prevSocialBar.style.paddingLeft = '15px';
+                prevSocialBar.style.paddingLeft = '12px';
                 prevSocialBar.style.paddingRight = '0';
             } else {
                 prevSocialBar.style.justifyContent = 'center';
@@ -675,44 +705,47 @@
             
             prevSocialBar.style.gap = socialGapRange.value + 'px';
 
-            // Append selected icons first
             if(document.getElementById('chk-fb').checked) prevSocialBar.innerHTML += '<i class="fab fa-facebook text-primary"></i>';
             if(document.getElementById('chk-insta').checked) prevSocialBar.innerHTML += '<i class="fab fa-instagram text-danger"></i>';
             if(document.getElementById('chk-wa').checked) prevSocialBar.innerHTML += '<i class="fab fa-whatsapp text-success"></i>';
             if(document.getElementById('chk-x').checked) prevSocialBar.innerHTML += '<i class="fab fa-x-twitter text-light"></i>';
             if(document.getElementById('chk-tt').checked) prevSocialBar.innerHTML += '<i class="fab fa-tiktok text-light"></i>';
 
-            // Append custom name/text alongside icons
             let customText = footerCustomTextInput.value;
             if(customText) {
                 prevSocialBar.innerHTML += `<span class="ms-1">${customText}</span>`;
             }
         }
 
-        // Reliable Download with Font Ready Verification
+        // Reliable Download with Font Fix
         downloadBtn.addEventListener('click', () => {
             let scaleVal = parseInt(downloadScaleSelect.value) || 2;
-            downloadBtn.innerText = "فونٽ لوڊ ٿي رهيا آهن...";
+            downloadBtn.innerText = "تصوير تيار ٿي رهي آهي...";
             downloadBtn.disabled = true;
 
-            document.fonts.ready.then(() => {
-                downloadBtn.innerText = "تصوير تيار ٿي رهي آهي...";
-                setTimeout(() => {
-                    html2canvas(captureArea, { scale: scaleVal, useCORS: true, allowTaint: true }).then(canvas => {
+            setTimeout(() => {
+                document.fonts.ready.then(() => {
+                    html2canvas(captureArea, { 
+                        scale: scaleVal, 
+                        useCORS: true, 
+                        allowTaint: true,
+                        logging: false,
+                        letterRendering: true
+                    }).then(canvas => {
                         const link = document.createElement('a');
                         link.download = `Sindhi-News-Post-${scaleVal}x.png`;
                         link.href = canvas.toDataURL('image/png');
                         link.click();
 
-                        downloadBtn.innerHTML = '<i class="fa fa-download me-2"></i> تصوير ڊائونلوڊ ڪريو';
+                        downloadBtn.innerHTML = '<i class="fa fa-download me-1"></i> تصوير ڊائونلوڊ ڪريو';
                         downloadBtn.disabled = false;
                     }).catch(err => {
                         console.error(err);
-                        downloadBtn.innerHTML = '<i class="fa fa-download me-2"></i> تصوير ڊائونلوڊ ڪريو';
+                        downloadBtn.innerHTML = '<i class="fa fa-download me-1"></i> تصوير ڊائونلوڊ ڪريو';
                         downloadBtn.disabled = false;
                     });
-                }, 300);
-            });
+                });
+            }, 300);
         });
     </script>
 </body>
