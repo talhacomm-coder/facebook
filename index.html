@@ -22,10 +22,11 @@
         body {
             background-color: #f4f6f9;
             font-family: 'MBSindhiWeb', 'Lateef', cursive;
+            overflow-x: hidden;
         }
         .preview-container {
             width: 100%;
-            max-width: 380px;
+            max-width: 350px;
             background: #fff;
             position: relative;
             overflow: hidden;
@@ -109,9 +110,9 @@
             border-radius: 12px;
         }
         .tab-btn {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: bold;
-            padding: 6px 10px;
+            padding: 5px 8px;
             border-radius: 6px !important;
             transition: all 0.2s ease;
         }
@@ -127,18 +128,18 @@
 <body>
 
     <nav class="navbar navbar-dark bg-dark shadow-sm mb-3">
-        <div class="container">
-            <a class="navbar-brand" href="#"><i class="fa fa-newspaper me-2"></i> سنڌي نيوز پوسٽليڪر</a>
+        <div class="container-fluid px-4">
+            <a class="navbar-brand fs-6" href="#"><i class="fa fa-newspaper me-2"></i> سنڌي نيوز پوسٽليڪر</a>
         </div>
     </nav>
 
-    <div class="container mb-5">
-        <div class="row g-3">
+    <div class="container-fluid px-3 mb-5">
+        <div class="row g-3 justify-content-center">
             <!-- Live Preview Column -->
-            <div class="col-lg-5">
+            <div class="col-xl-4 col-lg-5 col-md-6">
                 <div class="sticky-top" style="top: 20px;">
                     <div class="card shadow-sm p-3 border-0">
-                        <h6 class="text-center mb-2 text-secondary fw-bold">لائيو پريوو فريم</h6>
+                        <h6 class="text-center mb-2 text-secondary fw-bold fs-6">لائيو پريوو فريم</h6>
                         
                         <div class="preview-container mb-2" id="captureArea">
                             <img id="prevLogo" src="https://via.placeholder.com/80" class="watermark-logo" style="width: 70px; height: 70px; top: 15px; left: 15px;">
@@ -167,21 +168,21 @@
                         </div>
 
                         <!-- Download Controls -->
-                        <div class="input-group mb-2 mt-2">
-                            <label class="input-group-text bg-secondary text-white small">ڊائونلوڊ سائيز</label>
-                            <select class="form-select form-select-sm" id="downloadScaleSelect">
+                        <div class="input-group input-group-sm mb-2 mt-2">
+                            <label class="input-group-text bg-secondary text-white">ڊائونلوڊ سائيز</label>
+                            <select class="form-select" id="downloadScaleSelect">
                                 <option value="1">عام (1x)</option>
                                 <option value="2" selected>ايڇ ڊي (2x - بھترين)</option>
                                 <option value="3">الٽرا ايڇ ڊي (3x - وڏي)</option>
                             </select>
                         </div>
-                        <button class="btn btn-success w-100 py-2 fw-bold shadow-sm" id="downloadBtn"><i class="fa fa-download me-2"></i> تصوير ڊائونلوڊ ڪريو</button>
+                        <button class="btn btn-success btn-sm w-100 py-2 fw-bold shadow-sm" id="downloadBtn"><i class="fa fa-download me-2"></i> تصوير ڊائونلوڊ ڪريو</button>
                     </div>
                 </div>
             </div>
 
             <!-- Settings Frame Column -->
-            <div class="col-lg-7">
+            <div class="col-xl-7 col-lg-7 col-md-6">
                 <div class="card shadow-sm p-3 border-0 settings-card">
                     <h5 class="mb-3 text-primary border-bottom pb-2 fs-6 fw-bold"><i class="fa fa-sliders me-2"></i> ڊزائن ۽ ايڊيٽنگ سيٽنگون</h5>
                     
