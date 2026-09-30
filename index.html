@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سنڌي نيوز پوسٽ جنريٽر - ايڊوانسڊ اپڊيٽ</title>
+    <title>سنڌي نيوز پوسٽ جنريٽر - مڪمل اپڊيٽ</title>
     <!-- Bootstrap 5 CSS RTL -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css.rtl.min.css">
     <!-- Google Fonts -->
@@ -18,7 +18,6 @@
         .preview-container {
             width: 100%;
             max-width: 380px;
-            aspect-ratio: 4 / 5;
             background: #fff;
             position: relative;
             overflow: hidden;
@@ -28,12 +27,10 @@
             display: flex;
             flex-direction: column;
         }
-        /* Dynamic Order Container */
         .dynamic-flex-wrapper {
             display: flex;
             flex-direction: column;
             width: 100%;
-            height: 100%;
         }
         .preview-header-banner {
             color: white;
@@ -51,7 +48,7 @@
         .preview-image-box {
             position: relative;
             width: 100%;
-            flex-grow: 1;
+            aspect-ratio: 4 / 4;
             overflow: hidden;
             background: #111;
         }
@@ -103,13 +100,20 @@
             max-height: 85vh;
             overflow-y: auto;
         }
+        .developer-footer {
+            font-size: 10px;
+            color: #6c757d;
+            text-align: center;
+            margin-top: 6px;
+            font-family: 'Cairo', sans-serif;
+        }
     </style>
 </head>
 <body>
 
     <nav class="navbar navbar-dark bg-dark shadow-sm mb-3">
         <div class="container">
-            <a class="navbar-brand" href="#"><i class="fa fa-newspaper me-2"></i> سنڌي نيوز پوسٽليڪر - ايڊوانسڊ</a>
+            <a class="navbar-brand" href="#"><i class="fa fa-newspaper me-2"></i> سنڌي نيوز پوسٽليڪر</a>
         </div>
     </nav>
 
@@ -121,11 +125,11 @@
                     <div class="card shadow-sm p-3 border-0">
                         <h6 class="text-center mb-2 text-secondary fw-bold">لائيو پريوو فريم</h6>
                         
-                        <div class="preview-container mb-3" id="captureArea">
+                        <div class="preview-container mb-2" id="captureArea">
                             <img id="prevLogo" src="https://via.placeholder.com/80" class="watermark-logo" style="width: 70px; height: 70px; top: 15px; left: 15px;">
                             <div id="prevCustomName" class="custom-name-watermark" style="font-size: 22px; bottom: 130px; right: 15px; font-family: 'Lateef', cursive;">رپورٽر جو نالو</div>
                             
-                            <!-- Main Flex Wrapper for Ordering Banners -->
+                            <!-- Main Flex Wrapper -->
                             <div class="dynamic-flex-wrapper" id="dynamicFlexWrapper">
                                 <div class="preview-header-banner" id="prevTopBanner" style="font-size: 24px; height: 40px; background: linear-gradient(135deg, #cc0000, #ff4d4d);">برڪنگ نيوز</div>
                                 <div class="preview-image-box" id="prevImageBox">
@@ -136,15 +140,19 @@
                                 </div>
                             </div>
 
-                            <div class="bg-dark text-white p-1 d-flex justify-content-center gap-3 align-items-center" id="prevSocialBar" style="height: 35px; z-index: 2; position: absolute; bottom: 0; width: 100%;">
+                            <!-- Separate Social Icons Bar -->
+                            <div class="bg-dark text-white p-1 d-flex justify-content-center gap-3 align-items-center" id="prevSocialBar" style="height: 35px; z-index: 2; width: 100%;">
                                 <i class="fab fa-facebook text-primary"></i>
                                 <i class="fab fa-instagram text-danger"></i>
                                 <i class="fab fa-whatsapp text-success"></i>
                             </div>
                         </div>
+                        <div class="developer-footer">
+                            Software Developer: <strong>Ali Tech</strong> | WhatsApp: <strong>03363152236</strong>
+                        </div>
 
                         <!-- Download Controls -->
-                        <div class="input-group mb-2">
+                        <div class="input-group mb-2 mt-2">
                             <label class="input-group-text bg-secondary text-white small">ڊائونلوڊ سائيز</label>
                             <select class="form-select form-select-sm" id="downloadScaleSelect">
                                 <option value="1">عام (1x)</option>
@@ -175,7 +183,7 @@
                                 <div class="accordion-body bg-light py-2">
                                     <label class="form-label small mb-1">برڪنگ نيوز پٽي جي پوزيشن</label>
                                     <select class="form-select form-select-sm" id="layoutOrderSelect">
-                                        <option value="top" selected>سڀ کان مٿي (موجوده)</option>
+                                        <option value="top" selected>سڀ کان مٿي</option>
                                         <option value="above-news">خبر واري پٽي جي بلڪل مٿان</option>
                                     </select>
                                 </div>
@@ -264,7 +272,7 @@
                                     <div class="mb-2">
                                         <label class="form-label small mb-1">نالي لاءِ فونٽ چونڊيو</label>
                                         <select class="form-select form-select-sm" id="customNameFontSelector">
-                                            <option value="'Lateef', cursive" selected>Lateef (سنڌي لطيفي - ڊيفالٽ)</option>
+                                            <option value="'Lateef', cursive" selected>Lateef (سنڌي لطيفي)</option>
                                             <option value="'Noto Nastaliq Urdu', serif">Noto Nastaliq (نستعليق)</option>
                                             <option value="'Amiri', serif">Amiri (قاعدو)</option>
                                             <option value="'Cairo', sans-serif">Cairo (عام)</option>
@@ -296,7 +304,7 @@
                         <div class="accordion-item mb-2 border">
                             <h2 class="accordion-header" id="headingBreaking">
                                 <button class="accordion-button collapsed py-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBreaking" aria-expanded="false" aria-controls="collapseBreaking">
-                                    <i class="fa fa-bullhorn me-2 text-primary"></i> بريڪنگ نيوز بينر سيٽنگون (ملٽي پلائي رنگ)
+                                    <i class="fa fa-bullhorn me-2 text-primary"></i> بريڪنگ نيوز بينر سيٽنگون
                                 </button>
                             </h2>
                             <div id="collapseBreaking" class="accordion-collapse collapse" aria-labelledby="headingBreaking" data-bs-parent="#settingsAccordion">
@@ -333,7 +341,7 @@
                         <div class="accordion-item mb-2 border">
                             <h2 class="accordion-header" id="headingNewsText">
                                 <button class="accordion-button collapsed py-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNewsText" aria-expanded="false" aria-controls="collapseNewsText">
-                                    <i class="fa fa-align-right me-2 text-primary"></i> خبر جو متن، ملٽي پلائي رنگ ۽ فونٽ
+                                    <i class="fa fa-align-right me-2 text-primary"></i> خبر جو متن، رنگ ۽ فونٽ
                                 </button>
                             </h2>
                             <div id="collapseNewsText" class="accordion-collapse collapse" aria-labelledby="headingNewsText" data-bs-parent="#settingsAccordion">
@@ -364,7 +372,7 @@
                                     <div>
                                         <label class="form-label small mb-1">خبر جو فونٽ چونڊيو</label>
                                         <select class="form-select form-select-sm" id="fontSelector">
-                                            <option value="'Lateef', cursive" selected>Lateef (سنڌي لطيفي - ڊيفالٽ)</option>
+                                            <option value="'Lateef', cursive" selected>Lateef (سنڌي لطيفي)</option>
                                             <option value="'Noto Nastaliq Urdu', serif">Noto Nastaliq (نستعليق)</option>
                                             <option value="'Amiri', serif">Amiri (قاعدو)</option>
                                             <option value="'Cairo', sans-serif">Cairo (عام)</option>
@@ -374,20 +382,35 @@
                             </div>
                         </div>
 
-                        <!-- 6. Social Icons Settings -->
+                        <!-- 6. Social Icons Settings (Alignment & Spacing) -->
                         <div class="accordion-item mb-2 border">
                             <h2 class="accordion-header" id="headingSocial">
                                 <button class="accordion-button collapsed py-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSocial" aria-expanded="false" aria-controls="collapseSocial">
-                                    <i class="fa fa-share-nodes me-2 text-primary"></i> سماجي رابطن جا آئڪن
+                                    <i class="fa fa-share-nodes me-2 text-primary"></i> سماجي رابطن جا آئڪن (ترتيب ۽ فاصلو)
                                 </button>
                             </h2>
                             <div id="collapseSocial" class="accordion-collapse collapse" aria-labelledby="headingSocial" data-bs-parent="#settingsAccordion">
                                 <div class="accordion-body bg-light py-2">
-                                    <div class="d-flex gap-3 flex-wrap">
+                                    <div class="d-flex gap-3 flex-wrap mb-2">
                                         <div class="form-check"><input class="form-check-input social-chk" type="checkbox" value="fa-facebook" id="chk-fb" checked><label class="form-check-label small" for="chk-fb">فيس بوڪ</label></div>
                                         <div class="form-check"><input class="form-check-input social-chk" type="checkbox" value="fa-instagram" id="chk-insta" checked><label class="form-check-label small" for="chk-insta">انسٽाग्राम</label></div>
                                         <div class="form-check"><input class="form-check-input social-chk" type="checkbox" value="fa-whatsapp" id="chk-wa" checked><label class="form-check-label small" for="chk-wa">واٽس اپ</label></div>
+                                        <div class="form-check"><input class="form-check-input social-chk" type="checkbox" value="fa-x-twitter" id="chk-x"><label class="form-check-label small" for="chk-x">ايڪس (X)</label></div>
                                         <div class="form-check"><input class="form-check-input social-chk" type="checkbox" value="fa-tiktok" id="chk-tt"><label class="form-check-label small" for="chk-tt">ٽڪ تاڪ</label></div>
+                                    </div>
+                                    <div class="row g-2">
+                                        <div class="col-6">
+                                            <label class="form-label small mb-1">پوزيشن (Alignment)</label>
+                                            <select class="form-select form-select-sm" id="socialAlignment">
+                                                <option value="center" selected>وچ ۾ (Center)</option>
+                                                <option value="flex-start">کاٻي طرف (Left)</option>
+                                                <option value="flex-end">سڄي طرف (Right)</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-6">
+                                            <label class="form-label small mb-1">فاصلو (Gap): <span id="socialGapVal">3</span></label>
+                                            <input type="range" class="form-range" id="socialGapRange" min="1" max="8" value="3">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -455,6 +478,10 @@
         const barHeightVal = document.getElementById('barHeightVal');
         const bottomColor1 = document.getElementById('bottomColor1');
         const bottomColor2 = document.getElementById('bottomColor2');
+
+        const socialAlignment = document.getElementById('socialAlignment');
+        const socialGapRange = document.getElementById('socialGapRange');
+        const socialGapVal = document.getElementById('socialGapVal');
         
         const prevLogo = document.getElementById('prevLogo');
         const prevCustomName = document.getElementById('prevCustomName');
@@ -498,7 +525,7 @@
             prevLogo.style.top = e.target.value + 'px';
         });
 
-        // Custom Name / Watermark Text Controls
+        // Custom Name Controls
         customNameInput.addEventListener('input', (e) => {
             prevCustomName.innerText = e.target.value;
         });
@@ -529,7 +556,7 @@
             prevCustomName.style.bottom = e.target.value + 'px';
         });
 
-        // Main Image Scale & Position Controls
+        // Main Image Controls
         let currentScale = 1;
         let currentPosX = 0;
         let currentPosY = 0;
@@ -556,7 +583,7 @@
             updateImageTransform();
         });
 
-        // Breaking News Gradient Controls
+        // Breaking News Controls
         breakingTitleInput.addEventListener('input', (e) => {
             prevTopBanner.innerText = e.target.value;
         });
@@ -577,7 +604,7 @@
             prevTopBanner.style.height = e.target.value + 'px';
         });
 
-        // News Text Gradient Controls
+        // News Text Controls
         fontSizeRange.addEventListener('input', (e) => {
             fontSizeVal.innerText = e.target.value;
             prevNewsText.style.fontSize = e.target.value + 'px';
@@ -622,15 +649,25 @@
             prevNewsText.style.fontFamily = e.target.value;
         });
 
+        // Social Icons Controls
         document.querySelectorAll('.social-chk').forEach(chk => {
             chk.addEventListener('change', updateSocialIcons);
+        });
+        socialAlignment.addEventListener('change', updateSocialIcons);
+        socialGapRange.addEventListener('input', (e) => {
+            socialGapVal.innerText = e.target.value;
+            prevSocialBar.style.gap = e.target.value + 'px';
         });
 
         function updateSocialIcons() {
             prevSocialBar.innerHTML = '';
+            prevSocialBar.style.justifyContent = socialAlignment.value;
+            prevSocialBar.style.gap = socialGapRange.value + 'px';
+
             if(document.getElementById('chk-fb').checked) prevSocialBar.innerHTML += '<i class="fab fa-facebook text-primary"></i>';
             if(document.getElementById('chk-insta').checked) prevSocialBar.innerHTML += '<i class="fab fa-instagram text-danger"></i>';
             if(document.getElementById('chk-wa').checked) prevSocialBar.innerHTML += '<i class="fab fa-whatsapp text-success"></i>';
+            if(document.getElementById('chk-x').checked) prevSocialBar.innerHTML += '<i class="fab fa-x-twitter text-light"></i>';
             if(document.getElementById('chk-tt').checked) prevSocialBar.innerHTML += '<i class="fab fa-tiktok text-light"></i>';
         }
 
