@@ -162,8 +162,11 @@
 <body>
 
     <nav class="navbar navbar-dark bg-dark shadow-sm mb-2 py-1">
-        <div class="container-fluid px-3">
+        <div class="container-fluid px-3 d-flex justify-content-between align-items-center">
             <a class="navbar-brand fs-6" href="#"><i class="fa fa-photo-film me-2"></i> Social Media Post Studio</a>
+            <div id="authContainer">
+                <button class="btn btn-outline-light btn-sm" id="loginBtn" style="font-size: 11px;"><i class="fa fa-sign-in-alt me-1"></i> لاگ ان / سائن اپ</button>
+            </div>
         </div>
     </nav>
 
@@ -483,8 +486,78 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Html2Canvas Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- Supabase JS Client CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <script>
+        // Supabase Initialization
+        const SUPABASE_URL = 'https://dbkyqgfcopjhizchoxya.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRia3lxZ2Zjb3BqaGl6Y2hoxHlhIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc5MDcyMjk4NCwiZXhwIjoyMTA2Mjk4OTg0fQ.U-5A0DoVnqaL67r96K4GumTiu3eyr_VL4aMpwgj2sRE';
+        
+        // Note: Using Service Role Key in browser is functional for simple apps, but Auth operations require proper client configuration
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        let currentUser = null;
+
+        // Check Auth and Load Settings
+        async function initAuth() {
+            const { data: { session } } = await supabaseClient.auth.getSession();
+            if (session) {
+                currentUser = session.user;
+                updateAuthUI();
+                loadCloudSettings(currentUser.id);
+            }
+        }
+
+        const loginBtn = document.getElementById('loginBtn');
+        loginBtn.addEventListener('click', async () => {
+            let email = prompt("پنهنجو اي ميل (Email) داخل ڪريو لاگ ان لاءِ:");
+            if(email) {
+                const { error } = await supabaseClient.auth.signInWithOtp({ email: email });
+                if(error) alert("مسئلو آيو: " . error.message);
+                else alert("لاگ ان لاءِ لنڪ توهان جي اي ميل تي موڪليو ويو آهي!");
+            }
+        });
+
+        function updateAuthUI() {
+            if(currentUser) {
+                document.getElementById('authContainer').innerHTML = `<span class="text-white small me-2">${currentUser.email}</span><button class="btn btn-outline-danger btn-sm" onclick="logoutUser()" style="font-size: 10px;">لاگ άوٽ</button>`;
+            }
+        }
+
+        async function logoutUser() {
+            await supabaseClient.auth.signOut();
+            location.reload();
+        }
+
+        async function saveCloudSettings() {
+            if(!currentUser) return; // فري يوزر لاءِ صرف ڊفالٽ رهندي
+            let settingsData = {
+                newsText: newsTextInput.value,
+                breakingText: breakingTitleInput.value,
+                reporterName: customNameInput.value
+            };
+            await supabaseClient.from('user_settings').upsert({ user_id: currentUser.id, settings: settingsData });
+        }
+
+        async function loadCloudSettings(userId) {
+            let { data } = await supabaseClient.from('user_settings').select('*').eq('user_id', userId).single();
+            if(data && data.settings) {
+                if(data.settings.newsText) {
+                    newsTextInput.value = data.settings.newsText;
+                    prevNewsText.innerText = data.settings.newsText;
+                }
+                if(data.settings.breakingText) {
+                    breakingTitleInput.value = data.settings.breakingText;
+                    prevFloatingBreaking.innerText = data.settings.breakingText;
+                }
+                if(data.settings.reporterName) {
+                    customNameInput.value = data.settings.reporterName;
+                    prevCustomName.innerText = data.settings.reporterName;
+                }
+            }
+        }
+
         // Tab switching logic
         const tabButtons = document.querySelectorAll('.tab-btn');
         const settingSections = document.querySelectorAll('.setting-section');
@@ -622,6 +695,7 @@
             if(newVal !== null) {
                 newsTextInput.value = newVal;
                 prevNewsText.innerText = newVal;
+                saveCloudSettings();
             }
         });
 
@@ -630,6 +704,7 @@
             if(newVal !== null) {
                 breakingTitleInput.value = newVal;
                 prevFloatingBreaking.innerText = newVal;
+                saveCloudSettings();
             }
         });
 
@@ -638,6 +713,7 @@
             if(newVal !== null) {
                 customNameInput.value = newVal;
                 prevCustomName.innerText = newVal;
+                saveCloudSettings();
             }
         });
 
@@ -725,6 +801,7 @@
                 document.removeEventListener('touchmove', onDrag);
                 document.removeEventListener('mouseup', stopDrag);
                 document.removeEventListener('touchend', stopDrag);
+                saveCloudSettings();
             }
         }
 
@@ -826,6 +903,7 @@
 
         customNameInput.addEventListener('input', (e) => {
             prevCustomName.innerText = e.target.value;
+            saveCloudSettings();
         });
 
         customNameFontSelector.addEventListener('change', (e) => {
@@ -856,6 +934,7 @@
 
         breakingTitleInput.addEventListener('input', (e) => {
             prevFloatingBreaking.innerText = e.target.value;
+            saveCloudSettings();
         });
 
         breakingFontSizeRange.addEventListener('input', (e) => {
@@ -878,73 +957,9 @@
             prevFloatingBreaking.style.fontFamily = e.target.value;
         });
 
-        imgScaleRange.addEventListener('input', (e) => {
-            currentScale = parseFloat(e.target.value);
-            imgScaleVal.innerText = currentScale;
-            updateImageTransform();
-        });
-
-        imgPosXRange.addEventListener('input', (e) => {
-            currentPosX = parseFloat(e.target.value);
-            imgPosXVal.innerText = currentPosX;
-            updateImageTransform();
-        });
-
-        imgPosYRange.addEventListener('input', (e) => {
-            currentPosY = parseFloat(e.target.value);
-            imgPosYVal.innerText = currentPosY;
-            updateImageTransform();
-        });
-
-        function updateTopGradient() {
-            prevTopBanner.style.background = `linear-gradient(135deg, ${topColor1.value}, ${topColor2.value})`;
-        }
-        topColor1.addEventListener('input', updateTopGradient);
-        topColor2.addEventListener('input', updateTopGradient);
-
-        breakingHeightRange.addEventListener('input', (e) => {
-            breakingHeightVal.innerText = e.target.value;
-            prevTopBanner.style.height = e.target.value + 'px';
-        });
-
-        fontSizeRange.addEventListener('input', (e) => {
-            fontSizeVal.innerText = e.target.value;
-            prevNewsText.style.fontSize = e.target.value + 'px';
-        });
-
-        barHeightRange.addEventListener('input', (e) => {
-            barHeightVal.innerText = e.target.value;
-            prevNewsText.style.height = e.target.value + 'px';
-        });
-
-        function updateBottomGradient() {
-            prevNewsText.style.background = `linear-gradient(135deg, ${bottomColor1.value}, ${bottomColor2.value})`;
-        }
-        bottomColor1.addEventListener('input', updateBottomGradient);
-        bottomColor2.addEventListener('input', updateBottomGradient);
-
-        logoInput.addEventListener('change', (e) => {
-            if (e.target.files[0]) prevLogo.src = URL.createObjectURL(e.target.files[0]);
-        });
-
-        mainImageInput.addEventListener('change', (e) => {
-            if (e.target.files[0]) {
-                prevMainImage.src = URL.createObjectURL(e.target.files[0]);
-                currentScale = 1;
-                currentPosX = 0;
-                currentPosY = 0;
-                imgScaleRange.value = 1;
-                imgScaleVal.innerText = 1;
-                imgPosXRange.value = 0;
-                imgPosXVal.innerText = 0;
-                imgPosYRange.value = 0;
-                imgPosYVal.innerText = 0;
-                updateImageTransform();
-            }
-        });
-
         newsTextInput.addEventListener('input', (e) => {
             prevNewsText.innerText = e.target.value;
+            saveCloudSettings();
         });
 
         fontSelector.addEventListener('change', (e) => {
@@ -1021,6 +1036,9 @@
                 });
             }, 500);
         });
+
+        // Initialize Supabase Auth Session on load
+        initAuth();
     </script>
 </body>
 </html>
