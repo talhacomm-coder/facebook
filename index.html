@@ -11,17 +11,9 @@
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Custom Font Definitions */
-        @font-face { font-family: 'MBSindhiWeb'; src: url('mbsindhiweb.otf') format('opentype'); font-weight: normal; font-style: normal; }
-        @font-face { font-family: 'MBSarang'; src: url('MB Sarang.otf') format('opentype'); font-weight: normal; font-style: normal; }
-        @font-face { font-family: 'NafeesSaleem'; src: url('Nafees Saleem.otf') format('opentype'); font-weight: normal; font-style: normal; }
-        @font-face { font-family: 'MBMajeed'; src: url('MB Majeed.otf') format('opentype'); font-weight: normal; font-style: normal; }
-        @font-face { font-family: 'PakTypeNaskh'; src: url('PakType Naskh.otf') format('opentype'); font-weight: normal; font-style: normal; }
-        @font-face { font-family: 'MBTahoma'; src: url('MB Tahoma.otf') format('opentype'); font-weight: normal; font-style: normal; }
-
         body {
             background-color: #f4f6f9;
-            font-family: 'MBSindhiWeb', 'Lateef', cursive;
+            font-family: 'Lateef', cursive, sans-serif;
             overflow-x: hidden;
         }
         .preview-container {
@@ -52,7 +44,7 @@
             overflow: hidden;
             flex-shrink: 0;
             z-index: 2;
-            font-family: 'MBSindhiWeb', 'Lateef', cursive;
+            width: 100%;
         }
         .preview-image-box {
             position: relative;
@@ -80,7 +72,7 @@
             word-break: break-word;
             flex-shrink: 0;
             z-index: 2;
-            font-family: 'MBSindhiWeb', 'Lateef', cursive;
+            width: 100%;
         }
         .watermark-logo {
             position: absolute;
@@ -101,7 +93,6 @@
             z-index: 10;
             white-space: nowrap;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
-            font-family: 'MBSindhiWeb', 'Lateef', cursive;
         }
         .settings-card {
             background: #ffffff;
@@ -143,21 +134,21 @@
                         
                         <div class="preview-container mb-2" id="captureArea">
                             <img id="prevLogo" src="https://via.placeholder.com/80" class="watermark-logo" style="width: 60px; height: 60px; top: 12px; left: 12px;">
-                            <div id="prevCustomName" class="custom-name-watermark" style="font-size: 20px; bottom: 100px; right: 12px; font-family: 'MBSindhiWeb', sans-serif;">رپورٽر جو نالو</div>
+                            <div id="prevCustomName" class="custom-name-watermark" style="font-size: 20px; bottom: 100px; right: 12px; font-family: 'Lateef', sans-serif;">رپورٽر جو نالو</div>
                             
                             <!-- Main Flex Wrapper -->
                             <div class="dynamic-flex-wrapper" id="dynamicFlexWrapper">
-                                <div class="preview-header-banner" id="prevTopBanner" style="font-size: 20px; height: 35px; background: linear-gradient(135deg, #cc0000, #ff4d4d); font-family: 'MBSindhiWeb', sans-serif;">برڪنگ نيوز</div>
+                                <div class="preview-header-banner" id="prevTopBanner" style="font-size: 20px; height: 35px; background: linear-gradient(135deg, #cc0000, #ff4d4d); font-family: 'Lateef', sans-serif;">برڪنگ نيوز</div>
                                 <div class="preview-image-box" id="prevImageBox">
                                     <img id="prevMainImage" src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=600&q=80" class="preview-image" style="transform: scale(1) translate(0px, 0px);">
                                 </div>
-                                <div class="news-text-box" id="prevNewsText" style="font-size: 20px; height: 95px; background: linear-gradient(135deg, #0d6efd, #4dabf7); font-family: 'MBSindhiWeb', sans-serif;">
+                                <div class="news-text-box" id="prevNewsText" style="font-size: 20px; height: 95px; background: linear-gradient(135deg, #0d6efd, #4dabf7); font-family: 'Lateef', sans-serif;">
                                     رائونتي ۾ موٽر سائڪل سوارن تي مبينه درون حملو، نصير ڪورائي ۽ الله ڏتو ڪورائي زخمي
                                 </div>
                             </div>
 
                             <!-- Separate Social/Footer Bar with Icons + Name -->
-                            <div class="text-white p-1 d-flex justify-content-center gap-2 align-items-center" id="prevSocialBar" style="height: 32px; z-index: 2; width: 100%; font-size: 12px; background-color: #212529; font-family: 'MBSindhiWeb', sans-serif;">
+                            <div class="text-white p-1 d-flex justify-content-center gap-2 align-items-center" id="prevSocialBar" style="height: 32px; z-index: 2; width: 100%; font-size: 12px; background-color: #212529; font-family: 'Lateef', sans-serif; box-sizing: border-box;">
                                 <i class="fab fa-facebook text-primary"></i>
                                 <i class="fab fa-instagram text-danger"></i>
                                 <i class="fab fa-whatsapp text-success"></i>
@@ -232,14 +223,10 @@
                             <div>
                                 <label class="form-label small mb-1">خبر جو فونٽ چونڊيو</label>
                                 <select class="form-select form-select-sm" id="fontSelector">
-                                    <option value="'MBSindhiWeb', sans-serif" selected>MB Sindhi Web</option>
-                                    <option value="'MBSarang', sans-serif">MB Sarang</option>
-                                    <option value="'NafeesSaleem', serif">Nafees Saleem</option>
-                                    <option value="'MBMajeed', sans-serif">MB Majeed</option>
-                                    <option value="'PakTypeNaskh', serif">PakType Naskh</option>
-                                    <option value="'MBTahoma', sans-serif">MB Tahoma</option>
-                                    <option value="'Lateef', cursive">Lateef</option>
-                                    <option value="'Noto Nastaliq Urdu', serif">Noto Nastaliq</option>
+                                    <option value="Lateef" selected>Lateef (بيحد صاف)</option>
+                                    <option value="Amiri">Amiri Arabic</option>
+                                    <option value="Noto Nastaliq Urdu">Noto Nastaliq</option>
+                                    <option value="Cairo">Cairo (English/Modern)</option>
                                 </select>
                             </div>
                         </div>
@@ -304,14 +291,10 @@
                             <div class="mb-2">
                                 <label class="form-label small mb-1">نالي لاءِ فونٽ چونڊيو</label>
                                 <select class="form-select form-select-sm" id="customNameFontSelector">
-                                    <option value="'MBSindhiWeb', sans-serif" selected>MB Sindhi Web</option>
-                                    <option value="'MBSarang', sans-serif">MB Sarang</option>
-                                    <option value="'NafeesSaleem', serif">Nafees Saleem</option>
-                                    <option value="'MBMajeed', sans-serif">MB Majeed</option>
-                                    <option value="'PakTypeNaskh', serif">PakType Naskh</option>
-                                    <option value="'MBTahoma', sans-serif">MB Tahoma</option>
-                                    <option value="'Lateef', cursive">Lateef</option>
-                                    <option value="'Noto Nastaliq Urdu', serif">Noto Nastaliq</option>
+                                    <option value="Lateef" selected>Lateef</option>
+                                    <option value="Amiri">Amiri Arabic</option>
+                                    <option value="Noto Nastaliq Urdu">Noto Nastaliq</option>
+                                    <option value="Cairo">Cairo</option>
                                 </select>
                             </div>
                             <div class="row g-2">
@@ -420,8 +403,6 @@
 
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Html2Canvas Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <script>
         // Tab switching logic
@@ -448,7 +429,6 @@
             });
         });
 
-        const captureArea = document.getElementById('captureArea');
         const dynamicFlexWrapper = document.getElementById('dynamicFlexWrapper');
         const layoutOrderSelect = document.getElementById('layoutOrderSelect');
 
@@ -717,35 +697,192 @@
             }
         }
 
-        // Reliable Download with Font Fix
-        downloadBtn.addEventListener('click', () => {
-            let scaleVal = parseInt(downloadScaleSelect.value) || 2;
+        // Native HTML5 Canvas Direct Rendering Solution (Zero Font Breaking)
+        downloadBtn.addEventListener('click', async () => {
+            let scale = parseInt(downloadScaleSelect.value) || 2;
             downloadBtn.innerText = "تصوير تيار ٿي رهي آهي...";
             downloadBtn.disabled = true;
 
-            setTimeout(() => {
-                document.fonts.ready.then(() => {
-                    html2canvas(captureArea, { 
-                        scale: scaleVal, 
-                        useCORS: true, 
-                        allowTaint: true,
-                        logging: false,
-                        letterRendering: true
-                    }).then(canvas => {
-                        const link = document.createElement('a');
-                        link.download = `Sindhi-News-Post-${scaleVal}x.png`;
-                        link.href = canvas.toDataURL('image/png');
-                        link.click();
+            try {
+                const baseWidth = 600; // High resolution base width
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
 
-                        downloadBtn.innerHTML = '<i class="fa fa-download me-1"></i> تصوير ڊائونلوڊ ڪريو';
-                        downloadBtn.disabled = false;
-                    }).catch(err => {
-                        console.error(err);
-                        downloadBtn.innerHTML = '<i class="fa fa-download me-1"></i> تصوير ڊائونلوڊ ڪريو';
-                        downloadBtn.disabled = false;
-                    });
+                // Compute heights based on proportions
+                let topH = parseInt(breakingHeightRange.value) * (baseWidth / 300);
+                let newsH = parseInt(barHeightRange.value) * (baseWidth / 300);
+                let footerH = 64; // Footer height
+                let imgBoxH = baseWidth; // 1:1 ratio image box
+
+                canvas.width = baseWidth * scale;
+                canvas.height = (topH + imgBoxH + newsH + footerH) * scale;
+                ctx.scale(scale, scale);
+
+                // 1. Draw Main Image with Zoom & Pan translations
+                ctx.save();
+                let isTopOrder = (layoutOrderSelect.value === 'top');
+                let imgY = isTopOrder ? topH : 0;
+                
+                ctx.beginPath();
+                ctx.rect(0, imgY, baseWidth, imgBoxH);
+                ctx.clip();
+                ctx.fillStyle = '#111';
+                ctx.fillRect(0, imgY, baseWidth, imgBoxH);
+
+                const imgObj = new Image();
+                imgObj.crossOrigin = "anonymous";
+                imgObj.src = prevMainImage.src;
+                await new Promise((resolve) => {
+                    imgObj.onload = resolve;
+                    imgObj.onerror = resolve;
                 });
-            }, 300);
+
+                let sc = parseFloat(imgScaleRange.value);
+                let pX = parseFloat(imgPosXRange.value) * (baseWidth / 300);
+                let pY = parseFloat(imgPosYRange.value) * (baseWidth / 300);
+
+                ctx.save();
+                ctx.translate(baseWidth / 2 + pX, imgY + imgBoxH / 2 + pY);
+                ctx.scale(sc, sc);
+                let aspect = imgObj.width / imgObj.height;
+                let drawW = baseWidth;
+                let drawH = baseWidth;
+                if (aspect > 1) {
+                    drawW = baseWidth * aspect;
+                } else {
+                    drawH = baseWidth / aspect;
+                }
+                ctx.drawImage(imgObj, -drawW / 2, -drawH / 2, drawW, drawH);
+                ctx.restore();
+                ctx.restore();
+
+                // 2. Draw Gradients & Banners
+                let newsY = isTopOrder ? (topH + imgBoxH) : topH;
+
+                // Top Banner
+                let topGrad = ctx.createLinearGradient(0, isTopOrder ? 0 : imgBoxH, 0, isTopOrder ? topH : (imgBoxH + topH));
+                topGrad.addColorStop(0, topColor1.value);
+                topGrad.addColorStop(1, topColor2.value);
+                ctx.fillStyle = topGrad;
+                ctx.fillRect(0, isTopOrder ? 0 : imgBoxH, baseWidth, topH);
+
+                // News Bar Banner
+                let newsGrad = ctx.createLinearGradient(0, newsY, 0, newsY + newsH);
+                newsGrad.addColorStop(0, bottomColor1.value);
+                newsGrad.addColorStop(1, bottomColor2.value);
+                ctx.fillStyle = newsGrad;
+                ctx.fillRect(0, newsY, baseWidth, newsH);
+
+                // 3. Draw Text with Proper Styling
+                let fontName = fontSelector.value;
+
+                // Top Banner Text
+                ctx.fillStyle = "#ffffff";
+                ctx.font = `bold ${parseInt(breakingFontSizeRange.value) * (baseWidth / 300)}px ${fontName}, 'Lateef', sans-serif`;
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle";
+                ctx.fillText(breakingTitleInput.value, baseWidth / 2, (isTopOrder ? 0 : imgBoxH) + topH / 2);
+
+                // News Text (Multi-line auto wrap support)
+                ctx.font = `bold ${parseInt(fontSizeRange.value) * (baseWidth / 300)}px ${fontName}, 'Lateef', sans-serif`;
+                let newsText = newsTextInput.value;
+                let maxWidth = baseWidth - 40;
+                let words = newsText.split(' ');
+                let lines = [];
+                let currentLine = '';
+
+                for(let i=0; i<words.length; i++) {
+                    let testLine = currentLine + words[i] + ' ';
+                    let metrics = ctx.measureText(testLine);
+                    if(metrics.width > maxWidth && i > 0) {
+                        lines.push(currentLine);
+                        currentLine = words[i] + ' ';
+                    } else {
+                        currentLine = testLine;
+                    }
+                }
+                lines.push(currentLine);
+
+                let lineHeight = parseInt(fontSizeRange.value) * 1.3 * (baseWidth / 300);
+                let startTextY = newsY + (newsH - (lines.length * lineHeight)) / 2 + lineHeight / 2;
+                
+                for(let k=0; k<lines.length; k++) {
+                    ctx.fillText(lines[k].trim(), baseWidth / 2, startTextY + (k * lineHeight));
+                }
+
+                // 4. Draw Custom Name Watermark
+                ctx.save();
+                ctx.font = `bold ${parseInt(customNameSizeRange.value) * (baseWidth / 300)}px ${customNameFontSelector.value}, 'Lateef', sans-serif`;
+                ctx.fillStyle = `rgba(255, 255, 255, ${parseFloat(customNameOpacityRange.value) / 100})`;
+                ctx.textAlign = "right";
+                ctx.shadowColor = "rgba(0, 0, 0, 0.9)";
+                ctx.shadowBlur = 8;
+                let nameRight = parseFloat(customNamePosXRange.value) * (baseWidth / 300);
+                let nameBottom = parseFloat(customNamePosYRange.value) * (baseWidth / 300);
+                let renderNameY = canvas.height / scale - nameBottom;
+                ctx.fillText(customNameInput.value, baseWidth - nameRight, renderNameY);
+                ctx.restore();
+
+                // 5. Draw Logo Watermark
+                let logoSize = parseFloat(logoSizeRange.value) * (baseWidth / 300);
+                let logoX = parseFloat(logoPosXRange.value) * (baseWidth / 300);
+                let logoY = parseFloat(logoPosYRange.value) * (baseWidth / 300);
+                let logoOpacity = parseFloat(logoOpacityRange.value) / 100;
+
+                const logoObj = new Image();
+                logoObj.crossOrigin = "anonymous";
+                logoObj.src = prevLogo.src;
+                await new Promise((resolve) => {
+                    logoObj.onload = resolve;
+                    logoObj.onerror = resolve;
+                });
+
+                ctx.save();
+                ctx.globalAlpha = logoOpacity;
+                ctx.beginPath();
+                ctx.arc(logoX + logoSize/2, logoY + logoSize/2, logoSize/2, 0, Math.PI * 2);
+                ctx.closePath();
+                ctx.clip();
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(logoX, logoY, logoSize, logoSize);
+                ctx.drawImage(logoObj, logoX, logoY, logoSize, logoSize);
+                ctx.restore();
+
+                // Draw White Border around Logo
+                ctx.save();
+                ctx.globalAlpha = logoOpacity;
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.arc(logoX + logoSize/2, logoY + logoSize/2, logoSize/2, 0, Math.PI * 2);
+                ctx.stroke();
+                ctx.restore();
+
+                // 6. Draw Footer Social Bar
+                let footerY = topH + imgBoxH + newsH;
+                ctx.fillStyle = footerBgColor.value;
+                ctx.fillRect(0, footerY, baseWidth, footerH);
+
+                ctx.fillStyle = "#ffffff";
+                ctx.font = `${14 * (baseWidth / 300)}px 'Cairo', sans-serif`;
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle";
+                ctx.fillText(footerCustomTextInput.value, baseWidth / 2, footerY + footerH / 2);
+
+                // Trigger Download
+                const link = document.createElement('a');
+                link.download = `Sindhi-News-Post-${scale}x.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+
+                downloadBtn.innerHTML = '<i class="fa fa-download me-1"></i> تصوير ڊائونلوڊ ڪريو';
+                downloadBtn.disabled = false;
+            } catch (err) {
+                console.error(err);
+                alert("تصوير ڊائونلوڊ ڪرڻ ۾ مسئلو آيو. مهرباني ڪري ٻيهر ڪوشش ڪريو.");
+                downloadBtn.innerHTML = '<i class="fa fa-download me-1"></i> تصوير ڊائونلوڊ ڪريو';
+                downloadBtn.disabled = false;
+            }
         });
     </script>
 </body>
